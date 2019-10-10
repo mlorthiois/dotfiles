@@ -5,10 +5,10 @@ filetype off          " Nécessaire
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" On indique à Vundle de s'auto-gérer :)
+" On indique à Vundle de s'auto-gérer
 Plugin 'gmarik/Vundle.vim'  " Nécessaire
 """""""""""""""""""""""""""""""""""
-" C'est ici que vous allez placer la liste des plugins que Vundle doit gérer
+" Liste des plugins que Vundle doit gérer
 """""""""""""""""""""""""""""""""""
 Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot'
@@ -21,7 +21,7 @@ call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
 
 """""""""""""""""""""""""""""""""""
-" Le reste de votre .vimrc
+" Reste du .vimrc
 """""""""""""""""""""""""""""""""""
 "Generalites
 set noswapfile
@@ -38,7 +38,7 @@ set softtabstop=4
 set guifont=Fira\ Code\ Regular:h15
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 
-"Themes
+"Thème utilisé
 set termguicolors
 set background=dark
 colorscheme edge
