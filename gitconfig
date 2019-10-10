@@ -1,0 +1,7 @@
+# Ceci est le fichier de configuration personnel de Git.
+[user]
+# Veuillez adapter et décommenter les lignes suivantes :
+	name = l-matthias
+	email = matthias.lts@gmail.com
+[color]
+	ui = auto
