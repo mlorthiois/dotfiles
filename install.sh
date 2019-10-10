@@ -1,7 +1,7 @@
 #! /bin/bash
 
 dotfiles=~/dotfiles
-files="vimrc zshrc" #Liste de tous les fichiers à déplacer
+files="vimrc zshrc gitconfig" #Liste de tous les fichiers à déplacer
 
 # cd vers le dossier dotfiles
 echo "Déplacement vers le dossier $dotfiles"
