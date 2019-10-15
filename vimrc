@@ -16,6 +16,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'sainnhe/edge'
+Plugin 'xuhdev/vim-latex-live-preview.git'
+Plugin 'lervag/vimtex'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -49,4 +51,11 @@ let g:lightline = {'colorscheme' : 'edge'}
 "nnoremap : only available in normal mode
 autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
+autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
+
 nmap <F6> :NERDTreeToggle<CR>
+
+"vim-latex-preview
+autocmd Filetype tex setl updatetime=1
+let g:livepreview_previewer = 'open -a Preview'
+let g:polyglot_disabled = ['latex']
