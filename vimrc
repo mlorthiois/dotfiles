@@ -26,6 +26,7 @@ filetype plugin indent on    " Nécessaire
 " Reste du .vimrc
 """""""""""""""""""""""""""""""""""
 "Generalites
+set mouse=a
 set noswapfile
 set number
 syntax on
@@ -37,13 +38,13 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-set guifont=Fira\ Code\ Regular:h15
+set guifont=Menlo:h13
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 
 "Thème utilisé
 set termguicolors
 set background=dark
-colorscheme edge
+colorscheme perso
 let g:lightline = {'colorscheme' : 'edge'}
 
 "Shortcuts
