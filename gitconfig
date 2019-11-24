@@ -5,3 +5,5 @@
 	email = matthias.lts@gmail.com
 [color]
 	ui = auto
+[core]
+	excludesfile = /Users/matthiaslorthiois/.gitignore_global

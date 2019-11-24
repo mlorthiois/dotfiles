@@ -4,7 +4,6 @@ filetype off          " Nécessaire
 " Ajout de Vundle au runtime path et initialisation
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " On indique à Vundle de s'auto-gérer
 Plugin 'gmarik/Vundle.vim'  " Nécessaire
 """""""""""""""""""""""""""""""""""
@@ -18,6 +17,9 @@ Plugin 'ayu-theme/ayu-vim'
 Plugin 'sainnhe/edge'
 Plugin 'xuhdev/vim-latex-live-preview.git'
 Plugin 'lervag/vimtex'
+Plugin 'nightsense/simplifysimplify'
+Plugin 'cormacrelf/vim-colors-github'
+Plugin 'nightsense/night-and-day'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -38,14 +40,21 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-set guifont=Menlo:h13
+set guifont=Menlo:h14
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 
 "Thème utilisé
 set termguicolors
-set background=dark
-colorscheme perso
-let g:lightline = {'colorscheme' : 'edge'}
+set laststatus=2
+let g:nd_themes = [
+  \ ['8:00',  'simplifysimplify-light', 'light' ],
+  \ ['18:00', 'perso',            'dark'  ],
+  \ ]
+
+"Lightline
+let g:lightline = {'colorscheme' : 'wombat'}
+set linespace=4
+set noshowmode "N'affiche pas infos sous lightline
 
 "Shortcuts
 "<CR> is the same as click on the button Enter
@@ -53,6 +62,7 @@ let g:lightline = {'colorscheme' : 'edge'}
 autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
 autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
+autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%:r<CR>
 
 nmap <F6> :NERDTreeToggle<CR>
 
