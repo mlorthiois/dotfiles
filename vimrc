@@ -15,7 +15,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'xuhdev/vim-latex-live-preview.git'
 Plugin 'lervag/vimtex'
-Plugin 'nightsense/simplifysimplify'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'nightsense/night-and-day'
 
@@ -45,8 +44,8 @@ set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 set termguicolors
 set laststatus=2
 let g:nd_themes = [
-  \ ['8:00',  'simplifysimplify-light', 'light' ],
-  \ ['18:00', 'perso',            'dark'  ],
+  \ ['8:00',  'light', 'light' ],
+  \ ['18:00', 'dark',            'dark'  ],
   \ ]
 
 "Lightline
