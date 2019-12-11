@@ -17,6 +17,7 @@ Plugin 'xuhdev/vim-latex-live-preview.git'
 Plugin 'lervag/vimtex'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'nightsense/night-and-day'
+Plugin 'alvan/vim-closetag'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -60,6 +61,9 @@ autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
 autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
 autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%:r<CR>
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 nmap <F6> :NERDTreeToggle<CR>
 
