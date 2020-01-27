@@ -45,8 +45,8 @@ set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 set termguicolors
 set laststatus=2
 let g:nd_themes = [
-  \ ['8:00',  'light', 'light' ],
-  \ ['18:00', 'dark',            'dark'  ],
+  \ ['8:00',  'light',  'light' ],
+  \ ['18:00', 'dark',   'dark'  ],
   \ ]
 
 "Lightline
