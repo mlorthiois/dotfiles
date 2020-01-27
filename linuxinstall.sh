@@ -14,10 +14,13 @@ for file in $files; do
 done
 
 #Création fichier colors
+echo "Déplacement vers le dossier .vim"
 cd ~/.vim
+echo "Création du dossier colors"
 mkdir colors
-cd $dotfiles
 
+#Retour dans le dossier dotfiles et création des symlinks vers .vim/colors
+cd $dotfiles
 for theme in $vim_theme; do
     echo "Création du symlink de $vim_theme vers ~/.vim/colors"
     ln -s $dotfiles/$theme ~/.vim/colors/$theme
