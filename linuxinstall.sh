@@ -1,7 +1,7 @@
 #! /bin/bash
 
 dotfiles=~/dotfiles
-files="vimrc zshrc gitconfig" #Liste de tous les fichiers à déplacer
+files="vimrc gitconfig" #Liste de tous les fichiers à déplacer
 vim_theme="dark.vim light.vim"
 # cd vers le dossier dotfiles
 echo "Déplacement vers le dossier $dotfiles"
@@ -12,6 +12,9 @@ for file in $files; do
     echo "Création du symlink de $file vers ~"
     ln -s $dotfiles/$file ~/.$file
 done
+
+#Création du symlink zshrc
+ln -s ~/dotfiles/linux-zshrc ~/.zshrc
 
 #Création fichier colors
 echo "Déplacement vers le dossier .vim"

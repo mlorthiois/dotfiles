@@ -7,3 +7,5 @@
 	ui = auto
 [core]
 	excludesfile = /Users/matthiaslorthiois/.gitignore_global
+[credential]
+	helper = cache
