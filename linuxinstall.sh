@@ -1,5 +1,8 @@
 #! /bin/bash
 
+echo "Création du dossier vim"
+mkdir ~/.vim
+mkdir ~/.vim/colors
 dotfiles=~/dotfiles
 files="vimrc gitconfig" #Liste de tous les fichiers à déplacer
 vim_theme="dark.vim light.vim"
