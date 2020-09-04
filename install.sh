@@ -21,8 +21,6 @@ done
 #Création fichier colors
 echo "Déplacement vers le dossier .vim"
 cd ~/.vim
-echo "Création du dossier colors"
-mkdir colors
 
 #Retour dans le dossier dotfiles et création des symlinks vers .vim/colors
 cd $dotfiles
