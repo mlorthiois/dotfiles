@@ -13,8 +13,6 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'xuhdev/vim-latex-live-preview.git'
-Plugin 'lervag/vimtex'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'nightsense/night-and-day'
 Plugin 'alvan/vim-closetag'
@@ -66,8 +64,3 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 nmap <F6> :NERDTreeToggle<CR>
-
-"vim-latex-preview
-autocmd Filetype tex setl updatetime=1
-let g:livepreview_previewer = 'open -a Preview'
-let g:polyglot_disabled = ['latex']
