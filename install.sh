@@ -35,4 +35,4 @@ done
 touch ~/.zshrc
 echo "source ~/dotfiles/minimal.zsh-theme" >> ~/.zshrc
 echo "source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
-echo "source ~/dotfiles/zsh-autosuggestions/zsh-autosuggesions.zsh" >> ~/.zshrc
+echo "source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
