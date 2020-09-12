@@ -31,6 +31,7 @@ done
 
 #Création du fichier .zshrc
 touch ~/.zshrc
+echo "source ~/dotfiles/zshrc_config.zsh" >> ~/.zshrc
 echo "source ~/dotfiles/aliases" >> ~/.zshrc
 echo "source ~/dotfiles/minimal.zsh-theme" >> ~/.zshrc
 echo "source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc

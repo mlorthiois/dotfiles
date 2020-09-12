@@ -14,7 +14,6 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'cormacrelf/vim-colors-github'
-Plugin 'nightsense/night-and-day'
 Plugin 'alvan/vim-closetag'
 
 call vundle#end()            " Nécessaire
@@ -42,10 +41,6 @@ set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 "Thème utilisé
 set termguicolors
 set laststatus=2
-let g:nd_themes = [
-  \ ['8:00',  'light',  'light' ],
-  \ ['18:00', 'dark',   'dark'  ],
-  \ ]
 
 "Lightline
 let g:lightline = {'colorscheme' : 'wombat'}
