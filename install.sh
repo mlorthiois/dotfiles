@@ -1,14 +1,15 @@
 #! /bin/bash
 
-dotfiles=~/dotfiles
-files="vimrc gitconfig" 
+files="vimrc gitconfig"
 vim_theme="dark.vim light.vim"
+zsh_plugins="zsh-autosuggestions zsh-syntax-highlighting"
+zsh_config="minimal zshrc_config aliases"
 
 #Création des symlinks vers ~
 for file in $files; do
     if [ -e "$HOME/$file" ]; then
-    echo "Création du symlink de $file vers ~"
-    ln -s $dotfiles/$file ~/.$file
+        echo "Création du symlink de $file vers ~"
+        ln -s $dotfiles/$file ~/.$file
     fi
 done
 
@@ -28,11 +29,15 @@ done
 if [ ! -f "$HOME/.zshrc" ]; then
     echo "Création du fichier .zshrc et ajout des 'sources'"
     touch ~/.zshrc
-    echo "source ~/dotfiles/zshrc_config.zsh" >> ~/.zshrc
-    echo "source ~/dotfiles/aliases" >> ~/.zshrc
-    echo "source ~/dotfiles/minimal.zsh-theme" >> ~/.zshrc
-    echo "source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-    echo "source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
 fi
-
+for config in $zsh_config; do
+    if ! grep -q "source ~/dotfiles/$config.zsh" $HOME/.zshrc; then
+        echo "source ~/dotfiles/$config.zsh" >>$HOME/.zshrc
+    fi
+done
+for plugin in $zsh_plugins; do
+    if ! grep -q "source ~/dotfiles/$plugin/$plugin.zsh" $HOME/.zshrc; then
+        echo "source ~/dotfiles/$plugin/$plugin.zsh" >>$HOME/.zshrc
+    fi
+done
 echo "Setup completed!"

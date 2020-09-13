@@ -1,6 +1,0 @@
-alias genossh='ssh mlorthiois@genossh.genouest.org'
-source ~/dotfiles/zshrc_config.zsh
-source ~/dotfiles/aliases
-source ~/dotfiles/minimal.zsh-theme
-source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
