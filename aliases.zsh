@@ -1,2 +1,2 @@
 alias count='ls | wc -l'
-alias cat='bat'
+alias cat='clear && bat'

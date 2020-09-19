@@ -15,6 +15,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'alvan/vim-closetag'
+Plugin 'justinmk/vim-sneak'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -39,7 +41,6 @@ set guifont=Menlo:h14
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 
 "Thème utilisé
-set termguicolors
 set laststatus=2
 
 "Lightline
