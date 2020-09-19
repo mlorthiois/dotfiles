@@ -16,8 +16,7 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'alvan/vim-closetag'
 Plugin 'justinmk/vim-sneak'
-Plugin 'easymotion/vim-easymotion'
-
+Bundle 'sonph/onehalf', {'rtp': 'vim/'}
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
 
@@ -37,16 +36,15 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-set guifont=Menlo:h14
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
+let g:sneak#label = 1
+
+"Use space as a leader key
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 "Thème utilisé
-set laststatus=2
-
-"Lightline
-let g:lightline = {'colorscheme' : 'wombat'}
-set linespace=4
-set noshowmode "N'affiche pas infos sous lightline
+" colorscheme onehalflight
 
 "Shortcuts
 "<CR> is the same as click on the button Enter
