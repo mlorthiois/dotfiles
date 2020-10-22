@@ -39,9 +39,6 @@ set softtabstop=4
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 let g:sneak#label = 1
 
-"Use space as a leader key
-nnoremap <SPACE> <Nop>
-let mapleader=" "
 
 "Thème utilisé
 " colorscheme onehalflight
