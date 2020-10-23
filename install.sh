@@ -2,6 +2,7 @@
 
 files="vim/vimrc gitconfig"
 vim_theme="dark.vim light.vim"
+dotfiles=$(pwd)
 
 #Création des symlinks vers ~
 for file in $files; do
