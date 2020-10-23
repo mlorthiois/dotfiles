@@ -1,6 +1,6 @@
 #! /bin/bash
 
-files="vimrc gitconfig"
+files="vim/vimrc gitconfig"
 vim_theme="dark.vim light.vim"
 
 #Création des symlinks vers ~
@@ -19,7 +19,7 @@ fi
 for theme in $vim_theme; do
     if [ ! -e "$HOME/.vim/colors/$theme" ]; then
         echo "Création du symlink de $theme vers ~/.vim/colors"
-        ln -s $dotfiles/$theme ~/.vim/colors/$theme
+        ln -s $dotfiles/vim/$theme ~/.vim/colors/$theme
     fi
 done
 
