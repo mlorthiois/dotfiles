@@ -2,8 +2,6 @@
 
 files="vimrc gitconfig"
 vim_theme="dark.vim light.vim"
-zsh_plugins="zsh-autosuggestions zsh-syntax-highlighting"
-zsh_config="minimal zshrc_config aliases"
 
 #Création des symlinks vers ~
 for file in $files; do
@@ -30,14 +28,10 @@ if [ ! -f "$HOME/.zshrc" ]; then
     echo "Création du fichier .zshrc et ajout des 'sources'"
     touch ~/.zshrc
 fi
-for config in $zsh_config; do
-    if ! grep -q "source ~/dotfiles/$config.zsh" $HOME/.zshrc; then
-        echo "source ~/dotfiles/$config.zsh" >>$HOME/.zshrc
-    fi
-done
-for plugin in $zsh_plugins; do
-    if ! grep -q "source ~/dotfiles/$plugin/$plugin.zsh" $HOME/.zshrc; then
-        echo "source ~/dotfiles/$plugin/$plugin.zsh" >>$HOME/.zshrc
-    fi
-done
+
+if ! grep -q "source ~/dotfiles/zshrc_config.zsh" $HOME/.zshrc; then
+    echo "Add zshrc_config.zsh in .zshrc"
+    echo "source ~/dotfiles/zshrc_config.zsh" >>$HOME/.zshrc
+fi
+
 echo "Setup completed!"
