@@ -2,8 +2,8 @@
 MNML_OK_COLOR="${MNML_OK_COLOR:-2}"
 MNML_ERR_COLOR="${MNML_ERR_COLOR:-1}"
 
-MNML_USER_CHAR="${MNML_USER_CHAR:-λ}"
-MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-›}"
+MNML_USER_CHAR="${MNML_USER_CHAR:-▲}"
+MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-}" #>
 MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
 MNML_ELLIPSIS_CHAR="${MNML_ELLIPSIS_CHAR:-..}"
 MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
@@ -25,7 +25,7 @@ function mnml_status {
         job_ansi="$MNML_BGJOB_MODE"
     fi
 
-    local err_ansi="$MNML_OK_COLOR"
+    local err_ansi=30 #"$MNML_OK_COLOR"
     if [ "$MNML_LAST_ERR" != "0" ]; then
         err_ansi="$MNML_ERR_COLOR"
     fi
