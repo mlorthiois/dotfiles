@@ -23,6 +23,9 @@ filetype plugin indent on    " Nécessaire
 """""""""""""""""""""""""""""""""""
 " Reste du .vimrc
 """""""""""""""""""""""""""""""""""
+hi! Sneak guifg=white guibg=red ctermfg=black ctermbg=LightBlue
+hi! SneakScope guifg=red guibg=yellow ctermfg=LightMagenta ctermbg=Magenta
+hi! SneakLabel guifg=white guibg=magenta ctermfg=black ctermbg=LightGreen
 "Generalites
 set mouse=a
 set noswapfile
