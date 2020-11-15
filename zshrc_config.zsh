@@ -21,6 +21,34 @@ alias count='ls | wc -l'
 alias cat='clear && bat'
 alias untargz='tar -zxvf'
 
+### Functions
+extract () {
+  if [ -f $1 ]
+  then
+    output=$(echo "${1%.*}")
+    case $1 in
+      (*.7z) 7z x $1 ;;
+      (*.lzma) unlzma $1 ;;
+      (*.rar) unrar x $1 ;;
+      (*.tar) tar xvf $1 ;;
+      (*.tar.bz2) tar xvjf $1 ;;
+      (*.bz2) bunzip2 $1 ;;
+      (*.tar.gz) tar xvzf $1 ;;
+      (*.gz) gunzip -c $1 > $output ;;
+      (*.tar.xz) tar Jxvf $1 ;;
+      (*.xz) xz -d $1 ;;
+      (*.tbz2) tar xvjf $1 ;;
+      (*.tgz) tar xvzf $1 ;;
+      (*.zip) unzip $1 ;;
+      (*.Z) uncompress ;;
+      (*) echo "don't know how to extract $1..."; return 1;;
+    esac
+    echo -e "\e[92m$output successfully created"; return 0
+  else
+    echo -e "\e[91mError: the file '$1' doesn't exist!"; return 2
+  fi
+}
+
 ### History Configuration
 HISTSIZE=5000               #How many lines of history to keep in memory
 HISTFILE=~/.zsh_history     #Where to save history to disk
@@ -30,86 +58,7 @@ setopt    sharehistory      #Share history across terminals
 setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
 
 source ~/.iterm2_shell_integration.zsh
-GIT_BINARY=/usr/bin/git
 
-dirty() {
-    # Outputs "dirty" or "clean"
-    OUTPUT=$("$GIT_BINARY" status --porcelain --ignore-submodules -unormal 2>/dev/null)
-    if (($?)); then
-        echo "clean"
-        return
-    fi
-    if [ -z "$OUTPUT" ]; then
-        echo "clean"
-    else
-        echo "dirty"
-    fi
+iterm2_print_user_vars() {
+  it2git
 }
-
-counts() {
-    OUTPUT=$("$GIT_BINARY" rev-list --left-right --count HEAD...@'{u}' 2>/dev/null)
-    if (($?)); then
-        echo "error"
-        return
-    fi
-    echo "$OUTPUT"
-}
-
-branch() {
-    OUTPUT=$("$GIT_BINARY" symbolic-ref -q --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
-    if (($?)); then
-        return
-    fi
-    echo "$OUTPUT"
-}
-
-adds() {
-    "${GIT_BINARY}" ls-files --others --exclude-standard | wc -l
-}
-
-deletes() {
-    "${GIT_BINARY}" ls-files --deleted --exclude-standard | wc -l
-}
-function iterm2_begin_osc {
-  printf "\033]"
-}
-
-function iterm2_end_osc {
-  printf "\007"
-}
-
-function iterm2_set_user_var() {
-  iterm2_begin_osc
-  printf "1337;SetUserVar=%s=%s" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
-  iterm2_end_osc
-}
-
-git_poll () {
-    DIRECTORY="$1"
-    cd "$DIRECTORY"
-    DIRTY=$(dirty)
-    COUNTS=$(counts)
-    PUSH_COUNT=$(cut -f1 <<< "$COUNTS")
-    PULL_COUNT=$(cut -f2 <<< "$COUNTS")
-    BRANCH=$(branch)
-
-    iterm2_set_user_var gitBranch "$BRANCH"
-    iterm2_set_user_var gitDirty "$DIRTY"
-    iterm2_set_user_var gitPushCount "$PUSH_COUNT"
-    iterm2_set_user_var gitPullCount "$PULL_COUNT"
-    iterm2_set_user_var gitAdds "$ADDS"
-    iterm2_set_user_var gitDeletes "$DELETES"
-}
-
-"$GIT_BINARY" rev-parse --git-dir 2>/dev/null >/dev/null
-if (($?)); then
-    iterm2_set_user_var gitBranch ""
-    iterm2_set_user_var gitDirty ""
-    iterm2_set_user_var gitPushCount ""
-    iterm2_set_user_var gitPullCount ""
-    iterm2_set_user_var gitAdds ""
-    iterm2_set_user_var gitDeletes ""
-else
-    git_poll "$PWD"
-fi
-
