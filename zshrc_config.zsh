@@ -25,7 +25,7 @@ alias untargz='tar -zxvf'
 case $TERM in 
 xterm*)
     render="\e]0;▲ ${PWD##*/}"
-    if [ ${#string} -ge 1 ]; then
+    if [ ${#HOSTNAME} -ge 1 ]; then
 	    host="- $HOSTNAME"
     fi
     precmd () {print -Pn "$render $host\007"}
