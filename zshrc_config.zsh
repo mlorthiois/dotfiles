@@ -28,6 +28,9 @@ xterm*)
 	    host="- $HOSTNAME"
     fi
     precmd () {print -Pn "\e]0;▲ ${PWD##*/} $host\007"}
+    function preexec {
+      printf "\033]0;%s\a" "▲ $1 - ${PWD##*/} $host"
+    }
     ;;
 esac
 
