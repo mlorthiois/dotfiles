@@ -18,14 +18,24 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 
 ### Aliases
 alias count='ls | wc -l'
-alias cat='clear && bat'
+alias bat='clear && bat'
 alias untargz='tar -zxvf'
 
 ### Functions
+case $TERM in 
+xterm*)
+    render="\e]0;▲ ${PWD##*/}"
+    if [ ${#string} -ge 1 ]; then
+	    host="- $HOSTNAME"
+    fi
+    precmd () {print -Pn "$render $host\007"}
+    ;;
+esac
+
 extract () {
   if [ -f $1 ]
   then
-    output=$(echo "${1%.*}")
+   output=$(echo "${1%.*}")
     case $1 in
       (*.7z) 7z x $1 ;;
       (*.lzma) unlzma $1 ;;
