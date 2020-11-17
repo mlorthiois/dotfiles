@@ -24,11 +24,10 @@ alias untargz='tar -zxvf'
 ### Functions
 case $TERM in 
 xterm*)
-    render="\e]0;▲ ${PWD##*/}"
     if [ ${#HOSTNAME} -ge 1 ]; then
 	    host="- $HOSTNAME"
     fi
-    precmd () {print -Pn "$render $host\007"}
+    precmd () {print -Pn "\e]0;▲ ${PWD##*/} $host\007"}
     ;;
 esac
 
