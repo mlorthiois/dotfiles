@@ -18,8 +18,6 @@ PS1=$(echo $PS1 | sed 's/(base) //')
 
 ### Aliases
 alias count='ls | wc -l'
-alias bat='clear && bat'
-alias untargz='tar -zxvf'
 
 ### Functions
 case $TERM in 

@@ -9,14 +9,11 @@ Plugin 'gmarik/Vundle.vim'  " Nécessaire
 """""""""""""""""""""""""""""""""""
 " Liste des plugins que Vundle doit gérer
 """""""""""""""""""""""""""""""""""
-Plugin 'itchyny/lightline.vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'cormacrelf/vim-colors-github'
 Plugin 'alvan/vim-closetag'
 Plugin 'justinmk/vim-sneak'
-Bundle 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'LukeGoodsell/nextflow-vim'
+Plugin 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
 
@@ -41,7 +38,8 @@ set expandtab
 set softtabstop=4
 set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 let g:sneak#label = 1
-
+highlight ColorColumn guibg=grey ctermbg=16
+set colorcolumn=80
 
 "Thème utilisé
 " colorscheme onehalflight
