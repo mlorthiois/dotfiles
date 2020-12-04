@@ -25,7 +25,7 @@ alias untargz='tar -zxvf'
 case $TERM in 
 xterm*)
     if [ ${#HOSTNAME} -ge 1 ]; then
-	    host="- $HOSTNAME"
+	    host="[$HOSTNAME]"
     fi
     precmd () {print -Pn "\e]0;▲ ${PWD##*/} $host\007"}
     function preexec {
