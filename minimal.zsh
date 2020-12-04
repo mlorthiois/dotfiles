@@ -10,10 +10,7 @@ MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 
 [ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
 
-# Show only right prompt if connect to ssh
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then    
-    [ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
-fi
+[ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
 
 [ "${+MNML_INFOLN}" -eq 0 ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
