@@ -13,6 +13,10 @@ for file in $files; do
 done
 
 # Vim
+if [ ! -e "$HOME/.vimrc" ]; then
+    echo "Création du symlink de vim/vimrc vers ~/.vimrc"
+    ln -s $dotfiles/vim/vimrc ~/.vimrc
+fi
 if [ ! -d "$HOME/.vim/colors" ]; then
     echo "Création du dossier vim et vim/colors"
     mkdir -p ~/.vim/colors

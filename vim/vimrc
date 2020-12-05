@@ -12,7 +12,10 @@ Plugin 'gmarik/Vundle.vim'  " Nécessaire
 Plugin 'scrooloose/nerdtree'
 Plugin 'alvan/vim-closetag'
 Plugin 'justinmk/vim-sneak'
+Plugin 'joshdick/onedark.vim'
 Plugin 'LukeGoodsell/nextflow-vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'itchyny/lightline.vim'
 Plugin 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -40,9 +43,23 @@ set backspace=indent,eol,start "Permet d'utiliser la touche effacer sur mac
 let g:sneak#label = 1
 highlight ColorColumn guibg=grey ctermbg=16
 set colorcolumn=80
+autocmd InsertEnter,InsertLeave * set cul!
+set noshowmode
+
 
 "Thème utilisé
-" colorscheme onehalflight
+set laststatus=2
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+  augroup END
+endif
+colorscheme onedark
 
 "Shortcuts
 "<CR> is the same as click on the button Enter
@@ -51,8 +68,12 @@ autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
 autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
 autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%:r<CR>
+
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 nmap <F6> :NERDTreeToggle<CR>
+au VimEnter *  NERDTree
+autocmd VimEnter * wincmd p
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
