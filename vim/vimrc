@@ -17,6 +17,7 @@ Plugin 'LukeGoodsell/nextflow-vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'itchyny/lightline.vim'
 Plugin 'https://github.com/snakemake/snakemake.git', {'rtp': 'misc/vim/'}
+Plugin 'mhinz/vim-startify'
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
 
@@ -77,3 +78,16 @@ nmap <F6> :NERDTreeToggle<CR>
 au VimEnter *  NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeMinimalUI=1
+
+
+let s:header = [
+    \ '   __      _______ __  __ ',
+    \ '   \ \    / /_   _|  \/  |',
+    \ '    \ \  / /  | | | \  / |',
+    \ '     \ \/ /   | | | |\/| |',
+    \ '      \  /   _| |_| |  | |',
+    \ '       \/   |_____|_|  |_|',
+    \ '',
+    \ ]
+let g:startify_custom_header = s:header
