@@ -14,4 +14,4 @@ lua require('galaxyline')
 lua require('indentline')
 lua require('lsp')
 lua require('treesitter')
-
+lua require('compe')
