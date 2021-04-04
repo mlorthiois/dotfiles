@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
 
     -- Status Line and Tab line
-    use 'glepnir/galaxyline.nvim'
+    use {'glepnir/galaxyline.nvim', branch = 'main'}
     use 'romgrk/barbar.nvim'
 
     -- Telescope

@@ -1,7 +1,0 @@
-source $HOME/dotfiles/vim/plugins.vim
-source $HOME/dotfiles/vim/coc_settings.vim
-source $HOME/dotfiles/vim/plugins_config.vim
-source $HOME/dotfiles/vim/themes.vim
-source $HOME/dotfiles/vim/settings.vim
-source $HOME/dotfiles/vim/coc_settings.vim
-source $HOME/dotfiles/vim/shortcuts.vim
