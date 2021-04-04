@@ -14,4 +14,5 @@ lua require('galaxyline')
 lua require('indentline')
 lua require('lsp')
 lua require('treesitter')
-lua require('compe')
+lua require('telescope')
+source $HOME/.config/nvim/github.vim

@@ -30,12 +30,12 @@ set formatoptions-=cro          " Stop newline continution of comments
 set clipboard=unnamedplus       " Copy paste between vim and everything else
 let g:mapleader = " "           " Set Space as mapleader
 set clipboard=unnamedplus       " Use system clipboard
+set termguicolors               " Use right colors
 
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-let g:nvcode_termcolors=256
-colorscheme nvcode
+let g:colors_name = 'github'
 
 " Plugins
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
@@ -47,3 +47,4 @@ let g:sneak#s_next = 1
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+

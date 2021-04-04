@@ -55,7 +55,6 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-tree.lua'
 
     -- Color
-    use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'norcalli/nvim-colorizer.lua'
     use 'sheerun/vim-polyglot'
 end)
