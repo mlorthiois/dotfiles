@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-jdtls'
     use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/nvim-compe'
+    use 'hrsh7th/vim-vsnip'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

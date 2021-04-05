@@ -10,9 +10,10 @@ lua require('plugins')
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keymappings.vim
 lua require('dashboard')
-lua require('galaxyline')
+lua require('nv-galaxyline')
 lua require('indentline')
 lua require('lsp')
 lua require('treesitter')
 lua require('telescope')
 source $HOME/.config/nvim/github.vim
+lua require('nv-compe')

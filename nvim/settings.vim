@@ -31,7 +31,7 @@ set clipboard=unnamedplus       " Copy paste between vim and everything else
 let g:mapleader = " "           " Set Space as mapleader
 set clipboard=unnamedplus       " Use system clipboard
 set termguicolors               " Use right colors
-
+set shortmess+=c                " Avoid "Pattern not found with lsp-compe
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
