@@ -40,8 +40,6 @@ let g:colors_name = 'github'
 " Plugins
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
-let g:sneak#label = 1
-let g:sneak#s_next = 1
 
 " Languages
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2

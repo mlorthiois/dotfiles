@@ -31,6 +31,16 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <silent>    <Leader>j :ToggleTerm<CR>
 
 
+" Hop (vim-sneak)
+nnoremap <silent>  s <cmd>HopChar2<cr>
+nnoremap <silent>  S <cmd>HopWord<cr>
+
+" Comments
+nnoremap <silent>     <Leader>c :CommentToggle<cr>
+vnoremap <silent>     <Leader>c :CommentToggle<cr>
+
+
+
 " Shortcuts
 autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>

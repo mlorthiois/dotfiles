@@ -21,8 +21,9 @@ return require('packer').startup(function(use)
     use 'liuchengxu/vim-which-key'
     use 'airblade/vim-rooter'
     use 'ChristianChiarulli/dashboard-nvim'
-    use 'justinmk/vim-sneak'
     use 'akinsho/nvim-toggleterm.lua'
+    use "terrortylor/nvim-comment"
+    use "phaazon/hop.nvim" --Replace vim-sneak
 
     -- LSP
     use 'neovim/nvim-lspconfig'
@@ -32,6 +33,7 @@ return require('packer').startup(function(use)
     use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/nvim-compe'
     use 'hrsh7th/vim-vsnip'
+    use 'lewis6991/gitsigns.nvim'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

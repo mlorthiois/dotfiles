@@ -65,3 +65,10 @@ end
 --- LSP saga
 local saga = require 'lspsaga'
 saga.init_lsp_saga()
+
+--- GitSigns
+require('gitsigns').setup()
+
+--- Comments
+require('nvim_comment').setup()
+
