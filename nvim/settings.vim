@@ -30,7 +30,7 @@ set formatoptions-=cro          " Stop newline continution of comments
 set clipboard=unnamedplus       " Copy paste between vim and everything else
 let g:mapleader = " "           " Set Space as mapleader
 set termguicolors               " Use right colors
-set shortmess+=c                " Avoid "Pattern not found with lsp-compe
+set shortmess+=c                " Avoid Pattern not found with lsp-compe
 set signcolumn=yes              " Always show signcolumn to avoid shifting on display
 set scrolloff=2                 " Don't stick line to top/bottom
 

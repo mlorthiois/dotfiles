@@ -3,7 +3,7 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true -- false will disable the whole extension
     },
-    indent = {enable = {"javascriptreact"}},
+    indent = {enable = true},
     autotag = {enable = true},
     rainbow = {enable = true}
 }
