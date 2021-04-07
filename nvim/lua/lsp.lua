@@ -45,12 +45,24 @@ local on_attach = function(client, bufnr)
   end
 end
 
+
+--- Format on Save
+local on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+        vim.api.nvim_command [[augroup Format]]
+        vim.api.nvim_command [[autocmd! * <buffer>]]
+        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({}, 1000)]]
+        vim.api.nvim_command [[augroup END]]
+    end
+end
+
+
 --- Use lspinstall to install all servers
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
+    require'lspconfig'[server].setup{on_attach = on_attach}
   end
 end
 
@@ -71,4 +83,29 @@ require('gitsigns').setup()
 
 --- Comments
 require('nvim_comment').setup()
+
+--- EFM lang server for formatting
+local prettier = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
+
+require "lspconfig".efm.setup {
+    -- root_dir = nvim_lsp.util.root_pattern(unpack({".git/", "main.py"})),
+    on_attach = on_attach,
+    init_options = {documentFormatting = true},
+    filetypes = {"python", "typescript", "typescriptreact", "javascript", "javascriptreact"},
+    settings = {
+        rootMarkers = {".git/", "Makefile", "setup.py", "main.py", "package.json"},
+        languages = {
+            python = {
+              {
+                formatCommand = "yapf --quiet ",
+                formatStdin = true
+              }
+            },
+            typescriptreact = {prettier},
+            typescript = {prettier},
+            javascript = {prettier},
+            javascriptreact = {prettier}
+        }
+    }
+}
 

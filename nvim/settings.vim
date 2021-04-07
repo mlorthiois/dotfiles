@@ -5,7 +5,7 @@ set nowrap                      " Display long lines as just one line
 set encoding=utf-8              " The encoding displayed
 set pumheight=10                " Makes popup menu smaller
 set fileencoding=utf-8          " The encoding written to file
-set ruler              			" Show the cursor position all the time
+set ruler              			    " Show the cursor position all the time
 set cmdheight=2                 " More space for displaying messages
 set iskeyword+=-                " treat dash separated words as a word text object"
 set mouse=a                     " Enable your mouse
@@ -29,9 +29,10 @@ set timeoutlen=500              " By default timeoutlen is 1000 ms
 set formatoptions-=cro          " Stop newline continution of comments
 set clipboard=unnamedplus       " Copy paste between vim and everything else
 let g:mapleader = " "           " Set Space as mapleader
-set clipboard=unnamedplus       " Use system clipboard
 set termguicolors               " Use right colors
 set shortmess+=c                " Avoid "Pattern not found with lsp-compe
+set signcolumn=yes              " Always show signcolumn to avoid shifting on display
+set scrolloff=2                 " Don't stick line to top/bottom
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
@@ -40,9 +41,6 @@ let g:colors_name = 'github'
 " Plugins
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
-
 " Languages
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufNewFile,BufRead *.nf set syntax=groovy
