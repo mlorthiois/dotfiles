@@ -22,7 +22,7 @@ set autoindent                  " Good auto indent
 set laststatus=2                " Always display the status line
 set number                      " Line numbers
 set cursorline                  " Enable highlighting of the current line
-set background=dark             " tell vim what the background color looks like
+" set background=dark             " tell vim what the background color looks like
 set noshowmode                  " We don't need to see things like -- INSERT -- anymore
 set updatetime=300              " Faster completion
 set timeoutlen=500              " By default timeoutlen is 1000 ms
@@ -33,10 +33,14 @@ set termguicolors               " Use right colors
 set shortmess+=c                " Avoid Pattern not found with lsp-compe
 set signcolumn=yes              " Always show signcolumn to avoid shifting on display
 set scrolloff=2                 " Don't stick line to top/bottom
+set relativenumber              " Show relative number in left column
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-let g:colors_name = 'github'
+let g:nd_themes = [
+  \ ['8:00',  'github_light', 'light' ],
+  \ ['21:00', 'github_dark',  'dark'  ],
+  \ ]
 
 " Plugins
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()

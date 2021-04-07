@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     use 'akinsho/nvim-toggleterm.lua'
     use "terrortylor/nvim-comment"
     use "phaazon/hop.nvim" --Replace vim-sneak
+    use 'nightsense/night-and-day'
 
     -- LSP
     use 'neovim/nvim-lspconfig'

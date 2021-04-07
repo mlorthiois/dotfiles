@@ -15,6 +15,5 @@ lua require('indentline')
 lua require('lsp')
 lua require('treesitter')
 lua require('telescope')
-source $HOME/.config/nvim/github.vim
 lua require('nv-compe')
 lua require('comment')

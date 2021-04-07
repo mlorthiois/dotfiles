@@ -5,7 +5,7 @@ hi clear
 if exists('syntax_on')
   syntax reset
 endif
-let g:colors_name='github'
+let g:colors_name='github_dark'
 
 hi Normal guifg=#e0e4e8 ctermfg=249 guibg=#0d1217 ctermbg=234 gui=NONE cterm=NONE
 hi Comment guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=italic cterm=italic
@@ -70,9 +70,9 @@ hi SpellBad guifg=#f44747 ctermfg=203 guibg=NONE ctermbg=NONE gui=underline cter
 hi SpellCap guifg=#d7ba7d ctermfg=180 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi SpellLocal guifg=#d7ba7d ctermfg=180 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi SpellRare guifg=#d7ba7d ctermfg=180 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi StatusLine guifg=#e0e4e8 ctermfg=249 guibg=#151b22 ctermbg=236 gui=NONE cterm=NONE
+hi StatusLine guifg=#e0e4e8 ctermfg=249 guibg=#1d2023 ctermbg=236 gui=NONE cterm=NONE
 hi StatusLineNC guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi StatusLineTerm guifg=#e0e4e8 ctermfg=249 guibg=#0c1117 ctermbg=236 gui=NONE cterm=NONE
+hi StatusLineTerm guifg=#e0e4e8 ctermfg=249 guibg=#1d2023 ctermbg=236 gui=NONE cterm=NONE
 hi StatusLineTermNC guifg=#0c1117 ctermfg=236 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TabLine guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TabLineSel guifg=#e0e4e8 ctermfg=249 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
