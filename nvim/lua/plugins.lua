@@ -60,5 +60,4 @@ return require('packer').startup(function(use)
 
     -- Color
     use 'norcalli/nvim-colorizer.lua'
-    use 'sheerun/vim-polyglot'
 end)

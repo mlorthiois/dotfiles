@@ -22,7 +22,6 @@ set autoindent                  " Good auto indent
 set laststatus=2                " Always display the status line
 set number                      " Line numbers
 set cursorline                  " Enable highlighting of the current line
-" set background=dark             " tell vim what the background color looks like
 set noshowmode                  " We don't need to see things like -- INSERT -- anymore
 set updatetime=300              " Faster completion
 set timeoutlen=500              " By default timeoutlen is 1000 ms
@@ -48,3 +47,6 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 " Languages
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
+
+" Colorizer
+lua require'colorizer'.setup()
