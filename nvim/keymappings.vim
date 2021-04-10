@@ -27,13 +27,9 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" Terminal
-nnoremap <silent>    <Leader>j :ToggleTerm<CR>
-
-
 " Hop (vim-sneak)
 nnoremap <silent>  s <cmd>HopChar2<cr>
-nnoremap <silent>  S <cmd>HopWord<cr>
+nnoremap <silent>  S <cmd>HopPattern<cr>
 
 " Comments
 nnoremap <silent>     <Leader>c :CommentToggle<cr>
@@ -52,7 +48,7 @@ nnoremap <silent> <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <leader>gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>K :Lspsaga hover_doc<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

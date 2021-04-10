@@ -36,10 +36,11 @@ set relativenumber              " Show relative number in left column
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-let g:nd_themes = [
-  \ ['8:00',  'github_light', 'light' ],
-  \ ['21:00', 'github_dark',  'dark'  ],
-  \ ]
+let g:dusk_til_dawn_light_theme = "github_light"
+let g:dusk_til_dawn_dark_theme = "github_dark"
+let g:dusk_til_dawn_morning = 7
+let g:dusk_til_dawn_night = 21
+lua require'Dusk-til-Dawn'.timeMan()()
 
 " Plugins
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()

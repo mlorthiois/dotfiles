@@ -21,16 +21,14 @@ return require('packer').startup(function(use)
     use 'liuchengxu/vim-which-key'
     use 'airblade/vim-rooter'
     use 'ChristianChiarulli/dashboard-nvim'
-    use 'akinsho/nvim-toggleterm.lua'
     use "terrortylor/nvim-comment"
     use "phaazon/hop.nvim" --Replace vim-sneak
-    use 'nightsense/night-and-day'
+    use 'Th3Whit3Wolf/Dusk-til-Dawn.nvim'
 
     -- LSP
     use 'neovim/nvim-lspconfig'
     use 'glepnir/lspsaga.nvim'
     use 'kosayoda/nvim-lightbulb'
-    use 'mfussenegger/nvim-jdtls'
     use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/nvim-compe'
     use 'hrsh7th/vim-vsnip'
@@ -53,7 +51,6 @@ return require('packer').startup(function(use)
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
-    use 'nvim-telescope/telescope-media-files.nvim'
 
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
