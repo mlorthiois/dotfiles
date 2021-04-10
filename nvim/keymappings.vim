@@ -18,6 +18,9 @@ nnoremap <silent>    <Leader>e :NvimTreeToggle<CR>
 nnoremap <silent>    <Leader>t :BufferNext<CR>
 nnoremap <silent>    <Leader>w :BufferClose<CR>
 
+" Vsplit - Switch vsplit window
+nnoremap <silent>    <Leader><Tab> <C-w><C-w>
+
 " Which Key
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
@@ -35,9 +38,7 @@ nnoremap <silent>  S <cmd>HopPattern<cr>
 nnoremap <silent>     <Leader>c :CommentToggle<cr>
 vnoremap <silent>     <Leader>c :CommentToggle<cr>
 
-
-
-" Shortcuts
+" Languages Shortcuts
 autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
 autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
 autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
