@@ -80,3 +80,13 @@ source ~/.iterm2_shell_integration.zsh
 iterm2_print_user_vars() {
   it2git
 }
+
+### Use Ctrl-Z to fg - return in NeoVim without adding fg to ZSH History
+function Resume {  
+    fg
+    zle push-input 
+    BUFFER=""
+    zle accept-line
+} 
+zle -N Resume
+bindkey "^Z" Resume
