@@ -12,9 +12,9 @@ hi Comment guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=italic cterm=ita
 hi Constant guifg=#6f42c1 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi String guifg=#22863a ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Character guifg=#22863a ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Number guifg=#ffd33d ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Number guifg=#005cc5 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Boolean guifg=#f66a0a ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Float guifg=#ffd33d ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Float guifg=#005cc5 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Identifier guifg=#6f42c1 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Function guifg=#6f42c1 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Statement guifg=#cb2431 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
