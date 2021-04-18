@@ -5,6 +5,7 @@ nnoremap <silent>    <Leader>e :NvimTreeToggle<CR>
 
 " Tab
 nnoremap <silent>    <Leader>t :BufferNext<CR>
+nnoremap <silent>    <Leader>T :BufferPrevious<CR>
 nnoremap <silent>    <Leader>w :BufferClose<CR>
 
 " Vsplit - Switch vsplit window
