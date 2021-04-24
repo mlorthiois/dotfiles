@@ -16,3 +16,6 @@ autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%
 
 " LSP
 nnoremap <silent> K :Lspsaga hover_doc<CR>
+
+" Compe
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
