@@ -21,7 +21,7 @@ require'compe'.setup {
         vsnip = {kind = "  "},
         nvim_lsp = {kind = "  "},
         -- nvim_lua = {kind = "  "},
-		nvim_lua = false,
+		    nvim_lua = false,
         spell = {kind = "  "},
         tags = false,
         vim_dadbod_completion = true,

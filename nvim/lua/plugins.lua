@@ -24,7 +24,7 @@ return require('packer').startup(function(use)
     use "terrortylor/nvim-comment"
     use "phaazon/hop.nvim" --Replace vim-sneak
     use {"windwp/nvim-autopairs", opt = true}
-    use 'Th3Whit3Wolf/Dusk-til-Dawn.nvim'
+    use 'Th3Whit3Wolf/Dusk-til-Dawn.nvim' -- Dark and night colorscheme
 
     -- LSP
     use 'neovim/nvim-lspconfig'
