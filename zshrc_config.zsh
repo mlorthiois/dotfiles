@@ -24,18 +24,6 @@ alias dcb='docker-compose build'
 alias dcr='docker-compose run'
 
 ### Functions
-case $TERM in
-  xterm*)
-    if [ ${#HOSTNAME} -ge 1 ]; then
-      host="[$HOSTNAME]"
-    fi
-    precmd() {print -Pn "\e]0;▲ ${PWD##*/} $host\007"}
-    function preexec() {
-      printf "\033]0;%s\a" "▲ $1 - ${PWD##*/} $host"
-    }
-    ;;
-esac
-
 extract() {
   if [ -f $1 ]; then
     output=$(echo "${1%.*}")
@@ -75,8 +63,8 @@ setopt appendhistory    #Append history to the history file (no overwriting)
 setopt sharehistory     #Share history across terminals
 setopt incappendhistory #Immediately append to the history file, not just when a term is killed
 
+### iTerm2
 source ~/.iterm2_shell_integration.zsh
-
 iterm2_print_user_vars() {
   it2git
 }

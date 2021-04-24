@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
     use 'ChristianChiarulli/dashboard-nvim'
     use "terrortylor/nvim-comment"
     use "phaazon/hop.nvim" --Replace vim-sneak
+    use {"windwp/nvim-autopairs", opt = true}
     use 'Th3Whit3Wolf/Dusk-til-Dawn.nvim'
 
     -- LSP
