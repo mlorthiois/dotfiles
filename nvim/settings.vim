@@ -48,6 +48,10 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 " Languages
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
+" Enable type inlay hints
+" autocmd! CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+" \ :lua require('rust-tools.inlay_hints').set_inlay_hints({show_parameter_hints = true})
+
 
 " Colorizer
 lua require'colorizer'.setup()

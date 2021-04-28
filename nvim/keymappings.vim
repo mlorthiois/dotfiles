@@ -8,11 +8,6 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-nnoremap q }
-nnoremap Q {
-
-" Normal mode shortcuts
-nnoremap m $
-nnoremap ù :
-
+nnoremap m }
+nnoremap M {
 

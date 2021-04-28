@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-compe'
     use 'hrsh7th/vim-vsnip'
     use 'lewis6991/gitsigns.nvim'
+    use 'simrat39/rust-tools.nvim'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

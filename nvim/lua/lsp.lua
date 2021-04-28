@@ -38,7 +38,11 @@ local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
+    -- if server == "rust" then
+      -- goto continue
+    -- end
     require'lspconfig'[server].setup{on_attach = on_attach}
+    -- ::continue::
   end
 end
 
