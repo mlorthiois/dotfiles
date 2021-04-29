@@ -1,4 +1,5 @@
 syntax on                       " Enables syntax highlighing
+syntax match   mySpecialSymbols "+\|-\|\*\|;\|?\|:\|,\|<\|>\|&\||\|!\|\~\|%\|=\|)\|(\|{\|}\|\.\|\[\|\]"
 set noswapfile                  " Don't create .swp files
 set hidden                      " Required to keep multiple buffers open multiple buffers
 set nowrap                      " Display long lines as just one line
@@ -37,7 +38,7 @@ set relativenumber              " Show relative number in left column
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
 let g:dusk_til_dawn_light_theme = "github_light"
-let g:dusk_til_dawn_dark_theme = "github_dark"
+let g:dusk_til_dawn_dark_theme = "custom_dark"
 let g:dusk_til_dawn_morning = 7
 let g:dusk_til_dawn_night = 21
 lua require'Dusk-til-Dawn'.timeMan()()

@@ -1,5 +1,3 @@
-" Maintainer: Christian Chiarulli <chrisatmachine@gmail.com>
-
 set background=light
 hi clear
 if exists('syntax_on')
@@ -7,7 +5,7 @@ if exists('syntax_on')
 endif
 let g:colors_name='github_light'
 
-hi Normal guifg=#151515 ctermfg=249 guibg=#ffffff ctermbg=234 gui=NONE cterm=NONE
+hi Normal guifg=#151515 ctermfg=249 guibg=#fff ctermbg=234 gui=NONE cterm=NONE
 hi Comment guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=italic cterm=italic
 hi Constant guifg=#6f42c1 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi String guifg=#22863a ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -16,7 +14,7 @@ hi Number guifg=#005cc5 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Boolean guifg=#f66a0a ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Float guifg=#005cc5 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Identifier guifg=#6f42c1 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Function guifg=#6f42c1 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Function guifg=#6f42c1 ctermfg=187 guibg=NONE ctermbg=NONE gui=bold cterm=bold
 hi Statement guifg=#cb2431 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Conditional guifg=#cb2431 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Repeat guifg=#cb2431 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE

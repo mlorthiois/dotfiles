@@ -19,7 +19,8 @@ if !exists('g:vscode')
     lua require('telescope')
     lua require('nv-compe')
     lua require('comment')
-    lua require('rust')
+    " lua require('rust')
+    lua require('treesitter')
 else
     source $HOME/.config/nvim/keymappings.vim
     source $HOME/.config/nvim/vscode.vim

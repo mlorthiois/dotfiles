@@ -5,5 +5,5 @@ require'nvim-treesitter.configs'.setup {
     },
     indent = {enable = true},
     autotag = {enable = true},
-    rainbow = {enable = true}
+    -- rainbow = {enable = true}
 }
