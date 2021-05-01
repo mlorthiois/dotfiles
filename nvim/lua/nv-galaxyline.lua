@@ -10,12 +10,12 @@ gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 colors.bg = "ffdd00"
 -- end
 
-gls.left[1] = {
-  RainbowRed = {
-    provider = function() return '▊ ' end,
-    highlight = {colors.orange,colors.bg}
-  },
-}
+-- gls.left[1] = {
+--   RainbowRed = {
+--     provider = function() return '▊ ' end,
+--     highlight = {colors.orange,colors.bg}
+--   },
+-- }
 
 gls.left[2] = {
   ViMode = {
@@ -35,13 +35,13 @@ gls.left[2] = {
     highlight = {colors.red,colors.bg,'bold'},
   },
 }
-gls.left[3] = {
-  FileSize = {
-    provider = 'FileSize',
-    condition = condition.buffer_not_empty,
-    highlight = {colors.fg,colors.bg}
-  }
-}
+-- gls.left[3] = {
+--   FileSize = {
+--     provider = 'FileSize',
+--     condition = condition.buffer_not_empty,
+--     highlight = {colors.fg,colors.bg}
+--   }
+-- }
 gls.left[4] ={
   FileIcon = {
     provider = 'FileIcon',
@@ -54,7 +54,7 @@ gls.left[5] = {
   FileName = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.magenta,colors.bg,'bold'}
+    -- highlight = {colors.green,colors.bg,'bold'}
   }
 }
 
@@ -67,14 +67,14 @@ gls.left[6] = {
   },
 }
 
-gls.left[7] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = ' ',
-    separator_highlight = {'NONE',colors.bg},
-    highlight = {colors.fg,colors.bg,'bold'},
-  }
-}
+-- gls.left[7] = {
+--   PerCent = {
+--     provider = 'LinePercent',
+--     separator = ' ',
+--     separator_highlight = {'NONE',colors.bg},
+--     highlight = {colors.fg,colors.bg,'bold'},
+--   }
+-- }
 
 gls.left[8] = {
   DiagnosticError = {
@@ -118,7 +118,7 @@ gls.mid[1] = {
       return true
     end,
     icon = ' LSP:',
-    highlight = {colors.cyan,colors.bg,'bold'}
+    -- highlight = {colors.cyan,colors.bg,'bold'}
   }
 }
 
@@ -129,18 +129,16 @@ gls.right[1] = {
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
-    highlight = {colors.violet,colors.bg,'bold'},
+    -- highlight = {colors.violet,colors.bg,'bold'},
   }
 }
-
 gls.right[2] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace,
-    highlight = {colors.violet,colors.bg,'bold'},
+    -- highlight = {colors.violet,colors.bg,'bold'},
   }
 }
-
 gls.right[3] = {
   DiffAdd = {
     provider = 'DiffAdd',
@@ -153,7 +151,7 @@ gls.right[4] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
-    icon = ' 柳',
+    icon = '  柳',
     highlight = {colors.orange,colors.bg},
   }
 }
@@ -161,16 +159,9 @@ gls.right[5] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.hide_in_width,
-    icon = '  ',
+    icon = '   ',
     highlight = {colors.red,colors.bg},
   }
-}
-
-gls.right[6] = {
-  RainbowBlue = {
-    provider = function() return ' ▊' end,
-    highlight = {colors.orange,colors.bg}
-  },
 }
 
 gls.short_line_left[1] = {
