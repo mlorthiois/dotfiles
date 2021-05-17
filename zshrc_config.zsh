@@ -78,3 +78,21 @@ function Resume {
 } 
 zle -N Resume
 bindkey "^Z" Resume
+
+
+### TMUX session
+tmux-dev() {  
+  session=$1
+  tmux has-session -t $session
+  if [ $? != 0 ]
+  then
+    tmux new-session -s $session -n editor -d nvim
+    tmux split-window -h -p0
+    tmux split-window
+    tmux select-pane -t 0
+    tmux attach -t $session
+  else
+    echo 'SESSION ALREADY EXISTS'
+  fi
+} 
+

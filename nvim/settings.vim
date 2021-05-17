@@ -2,7 +2,7 @@ syntax on                       " Enables syntax highlighing
 syntax match   mySpecialSymbols "+\|-\|\*\|;\|?\|:\|,\|<\|>\|&\||\|!\|\~\|%\|=\|)\|(\|{\|}\|\.\|\[\|\]"
 set noswapfile                  " Don't create .swp files
 set hidden                      " Required to keep multiple buffers open multiple buffers
-set nowrap                      " Display long lines as just one line
+set wrap                        " Display long lines as just one line
 set encoding=utf-8              " The encoding displayed
 set pumheight=10                " Makes popup menu smaller
 set fileencoding=utf-8          " The encoding written to file
@@ -49,6 +49,7 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 " Languages
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
+autocmd TermOpen * setlocal nonumber norelativenumber
 " Enable type inlay hints
 " autocmd! CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 " \ :lua require('rust-tools.inlay_hints').set_inlay_hints({show_parameter_hints = true})

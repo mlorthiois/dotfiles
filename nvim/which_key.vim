@@ -11,16 +11,13 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 
-let g:which_key_map['c'] = [':CommentToggle', 'comment toggle']
-let g:which_key_map['?'] = [ ':NvimTreeFindFile'                , 'find current file' ]
-let g:which_key_map['e'] = [ ':NvimTreeToggle'                  , 'explorer' ]
-let g:which_key_map['h'] = [ '<C-W>s'                           , 'split below']
-let g:which_key_map['v'] = [ '<C-W>v'                           , 'split right']
-let g:which_key_map['s'] = [ ':w'                               , 'save']
-let g:which_key_map['t'] = [ ':BufferNext'                      , 'next buffer']
-let g:which_key_map['T'] = [ ':BufferPrevious'                  , 'prev buffer']
-let g:which_key_map['w'] = [ ':BufferClose'                     , 'close buffer']
-let g:which_key_map['p'] = [':Telescope buffers'                , 'list open buffers']
+let g:which_key_map['c'] = [':CommentToggle'       , 'comment toggle']
+let g:which_key_map['h'] = [ '<C-W>s'              , 'split below']
+let g:which_key_map['v'] = [ '<C-W>v'              , 'split right']
+let g:which_key_map['s'] = [ ':w'                  , 'save']
+let g:which_key_map['t'] = [ ':BufferPick'         , 'pick buffer']
+let g:which_key_map['w'] = [ ':BufferClose'        , 'close buffer']
+let g:which_key_map['p'] = [':Telescope buffers'   , 'list open buffers']
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,

@@ -52,9 +52,6 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
 
-    -- Explorer
-    use 'kyazdani42/nvim-tree.lua'
-
     -- Color
     use 'norcalli/nvim-colorizer.lua'
 end)
