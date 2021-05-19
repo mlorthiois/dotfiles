@@ -190,7 +190,7 @@ function mnml_me_dirs {
 }
 
 function mnml_me_ls {
-  tree -L 1 -Cap
+  tree -L 1 -Cp
 }
 
 function mnml_me_git {
