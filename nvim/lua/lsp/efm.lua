@@ -26,7 +26,9 @@ local python = {
   lintSource = "flake8"
 }
 
+local lspinstallPath = vim.fn.stdpath('data') .. "/lspinstall/"
 require'lspconfig'.efm.setup {
+  cmd = { lspinstallPath .. "efm/efm-langserver" },
   on_attach=on_attach,
   init_options = {documentFormatting = true, codeAction = false},
   settings = {

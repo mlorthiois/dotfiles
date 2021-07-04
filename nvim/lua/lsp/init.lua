@@ -17,16 +17,30 @@ require'lspsaga'.init_lsp_saga()
 require('nvim_comment').setup()
 
 --- Languages
-lspconfig.pyright.setup{}
+local lspinstallPath = vim.fn.stdpath('data') .. "/lspinstall/"
+--
+lspconfig.pyright.setup{
+  cmd = { lspinstallPath .. "python/node_modules/pyright/langserver.index.js", "--stdio" }
+}
+--
 lspconfig.r_language_server.setup{on_attach=on_attach}
+--
 lspconfig.tsserver.setup{
+  cmd = { lspinstallPath .. "typescript/node_modules/typescript-language-server/lib/cli.js", "--stdio"},
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
   end
 }
--- lspconfig.tailwindcss.setup{}
-lspconfig.clangd.setup{on_attach=on_attach}
-lspconfig.gopls.setup{on_attach=on_attach}
-lspconfig.gopls.setup{on_attach=on_attach}
+--
+lspconfig.clangd.setup{
+  cmd = { lspinstallPath .. "cpp/clangd/bin/clangd", "--background-index" },
+  on_attach=on_attach
+}
+--
+lspconfig.gopls.setup{
+  cmd = { lspinstallPath .. "go/gopls" },
+  on_attach=on_attach
+}
+--
 require'lsp.efm'
 require'lsp.rust'
