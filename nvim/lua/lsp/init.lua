@@ -21,5 +21,5 @@ require'lspconfig'.tsserver.setup{on_attach=on_attach}
 -- require'lspconfig'.tailwindcss.setup{}
 require'lspconfig'.clangd.setup{on_attach=on_attach}
 require'lspconfig'.gopls.setup{on_attach=on_attach}
-require'lspconfig'.rls.setup{on_attach=on_attach}
 require'lsp.efm'
+require'lsp.rust'
