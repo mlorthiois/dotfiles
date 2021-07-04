@@ -1,25 +1,26 @@
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+vim.lsp.set_log_level("debug")
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+-- Mappings.
+local opts = { noremap=true, silent=true }
 
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
+-- Set autocommands conditional on server_capabilities
+if client.resolved_capabilities.document_highlight then
+  vim.api.nvim_exec([[
+    hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+    hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+    hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+    augroup lsp_document_highlight
+      autocmd! * <buffer>
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    augroup END
+  ]], false)
+end
 end
 
 --- Format on Save
@@ -38,14 +39,9 @@ local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
-    -- if server == "rust" then
-      -- goto continue
-    -- end
     require'lspconfig'[server].setup{on_attach = on_attach}
-    -- ::continue::
   end
 end
-
 setup_servers()
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
@@ -62,27 +58,21 @@ saga.init_lsp_saga()
 require('nvim_comment').setup()
 
 --- EFM lang server for formatting
-local prettier = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
-
-require "lspconfig".efm.setup {
-    -- root_dir = nvim_lsp.util.root_pattern(unpack({".git/", "main.py"})),
-    on_attach = on_attach,
-    init_options = {documentFormatting = true},
-    filetypes = {"python", "typescript", "typescriptreact", "javascript", "javascriptreact"},
-    settings = {
-        rootMarkers = {".git/", "Makefile", "setup.py", "main.py", "package.json"},
-        languages = {
-            python = {
-              {
-                formatCommand = "yapf --quiet ",
-                formatStdin = true
-              }
-            },
-            typescriptreact = {prettier},
-            typescript = {prettier},
-            javascript = {prettier},
-            javascriptreact = {prettier}
-        }
-    }
-}
-
+-- local prettier = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
+-- 
+-- require "lspconfig".efm.setup {
+--     root_dir = nvim_lsp.util.root_pattern(unpack({".git/", "main.py"})),
+--     on_attach = on_attach,
+--     init_options = {documentFormatting = true},
+--     filetypes = {"python", "typescript", "typescriptreact", "javascript", "javascriptreact"},
+--     settings = {
+--         rootMarkers = {".git/", "Makefile", "setup.py", "main.py", "package.json", "."},
+--         languages = {
+--             typescriptreact = {prettier},
+--             typescript = {prettier},
+--             javascript = {prettier},
+--             javascriptreact = {prettier}
+--         }
+--     }
+-- }
+-- 

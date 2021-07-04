@@ -37,7 +37,8 @@ set relativenumber              " Show relative number in left column
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-let g:dusk_til_dawn_light_theme = "custom_light"
+" let g:dusk_til_dawn_light_theme = "custom_light"
+let g:dusk_til_dawn_light_theme = "custom_dark"
 let g:dusk_til_dawn_dark_theme = "custom_dark"
 let g:dusk_til_dawn_morning = 7
 let g:dusk_til_dawn_night = 21
