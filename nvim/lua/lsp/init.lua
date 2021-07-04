@@ -1,3 +1,5 @@
+local lspconfig = require"lspconfig"
+
 --- Format on Save
 local on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
@@ -15,11 +17,16 @@ require'lspsaga'.init_lsp_saga()
 require('nvim_comment').setup()
 
 --- Languages
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.r_language_server.setup{on_attach=on_attach}
-require'lspconfig'.tsserver.setup{on_attach=on_attach}
--- require'lspconfig'.tailwindcss.setup{}
-require'lspconfig'.clangd.setup{on_attach=on_attach}
-require'lspconfig'.gopls.setup{on_attach=on_attach}
+lspconfig.pyright.setup{}
+lspconfig.r_language_server.setup{on_attach=on_attach}
+lspconfig.tsserver.setup{
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+  end
+}
+-- lspconfig.tailwindcss.setup{}
+lspconfig.clangd.setup{on_attach=on_attach}
+lspconfig.gopls.setup{on_attach=on_attach}
+lspconfig.gopls.setup{on_attach=on_attach}
 require'lsp.efm'
 require'lsp.rust'

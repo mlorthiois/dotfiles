@@ -12,7 +12,7 @@ local eslint = {
   lintStdin = true,
   lintFormats = {"%f:%l:%c: %m"},
   lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatCommand = "prettierd ${INPUT}",
   formatStdin = true
 }
 
@@ -28,15 +28,13 @@ local python = {
 
 require'lspconfig'.efm.setup {
   on_attach=on_attach,
-  init_options = {documentFormatting = true},
+  init_options = {documentFormatting = true, codeAction = false},
   settings = {
     rootMarkers = {".git/", "package.json", "main.py"},
     languages = {
       javascript = {eslint},
       javascriptreact = {eslint},
-      ["javascript.jsx"] = {eslint},
       typescript = {eslint},
-      ["typescript.tsx"] = {eslint},
       typescriptreact = {eslint},
       python = {python}
     }
