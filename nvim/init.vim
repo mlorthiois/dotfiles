@@ -11,17 +11,15 @@ if !exists('g:vscode')
     source $HOME/.config/nvim/keymappings.vim
     source $HOME/.config/nvim/plugins_keymappings.vim
     source $HOME/.config/nvim/which_key.vim
-    lua require('dashboard')
     lua require('nv-galaxyline')
     lua require('indentline')
     lua require('lsp')
     lua require('git')
-    lua require('telescope')
     lua require('nv-compe')
     lua require('comment')
-    " lua require('rust')
     lua require('treesitter')
 else
     source $HOME/.config/nvim/keymappings.vim
     source $HOME/.config/nvim/vscode.vim
 endif
+

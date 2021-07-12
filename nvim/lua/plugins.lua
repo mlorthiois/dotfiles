@@ -20,7 +20,6 @@ return require('packer').startup(function(use)
     -- General
     use 'liuchengxu/vim-which-key'
     use 'airblade/vim-rooter'
-    use 'ChristianChiarulli/dashboard-nvim'
     use "terrortylor/nvim-comment"
     use "phaazon/hop.nvim" --Replace vim-sneak
     use {"windwp/nvim-autopairs", opt = true}

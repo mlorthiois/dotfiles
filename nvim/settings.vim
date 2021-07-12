@@ -37,7 +37,8 @@ set relativenumber              " Show relative number in left column
 
 " UI settings
 set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-" let g:dusk_til_dawn_light_theme = "custom_light"
+
+" Toggle theme
 let g:dusk_til_dawn_light_theme = "custom_dark"
 let g:dusk_til_dawn_dark_theme = "custom_dark"
 let g:dusk_til_dawn_morning = 7
@@ -51,10 +52,11 @@ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
 autocmd TermOpen * setlocal nonumber norelativenumber
-" Enable type inlay hints
-" autocmd! CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-" \ :lua require('rust-tools.inlay_hints').set_inlay_hints({show_parameter_hints = true})
-
 
 " Colorizer
 lua require'colorizer'.setup()
+
+" Open Telescope when no file specified
+if @% == "" 
+  autocmd VimEnter * nested :Telescope find_files
+endif
