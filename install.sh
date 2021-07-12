@@ -17,6 +17,12 @@ if [ ! -d "$HOME/.config/nvim" ]; then
     ln -s $dotfiles/nvim ~/.config
 fi
 
+# Kitty
+if [ ! -d "$HOME/.config/kitty" ]; then
+    echo "Création du symlink de kitty vers ~/.config/kitty"
+    ln -s $dotfiles/kitty ~/.config
+fi
+
 #Création du fichier .zshrc
 if [ ! -f "$HOME/.zshrc" ]; then
     echo "Création du fichier .zshrc et ajout des 'sources'"
