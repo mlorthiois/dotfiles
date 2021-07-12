@@ -1,7 +1,12 @@
+### Oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+CASE_SENSITIVE="true"
+source $ZSH/oh-my-zsh.sh
+
+
 ### imports
 source $HOME/dotfiles/zsh/minimal.zsh
-source $HOME/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### app themes
 # bat
