@@ -1,7 +1,7 @@
 ### imports
-source $HOME/dotfiles/minimal.zsh
-source $HOME/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/dotfiles/zsh/minimal.zsh
+source $HOME/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### app themes
 # bat
