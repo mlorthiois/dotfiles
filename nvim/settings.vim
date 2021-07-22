@@ -70,3 +70,6 @@ let g:loaded_2html_plugin = 0
 let g:loaded_matchit = 0
 let g:loaded_matchparen = 0
 let g:loaded_spec = 0
+
+" To stop Rooter echoing the project directory
+let g:rooter_silent_chdir = 1

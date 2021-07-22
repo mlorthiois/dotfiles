@@ -14,8 +14,16 @@ return require("packer").startup(
   function(use)
     use "wbthomason/packer.nvim"
 
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("whichkey")
+      end,
+      opt = true,
+      keys = "<space>"
+    }
+
     -- General
-    use "liuchengxu/vim-which-key"
     use "airblade/vim-rooter"
     use {
       "terrortylor/nvim-comment",

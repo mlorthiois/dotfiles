@@ -8,7 +8,6 @@ if !exists('g:vscode')
     source $HOME/.config/nvim/settings.vim
     lua require('plugins')
     source $HOME/.config/nvim/keymappings.vim
-    source $HOME/.config/nvim/which_key.vim
 else
     source $HOME/.config/nvim/vscode.vim
 endif

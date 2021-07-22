@@ -30,3 +30,6 @@ nnoremap <silent> K :Lspsaga hover_doc<CR>
 
 " Compe
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+
+" Use comment in visual mode
+vnoremap <silent>     <Leader>c :CommentToggle<cr>
