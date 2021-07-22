@@ -51,16 +51,9 @@ return require("packer").startup(
     }
     use {
       "glepnir/lspsaga.nvim",
-      event = "BufRead",
-      config = function()
-        require "lspsaga".init_lsp_saga()
-      end
-    }
-    use {
-      "kosayoda/nvim-lightbulb",
       event = "BufReadPre",
       config = function()
-        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+        require "lspsaga".init_lsp_saga()
       end
     }
     use {"hrsh7th/vim-vsnip", event = "InsertEnter"}
@@ -103,6 +96,7 @@ return require("packer").startup(
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
+      event = "BufReadPre",
       config = function()
         require "nv-galaxyline"
       end
