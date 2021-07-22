@@ -1,10 +1,9 @@
 syntax on                       " Enables syntax highlighing
-syntax match   mySpecialSymbols "+\|-\|\*\|;\|?\|:\|,\|<\|>\|&\||\|!\|\~\|%\|=\|)\|(\|{\|}\|\.\|\[\|\]"
 set noswapfile                  " Don't create .swp files
 set hidden                      " Required to keep multiple buffers open multiple buffers
 set wrap                        " Display long lines as just one line
 set encoding=utf-8              " The encoding displayed
-set pumheight=10                " Makes popup menu smaller
+set pumheight=15                " Makes popup menu smaller
 set fileencoding=utf-8          " The encoding written to file
 set ruler              			    " Show the cursor position all the time
 set cmdheight=2                 " More space for displaying messages
@@ -35,28 +34,34 @@ set signcolumn=yes              " Always show signcolumn to avoid shifting on di
 set scrolloff=2                 " Don't stick line to top/bottom
 set relativenumber              " Show relative number in left column
 
-" UI settings
-set guifont=JetBrainsMono-Nerd-Font-Regular:h16 " Add GUI custom font
-
 " Toggle theme
 let g:dusk_til_dawn_light_theme = "custom_dark"
 let g:dusk_til_dawn_dark_theme = "custom_dark"
 let g:dusk_til_dawn_morning = 7
 let g:dusk_til_dawn_night = 21
-lua require'Dusk-til-Dawn'.timeMan()()
-
-" Plugins
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
 " Languages
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
 autocmd TermOpen * setlocal nonumber norelativenumber
 
-" Colorizer
-lua require'colorizer'.setup()
-
 " Open Telescope when no file specified
-if @% == "" 
-  autocmd VimEnter * nested :Telescope find_files
-endif
+" if @% == "" 
+  " autocmd VimEnter * nested :Telescope find_files
+" endif
+
+" disable builtin vim plugins
+let g:loaded_gzip = 0
+let g:loaded_shada = 0
+let g:loaded_health = 0
+let g:loaded_man = 0
+let g:loaded_tar = 0
+let g:loaded_tarPlugin = 0
+let g:loaded_rPlugin = 0
+let g:loaded_zipPlugin = 0
+let g:loaded_2html_plugin = 0
+let g:loaded_netrw = 0
+let g:loaded_netrwPlugin = 0
+let g:loaded_matchit = 0
+let g:loaded_matchparen = 0
+let g:loaded_spec = 0

@@ -4,20 +4,9 @@ local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 
--- if vim.o.colorscheme == "github_dark" then
-  -- colors.bg = "#1d2023"
--- else
 colors.bg = "ffdd00"
--- end
 
--- gls.left[1] = {
---   RainbowRed = {
---     provider = function() return '▊ ' end,
---     highlight = {colors.orange,colors.bg}
---   },
--- }
-
-gls.left[2] = {
+gls.left[1] = {
   ViMode = {
     provider = function()
       -- auto change color according the vim mode
@@ -35,14 +24,8 @@ gls.left[2] = {
     highlight = {colors.red,colors.bg,'bold'},
   },
 }
--- gls.left[3] = {
---   FileSize = {
---     provider = 'FileSize',
---     condition = condition.buffer_not_empty,
---     highlight = {colors.fg,colors.bg}
---   }
--- }
-gls.left[4] ={
+
+gls.left[2] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
@@ -50,7 +33,7 @@ gls.left[4] ={
   },
 }
 
-gls.left[5] = {
+gls.left[3] = {
   FileName = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
@@ -58,7 +41,7 @@ gls.left[5] = {
   }
 }
 
-gls.left[6] = {
+gls.left[4] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' ',
@@ -67,23 +50,15 @@ gls.left[6] = {
   },
 }
 
--- gls.left[7] = {
---   PerCent = {
---     provider = 'LinePercent',
---     separator = ' ',
---     separator_highlight = {'NONE',colors.bg},
---     highlight = {colors.fg,colors.bg,'bold'},
---   }
--- }
-
-gls.left[8] = {
+gls.left[5] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
-gls.left[9] = {
+
+gls.left[6] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -91,7 +66,7 @@ gls.left[9] = {
   }
 }
 
-gls.left[10] = {
+gls.left[7] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
@@ -99,7 +74,7 @@ gls.left[10] = {
   }
 }
 
-gls.left[11] = {
+gls.left[8] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
@@ -118,7 +93,6 @@ gls.mid[1] = {
       return true
     end,
     icon = ' LSP:',
-    -- highlight = {colors.cyan,colors.bg,'bold'}
   }
 }
 
@@ -129,14 +103,12 @@ gls.right[1] = {
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
-    -- highlight = {colors.violet,colors.bg,'bold'},
   }
 }
 gls.right[2] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace,
-    -- highlight = {colors.violet,colors.bg,'bold'},
   }
 }
 gls.right[3] = {

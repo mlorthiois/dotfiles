@@ -1,56 +1,134 @@
--- vim.cmd [[packadd packer.nvim]]
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
+-- Autoinstall packer if not installed
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-    execute 'packadd packer.nvim'
+  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+  execute "packadd packer.nvim"
 end
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
-require('packer').init({display = {auto_clean = false}})
-
-return require('packer').startup(function(use)
-    -- Packer can manage itself as an optional plugin
-    use 'wbthomason/packer.nvim'
+return require("packer").startup(
+  function(use)
+    use "wbthomason/packer.nvim"
 
     -- General
-    use 'liuchengxu/vim-which-key'
-    use 'airblade/vim-rooter'
-    use "terrortylor/nvim-comment"
-    use "phaazon/hop.nvim" --Replace vim-sneak
-    use {"windwp/nvim-autopairs", opt = true}
-    use 'Th3Whit3Wolf/Dusk-til-Dawn.nvim' -- Dark and night colorscheme
+    use "liuchengxu/vim-which-key"
+    use "airblade/vim-rooter"
+    use {
+      "terrortylor/nvim-comment",
+      cmd = "CommentToggle",
+      config = function()
+        require("nvim_comment").setup()
+      end
+    }
+    use {"phaazon/hop.nvim", cmd = {"HopChar2", "HopPattern"}} --Replace vim-sneak
+    use {"windwp/nvim-autopairs", opt = true, after = "nvim-compe"}
+    use {
+      "Th3Whit3Wolf/Dusk-til-Dawn.nvim",
+      config = function()
+        require "Dusk-til-Dawn".timeMan()()
+      end
+    } -- Dark and night colorscheme
 
     -- LSP
-    use 'neovim/nvim-lspconfig'
-    use 'glepnir/lspsaga.nvim'
-    use 'kosayoda/nvim-lightbulb'
-    use 'kabouzeid/nvim-lspinstall'
-    use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
-    use 'lewis6991/gitsigns.nvim'
-    use 'simrat39/rust-tools.nvim'
+    use {"kabouzeid/nvim-lspinstall", event = "BufReadPre"}
+    use {
+      "neovim/nvim-lspconfig",
+      event = "BufReadPre",
+      config = function()
+        require "lsp"
+      end
+    }
+    use {
+      "hrsh7th/nvim-compe",
+      event = "InsertEnter",
+      config = function()
+        require "nv-compe"
+      end
+    }
+    use {
+      "glepnir/lspsaga.nvim",
+      event = "BufRead",
+      config = function()
+        require "lspsaga".init_lsp_saga()
+      end
+    }
+    use {
+      "kosayoda/nvim-lightbulb",
+      event = "BufReadPre",
+      config = function()
+        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+      end
+    }
+    use {"hrsh7th/vim-vsnip", event = "InsertEnter"}
+    use {
+      "lewis6991/gitsigns.nvim",
+      event = "BufReadPre",
+      config = function()
+        require "git"
+      end
+    }
+    use {
+      "simrat39/rust-tools.nvim",
+      config = function()
+        require "lsp.rust"
+      end,
+      ft = "rust"
+    }
 
     -- Treesitter
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use {'lukas-reineke/indent-blankline.nvim'}
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      event = "BufRead",
+      run = ":TSUpdate",
+      config = function()
+        require "treesitter"
+      end
+    }
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require "indentline"
+      end
+    }
 
     -- Icons
-    use 'kyazdani42/nvim-web-devicons'
+    use "kyazdani42/nvim-web-devicons"
 
     -- Status Line and Tab line
-    use {'glepnir/galaxyline.nvim', branch = 'main'}
-    use 'romgrk/barbar.nvim'
+    use {
+      "glepnir/galaxyline.nvim",
+      branch = "main",
+      config = function()
+        require "nv-galaxyline"
+      end
+    }
 
     -- Telescope
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
+    use {
+      "nvim-telescope/telescope.nvim",
+      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+      config = function()
+        require "nv-telescope"
+      end,
+      cmd = "Telescope"
+    }
+    use {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make"
+    }
 
     -- Color
-    use 'norcalli/nvim-colorizer.lua'
-end)
+    use {
+      "norcalli/nvim-colorizer.lua",
+      event = "BufReadPre",
+      config = function()
+        require "colorizer".setup()
+      end
+    }
+  end
+)

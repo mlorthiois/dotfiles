@@ -1,10 +1,10 @@
 local on_attach = function(client)
-    if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_command [[augroup Format]]
-        vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({}, 1000)]]
-        vim.api.nvim_command [[augroup END]]
-    end
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({}, 1000)]]
+    vim.api.nvim_command [[augroup END]]
+  end
 end
 
 local eslint = {
@@ -26,10 +26,15 @@ local python = {
   lintSource = "flake8"
 }
 
-local lspinstallPath = vim.fn.stdpath('data') .. "/lspinstall/"
-require'lspconfig'.efm.setup {
-  cmd = { lspinstallPath .. "efm/efm-langserver" },
-  on_attach=on_attach,
+local luafmt = {
+  formatCommand = "luafmt -i 2 -l 120 --stdin",
+  formatStdin = true
+}
+
+local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
+require "lspconfig".efm.setup {
+  cmd = {lspinstallPath .. "efm/efm-langserver"},
+  on_attach = on_attach,
   init_options = {documentFormatting = true, codeAction = false},
   settings = {
     rootMarkers = {".git/", "package.json", "main.py"},
@@ -38,7 +43,8 @@ require'lspconfig'.efm.setup {
       javascriptreact = {eslint},
       typescript = {eslint},
       typescriptreact = {eslint},
-      python = {python}
+      python = {python},
+      lua = {luafmt}
     }
   },
   filetypes = {
@@ -46,6 +52,7 @@ require'lspconfig'.efm.setup {
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "python"
+    "python",
+    "lua"
   }
 }
