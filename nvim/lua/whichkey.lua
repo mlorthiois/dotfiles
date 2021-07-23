@@ -6,7 +6,9 @@ wk.register(
     h = {"<C-W>s<cr>", "split below"},
     v = {"<C-W>v<cr>", "split right"},
     s = {":w<cr>", "save"},
-    p = {"<cmd>Telescope buffers<cr>", "list open buffers"},
+    b = {"<cmd>Telescope buffers<cr>", "list open buffers"},
+    n = {":lnext<cr>", "Next in localfix"},
+    p = {":lprev<cr>", "Prev in localfix"},
     f = {
       name = "+Telescope",
       p = {"<cmd>Telescope oldfiles<cr>", "previous open files"},

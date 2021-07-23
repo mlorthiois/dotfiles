@@ -11,10 +11,19 @@ imap <right> <nop>
 nnoremap m }
 nnoremap M {
 
-"----Plugins-----------
-" Vsplit - Switch vsplit window
-nnoremap <silent>    <Leader><Tab> <C-w><C-w>
+" Easily switch between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
+" Sizing window horizontally and vertically with Shift + Arrow keys
+nnoremap <S-right> :vert res +5<CR>
+nnoremap <S-left> :vert res -5<CR>
+nnoremap <S-Up> :res +5<CR>
+nnoremap <S-Down> :res -5<CR>
+
+"----Plugins-----------
 " Hop (vim-sneak)
 nnoremap <silent>  s <cmd>HopChar2<cr>
 nnoremap <silent>  S <cmd>HopPattern<cr>
