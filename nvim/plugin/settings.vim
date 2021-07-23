@@ -50,26 +50,5 @@ autocmd TermOpen * setlocal nonumber norelativenumber
   " autocmd VimEnter * nested :Telescope find_files
 " endif
 
-" disable builtin vim plugins
-let g:loaded_netrw = 0
-let g:loaded_netrwPlugin = 0
-let g:loaded_netrwSettings = 0
-let g:loaded_netrwFileHandlers = 0
-let g:loaded_gzip = 0
-let g:loaded_zip = 0
-let g:loaded_zipPlugin = 0
-let g:loaded_tar = 0
-let g:loaded_tarPlugin = 0
-let g:loaded_getscript = 0
-let g:loaded_getscriptPlugin = 0
-let g:loaded_shada = 0
-let g:loaded_health = 0
-let g:loaded_man = 0
-let g:loaded_rPlugin = 0
-let g:loaded_2html_plugin = 0
-let g:loaded_matchit = 0
-let g:loaded_matchparen = 0
-let g:loaded_spec = 0
-
 " To stop Rooter echoing the project directory
 let g:rooter_silent_chdir = 1

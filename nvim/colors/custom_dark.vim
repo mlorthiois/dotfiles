@@ -14,7 +14,7 @@ hi Constant guifg=#81D3B0 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NON
 hi String guifg=#81D3B0 ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Character guifg=#81D3B0 ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Number guifg=#81D3B0 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Boolean guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Boolean guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Float guifg=#b5cea8 ctermfg=151 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Identifier guifg=#d1d1d1 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Function guifg=#ffffff ctermfg=187 guibg=NONE ctermbg=NONE gui=bold cterm=NONE
@@ -22,7 +22,7 @@ hi Statement guifg=#86B5D2 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NO
 hi Conditional guifg=#86B5D2 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Repeat guifg=#86B5D2 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Label guifg=#86B5D2 ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Operator guifg=#FAC481 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Operator guifg=#fac481 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Keyword guifg=#d2a8ff ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Exception guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi PreProc guifg=#d2a8ff ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -47,7 +47,7 @@ hi SignColumn guifg=NONE ctermfg=NONE guibg=NONE ctermbg=234 gui=NONE cterm=NONE
 hi Conceal guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi CursorColumn guifg=NONE ctermfg=NONE guibg=NONE ctermbg=236 gui=NONE cterm=NONE
 hi CursorLine guifg=NONE ctermfg=NONE guibg=#151516 ctermbg=236 gui=NONE cterm=NONE
-hi Directory guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Directory guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi DiffAdd guifg=#1D1D1C ctermfg=234 guibg=#8b949e ctermbg=65 gui=NONE cterm=NONE
 hi DiffChange guifg=#d2a8ff ctermfg=187 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi DiffDelete guifg=#1D1D1C ctermfg=234 guibg=#ff7b72 ctermbg=167 gui=NONE cterm=NONE
@@ -86,7 +86,7 @@ hi Terminal guifg=#d1d1d1 ctermfg=249 guibg=#1D1D1C ctermbg=234 gui=NONE cterm=N
 hi Visual guifg=NONE ctermfg=NONE guibg=#3e4452 ctermbg=238 gui=NONE cterm=NONE
 hi VisualNOS guifg=#3e4452 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi WarningMsg guifg=#d1d1d1 ctermfg=187 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi WildMenu guifg=#1D1D1C ctermfg=234 guibg=#FAC481 ctermbg=74 gui=NONE cterm=NONE
+hi WildMenu guifg=#1D1D1C ctermfg=234 guibg=#fac481 ctermbg=74 gui=NONE cterm=NONE
 hi EndOfBuffer guifg=#1D1D1C ctermfg=234 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
 """""""""""""
@@ -125,11 +125,11 @@ hi TSLabel guifg=#79c0ff ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSKeyword guifg=#86B5D2 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSKeywordFunction guifg=#d1d1d1 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSKeywordOperator guifg=#d1d1d1 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi TSOperator guifg=#FAC481 ctermfg=249 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi TSOperator guifg=#fac481 ctermfg=249 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSException guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSType guifg=#85B5D2 ctermfg=79 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi TSTypeBuiltin guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi TSStructure guifg=#FAC481 ctermfg=201 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi TSTypeBuiltin guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi TSStructure guifg=#fac481 ctermfg=201 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSInclude guifg=#86B5D2 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSVariable guifg=#d1d1d1 ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSVariableBuiltin guifg=#d1d1d1 ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -140,7 +140,7 @@ hi TSUnderline guifg=#81D3B0 ctermfg=226 guibg=NONE ctermbg=NONE gui=NONE cterm=
 hi TSTitle guifg=#81D3B0 ctermfg=226 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSLiteral guifg=#81D3B0 ctermfg=174 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSURI guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=underline cterm=underline
-hi TSTag guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi TSTag guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSTagDelimiter guifg=#777775 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSQueryLinterError guifg=#ff7b72 ctermfg=208 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
@@ -152,20 +152,20 @@ hi markdownBold guifg=#d7ba7d ctermfg=180 guibg=NONE ctermbg=NONE gui=bold cterm
 hi markdownCode guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownCodeBlock guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownCodeDelimiter guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH1 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH2 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH3 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH4 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH5 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownH6 guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH1 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH2 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH3 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH4 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH5 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownH6 guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownHeadingDelimiter guifg=#ff7b72 ctermfg=167 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownHeadingRule guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownId guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownIdDeclaration guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownIdDeclaration guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownIdDelimiter guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownItalic guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=italic cterm=italic
 hi markdownLinkDelimiter guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi markdownLinkText guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi markdownLinkText guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownListMarker guifg=#ff7b72 ctermfg=167 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownOrderedListMarker guifg=#ff7b72 ctermfg=167 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi markdownRule guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -177,14 +177,14 @@ hi markdownUrl guifg=#4ec9b0 ctermfg=79 guibg=NONE ctermbg=NONE gui=underline ct
 hi WhichKey guifg=#ff7b72 ctermfg=175 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi WhichKeySeperator guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi WhichKeyGroup guifg=#4fc1ff ctermfg=75 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi WhichKeyDesc guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi WhichKeyDesc guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
 """""""""""
 " Git Signs
 """""""""""
 hi diffAdded guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi diffRemoved guifg=#ff7b72 ctermfg=167 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi diffFileId guifg=#FAC481 ctermfg=74 guibg=NONE ctermbg=NONE gui=bold,reverse cterm=bold,reverse
+hi diffFileId guifg=#fac481 ctermfg=74 guibg=NONE ctermbg=NONE gui=bold,reverse cterm=bold,reverse
 hi diffFile guifg=#3b4048 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi diffNewFile guifg=#8b949e ctermfg=65 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi diffOldFile guifg=#ff7b72 ctermfg=167 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -221,9 +221,9 @@ hi MatchParenCur guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=underline c
 " BarBar
 """"""""
 hi BufferCurrent guifg=#d1d1d1 ctermfg=249 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
-hi BufferCurrentIndex guifg=#FAC481 ctermfg=74 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
+hi BufferCurrentIndex guifg=#fac481 ctermfg=74 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
 hi BufferCurrentMod guifg=#d1d1d1 ctermfg=249 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
-hi BufferCurrentSign guifg=#FAC481 ctermfg=74 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
+hi BufferCurrentSign guifg=#fac481 ctermfg=74 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
 hi BufferCurrentTarget guifg=#ff7b72 ctermfg=167 guibg=#1D1D1B ctermbg=234 gui=bold cterm=bold
 hi BufferVisible guifg=#d1d1d1 ctermfg=249 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
 hi BufferVisibleIndex guifg=#d1d1d1 ctermfg=249 guibg=#1D1D1B ctermbg=234 gui=NONE cterm=NONE
@@ -241,3 +241,37 @@ hi BufferInactiveTarget guifg=#ff7b72 ctermfg=167 guibg=#151516 ctermbg=236 gui=
 """"""""
 hi CodiVirtualText guifg=#6395ec ctermfg=69 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi IndentBlanklineContextChar guifg=#d1d1d1 ctermfg=242 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+
+""""""""""
+" Galaxy line
+""""""""""
+highlight GalaxyLeftLspInactive                                                                     guibg=#1D1D1B guifg=#777775
+highlight GalaxyMapperCommon1                                                                       guibg=#1D1D1B guifg=#2e2e2e
+highlight GalaxyMapperCommon2                                                                       guibg=#000000 guifg=#d1d1d1
+highlight GalaxyMapperCommon3                                                                       guibg=#2e2e2e guifg=#d1d1d1
+highlight GalaxyMapperCommon5                                                                       guibg=#1D1D1B guifg=#777775
+highlight GalaxyMapperCommon7                                                                       guibg=#2e2e2e guifg=#000000
+highlight GalaxyMidFileStatusModified                                                               guibg=#1D1D1B guifg=#81D3B0
+highlight GalaxyMidFileStatusReadonly                                                               guibg=#1D1D1B guifg=#fac481
+highlight GalaxyMidFileStatusRestricted                                                             guibg=#1D1D1B guifg=#ff7b72
+highlight GalaxyMidFileStatusUnmodified                                                             guibg=#1D1D1B guifg=#777775
+highlight GalaxyRightLspErrorActive                                                                 guibg=#1D1D1B guifg=#ff7b72
+highlight GalaxyRightLspHintActive                                                                  guibg=#1D1D1B guifg=#81D3B0
+highlight GalaxyRightLspInformationActive                                                           guibg=#1D1D1B guifg=#79c0ff
+highlight GalaxyRightLspWarningActive                                                               guibg=#1D1D1B guifg=#fac481
+highlight GalaxyViModeCommandInverted                                                               guibg=#2e2e2e guifg=#79c0ff'
+highlight GalaxyViModeCommandUnturned                                                               guibg=#79c0ff guifg=#000000
+highlight GalaxyViModeCommonVisualInverted                                                          guibg=#2e2e2e guifg=#d2a8ff
+highlight GalaxyViModeCommonVisualUnturned                                                          guibg=#d2a8ff guifg=#000000
+highlight GalaxyViModeEmptyInverted                                                                 guibg=#2e2e2e guifg=#d1d1d1
+highlight GalaxyViModeEmptyUnturned                                                                 guibg=#000000 guifg=#000000
+highlight GalaxyViModeInsertInverted                                                                guibg=#2e2e2e guifg=#81D3B0
+highlight GalaxyViModeInsertUnturned                                                                guibg=#81D3B0 guifg=#000000
+highlight GalaxyViModeNormalInverted                                                                guibg=#2e2e2e guifg=#000000
+highlight GalaxyViModeNormalUnturned                                                                guibg=#000000 guifg=#d1d1d1
+highlight GalaxyViModeReplaceInverted                                                               guibg=#2e2e2e guifg=#ff7b72
+highlight GalaxyViModeReplaceUnturned                                                               guibg=#ff7b72 guifg=#d1d1d1
+highlight GalaxyViModeShellInverted                                                                 guibg=#2e2e2e guifg=#2aa198
+highlight GalaxyViModeShellUnturned                                                                 guibg=#2aa198 guifg=#d1d1d1
+highlight GalaxyViModeTerminalInverted                                                              guibg=#2e2e2e guifg=#2aa198
+highlight GalaxyViModeTerminalUnturned                                                              guibg=#2aa198 guifg=#d1d1d1
