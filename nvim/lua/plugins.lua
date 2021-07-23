@@ -54,7 +54,7 @@ return require("packer").startup(
       "hrsh7th/nvim-compe",
       event = "InsertEnter",
       config = function()
-        require "nv-compe"
+        require "completion"
       end
     }
     use {
@@ -106,7 +106,7 @@ return require("packer").startup(
       branch = "main",
       event = "BufReadPre",
       config = function()
-        require "nv-galaxyline"
+        require "gline"
       end
     }
 
@@ -115,7 +115,7 @@ return require("packer").startup(
       "nvim-telescope/telescope.nvim",
       requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
       config = function()
-        require "nv-telescope"
+        require "telescope-config"
       end,
       cmd = "Telescope"
     }

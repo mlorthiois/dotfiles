@@ -9,7 +9,6 @@ wk.register(
     p = {"<cmd>Telescope buffers<cr>", "list open buffers"},
     f = {
       name = "+Telescope",
-      B = {"<cmd>Telescope git_branches<cr>", "git branches"},
       p = {"<cmd>Telescope oldfiles<cr>", "previous open files"},
       f = {"<cmd>Telescope find_files<cr>", "files"},
       h = {"<cmd>Telescope command_history<cr>", "history"},
@@ -20,6 +19,7 @@ wk.register(
     },
     g = {
       name = "+Git",
+      b = {"<cmd>Telescope git_branches<cr>", "git branches"},
       j = {"<cmd>Gitsigns next_hunk", "next hunk"},
       k = {"<cmd>Gitsigns prev_hunk", "prev hunk"},
       p = {"<cmd>Gitsigns preview_hunk", "preview hunk"},
@@ -30,18 +30,17 @@ wk.register(
     },
     l = {
       name = "+LSP",
-      a = {"<cmd>Lspsaga code_action<cr>", "code action"},
-      A = {"<cmd>Lspsaga range_code_action<cr>", "selected action"},
-      D = {"<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics"},
-      i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "implementations"},
-      d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "go to definition"},
-      q = {"<cmd>Telescope quickfix<cr>", "quickfix"},
-      r = {"<cmd>lua vim.lsp.buf.references()<cr>", "references"},
-      R = {"<cmd>Lspsaga rename<cr>", "rename"},
-      t = {"<cmd>lua vim.lsp.type_definition()<cr>", "type defintion"},
-      x = {"<cmd>cclose<cr>", "close quickfix"},
-      s = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help"},
-      S = {"<cmd>Telescope lsp_document_symbols<cr>", "document symbols"}
+      a = {"<cmd>Lspsaga code_action<cr>", "Code action"},
+      g = {"<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition"},
+      t = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition"},
+      r = {"<cmd>Telescope lsp_references<cr>", "Symbol References"},
+      R = {"<cmd>Lspsaga rename<cr>", "Rename symbol"},
+      d = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Document diagnostics"},
+      D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace diagnostics"},
+      s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document symbols"},
+      S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace symbols"},
+      n = {"<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next diagnostic"},
+      p = {"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev diagnostic"}
     }
   },
   {
