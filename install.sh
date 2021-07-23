@@ -3,35 +3,31 @@
 files="gitconfig"
 dotfiles=$(pwd)
 
-#Création des symlinks vers ~
+# Symlink of files into ~
 for file in $files; do
-    if [ -e "$HOME/$file" ]; then
-        echo "Création du symlink de $file vers ~"
-        ln -s $dotfiles/$file ~/.$file
-    fi
+  if [ -e "$HOME/$file" ]; then
+      echo "Symlink of $file to ~"
+      ln -s $dotfiles/$file ~/.$file
+  fi
 done
 
-# Neovim
-if [ ! -d "$HOME/.config/nvim" ]; then
-    echo "Création du symlink de nvim vers ~/.config/nvim"
-    ln -s $dotfiles/nvim ~/.config
-fi
+# Symlinks for dir in ~/.config
+config_dirs="nvim kitty"
+for dir in $config_dirs; do
+  if [ ! -d "$HOME/.config/$dir" ]; then
+    echo "Symlink of $dir config to ~/.config/$dir"
+    ln -s $dotfiles/$dir ~/.config
+  fi
+done
 
-# Kitty
-if [ ! -d "$HOME/.config/kitty" ]; then
-    echo "Création du symlink de kitty vers ~/.config/kitty"
-    ln -s $dotfiles/kitty ~/.config
-fi
-
-#Création du fichier .zshrc
+# Add dependencies for .zshrc
 if [ ! -f "$HOME/.zshrc" ]; then
-    echo "Création du fichier .zshrc et ajout des 'sources'"
-    touch ~/.zshrc
+  echo "Creating .zshrc file"
+  touch ~/.zshrc
 fi
-
-if ! grep -q "source ~/dotfiles/zshrc_config.zsh" $HOME/.zshrc; then
-    echo "Add zshrc_config.zsh in .zshrc"
-    echo "source ~/dotfiles/zshrc_config.zsh" >>$HOME/.zshrc
+if ! grep -q "source ~/dotfiles/zsh/zshrc_config.zsh" $HOME/.zshrc; then
+  echo "Add zshrc_config.zsh in .zshrc"
+  echo "source ~/dotfiles/zsh/zshrc_config.zsh" >>$HOME/.zshrc
 fi
 
 echo "Setup completed!"
