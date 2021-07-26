@@ -33,22 +33,17 @@ set shortmess+=c                " Avoid Pattern not found with lsp-compe
 set signcolumn=yes              " Always show signcolumn to avoid shifting on display
 set scrolloff=2                 " Don't stick line to top/bottom
 set relativenumber              " Show relative number in left column
+set colorcolumn=99999           " Fix problem with indentline and empty line
 
-" Toggle theme
-let g:dusk_til_dawn_light_theme = "custom_dark"
-let g:dusk_til_dawn_dark_theme = "custom_dark"
-let g:dusk_til_dawn_morning = 7
-let g:dusk_til_dawn_night = 21
+colorscheme rsms
 
 " Languages
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
 autocmd TermOpen * setlocal nonumber norelativenumber
 
-" Open Telescope when no file specified
-" if @% == "" 
-  " autocmd VimEnter * nested :Telescope find_files
-" endif
-
 " To stop Rooter echoing the project directory
 let g:rooter_silent_chdir = 1
+
+" IndentBlankLine settings
+let g:indent_blankline_use_treesitter = v:true

@@ -34,11 +34,12 @@ autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
 autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
 autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%:r<CR>
 
-" LSP
-nnoremap <silent> K :Lspsaga hover_doc<CR>
-
 " Compe
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 " Use comment in visual mode
 vnoremap <silent> <leader>c :CommentToggle<cr>
+
+" Use TAB to switch between buffers
+nnoremap <Tab> :BufNext<CR>
+nnoremap <S-Tab> :BufPrev<CR>
