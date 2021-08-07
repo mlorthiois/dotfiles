@@ -1,12 +1,12 @@
 local wk = require("which-key")
 
 wk.register({
-	c = { "<cmd>CommentToggle<cr>", "comment toggle" },
+	c = { "comment toggle" },
 	h = { "<C-W>s<cr>", "split below" },
 	v = { "<C-W>v<cr>", "split right" },
-	s = { ":w<cr>", "save" },
-	n = { ":lnext<cr>", "Next in localfix" },
-	p = { ":lprev<cr>", "Prev in localfix" },
+	s = { "<cmd>w<cr>", "save" },
+	n = { "<cmd>lnext<cr>", "Next in localfix" },
+	p = { "<cmd>lprev<cr>", "Prev in localfix" },
 	b = {
 		name = "Buffers",
 		b = { "<cmd>Telescope buffers<cr>", "list open buffers" },
@@ -43,10 +43,10 @@ wk.register({
 	},
 	l = {
 		name = "+LSP",
-		a = { "<cmd>Lspsaga code_action<cr>", "Code action" },
+		a = { "<cmd>Telescope lsp_code_actions theme=get_cursor<cr>", "Code action" },
 		g = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
 		t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
-		r = { "<cmd>Telescope lsp_references<cr>", "Symbol References" },
+		r = { "<cmd>Telescope lsp_references layout_strategy=vertical<cr>", "Symbol References" },
 		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename symbol" },
 		d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Document diagnostics" },
 		D = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace diagnostics" },

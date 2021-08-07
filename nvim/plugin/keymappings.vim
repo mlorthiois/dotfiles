@@ -38,8 +38,8 @@ autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 " Use comment in visual mode
-vnoremap <silent> <leader>c :CommentToggle<cr>
+vnoremap <silent> <leader>c <cmd>CommentToggle<cr>
 
 " Use TAB to switch between buffers
-nnoremap <Tab> :BufNext<CR>
-nnoremap <S-Tab> :BufPrev<CR>
+nnoremap <Tab> <cmd>BufNext<CR>
+nnoremap <S-Tab> <cmd>BufPrev<CR>

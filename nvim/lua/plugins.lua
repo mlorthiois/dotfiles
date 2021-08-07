@@ -13,6 +13,8 @@ vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when t
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
+	----------------------------------------------------------------------
+	-- EDITING
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -22,15 +24,16 @@ return require("packer").startup(function(use)
 		keys = "<space>",
 	})
 
-	-- General
 	use("airblade/vim-rooter")
+
 	use({
 		"terrortylor/nvim-comment",
-		cmd = "CommentToggle",
+		event = "BufReadPre",
 		config = function()
 			require("nvim_comment").setup()
 		end,
 	})
+
 	use({
 		"phaazon/hop.nvim",
 		config = function()
@@ -38,10 +41,22 @@ return require("packer").startup(function(use)
 		end,
 		event = "BufReadPre",
 	})
+
 	use({ "windwp/nvim-autopairs", opt = true, after = "nvim-compe" })
 
+	----------------------------------------------------------------------
 	-- LSP
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("lsp.null-lsp")
+		end,
+		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	})
+
 	use({ "kabouzeid/nvim-lspinstall", event = "BufReadPre" })
+
 	use({
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
@@ -49,6 +64,7 @@ return require("packer").startup(function(use)
 			require("lsp")
 		end,
 	})
+
 	use({
 		"hrsh7th/nvim-compe",
 		event = "InsertEnter",
@@ -56,6 +72,7 @@ return require("packer").startup(function(use)
 			require("completion")
 		end,
 	})
+
 	use({
 		"glepnir/lspsaga.nvim",
 		event = "BufReadPre",
@@ -63,7 +80,9 @@ return require("packer").startup(function(use)
 			require("lspsaga").init_lsp_saga()
 		end,
 	})
+
 	use({ "hrsh7th/vim-vsnip", event = "InsertEnter" })
+
 	use({
 		"lewis6991/gitsigns.nvim",
 		event = "BufReadPre",
@@ -71,6 +90,7 @@ return require("packer").startup(function(use)
 			require("git")
 		end,
 	})
+
 	use({
 		"simrat39/rust-tools.nvim",
 		config = function()
@@ -79,7 +99,8 @@ return require("packer").startup(function(use)
 		ft = "rust",
 	})
 
-	-- Treesitter
+	----------------------------------------------------------------------
+	-- TREESITTER
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufRead",
@@ -89,6 +110,7 @@ return require("packer").startup(function(use)
 			require("treesitter")
 		end,
 	})
+
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufReadPre",
@@ -97,10 +119,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Icons
-	use("kyazdani42/nvim-web-devicons")
-
-	-- Status Line and Tab line
+	----------------------------------------------------------------------
+	-- EDITOR
 	use({
 		"glepnir/galaxyline.nvim",
 		branch = "main",
@@ -108,7 +128,9 @@ return require("packer").startup(function(use)
 		config = function()
 			require("gline")
 		end,
+		requires = { "kyazdani42/nvim-web-devicons" },
 	})
+
 	use({
 		"jose-elias-alvarez/buftabline.nvim",
 		config = function()
@@ -117,26 +139,11 @@ return require("packer").startup(function(use)
 				go_to_maps = false,
 			})
 			require("buftabline.utils").map({ prefix = "<leader>b", cmd = "buffer" })
-			require("buftabline.utils").map({ prefix = "<C>", cmd = "buffer" })
 		end,
 		event = "BufReadPre",
+		requires = { "kyazdani42/nvim-web-devicons" },
 	})
 
-	-- Telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
-		config = function()
-			require("telescope-config")
-		end,
-		cmd = "Telescope",
-	})
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-	})
-
-	-- Color
 	use({
 		"norcalli/nvim-colorizer.lua",
 		event = "BufReadPre",
@@ -144,5 +151,19 @@ return require("packer").startup(function(use)
 			require("colorizer").setup()
 		end,
 	})
-	use({ "tjdevries/colorbuddy.nvim" })
+
+	----------------------------------------------------------------------
+	-- TELESCOPE
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+		},
+		config = function()
+			require("telescope-config")
+		end,
+		cmd = "Telescope",
+	})
 end)

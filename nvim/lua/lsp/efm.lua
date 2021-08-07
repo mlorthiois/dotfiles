@@ -12,6 +12,9 @@ local eslint = {
 	lintStdin = true,
 	lintFormats = { "%f:%l:%c: %m" },
 	lintIgnoreExitCode = true,
+}
+
+local prettier = {
 	formatCommand = "prettierd ${INPUT}",
 	formatStdin = true,
 }
@@ -33,6 +36,7 @@ local luafmt = {
 }
 
 local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
+
 require("lspconfig").efm.setup({
 	cmd = { lspinstallPath .. "efm/efm-langserver" },
 	on_attach = on_attach,
@@ -40,12 +44,13 @@ require("lspconfig").efm.setup({
 	settings = {
 		rootMarkers = { ".git/", "package.json", "main.py" },
 		languages = {
-			javascript = { eslint },
-			javascriptreact = { eslint },
-			typescript = { eslint },
-			typescriptreact = { eslint },
+			javascript = { eslint, prettier },
+			javascriptreact = { eslint, prettier },
+			typescript = { eslint, prettier },
+			typescriptreact = { eslint, prettier },
 			python = { python },
 			lua = { luafmt },
+			markdown = { prettier },
 		},
 	},
 	filetypes = {
@@ -55,5 +60,6 @@ require("lspconfig").efm.setup({
 		"typescriptreact",
 		"python",
 		"lua",
+		"markdown",
 	},
 })

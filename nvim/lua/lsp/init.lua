@@ -76,9 +76,6 @@ require("lspconfig").sumneko_lua.setup({
 	cmd = { prefix .. "bin/" .. system_name .. "/lua-language-server", "-E", prefix .. "main.lua" },
 })
 
--- External files
-require("lsp.efm")
-
 local M = {}
 
 M.icons = {
