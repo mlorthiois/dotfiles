@@ -43,3 +43,9 @@ vnoremap <silent> <leader>c <cmd>CommentToggle<cr>
 " Use TAB to switch between buffers
 nnoremap <Tab> <cmd>BufNext<CR>
 nnoremap <S-Tab> <cmd>BufPrev<CR>
+
+" Avoid long press of j
+nnoremap jj <nop>
+nnoremap kk <nop>
+nnoremap hh <nop>
+nnoremap ll <nop>

@@ -73,13 +73,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"glepnir/lspsaga.nvim",
-		event = "BufReadPre",
-		config = function()
-			require("lspsaga").init_lsp_saga()
-		end,
-	})
+	use({ "kosayoda/nvim-lightbulb", event = "BufReadPre" })
 
 	use({ "hrsh7th/vim-vsnip", event = "InsertEnter" })
 
@@ -94,9 +88,10 @@ return require("packer").startup(function(use)
 	use({
 		"simrat39/rust-tools.nvim",
 		config = function()
-			require("lsp.rust")
+			require("rust-tools").setup({})
 		end,
 		ft = "rust",
+		requires = { "neovim/nvim-lspconfig" },
 	})
 
 	----------------------------------------------------------------------
@@ -135,7 +130,7 @@ return require("packer").startup(function(use)
 		"jose-elias-alvarez/buftabline.nvim",
 		config = function()
 			require("buftabline").setup({
-				tab_format = "#{i} #{n}: #{b}#{f} ",
+				tab_format = " #{n}:#{b}#{f} ",
 				go_to_maps = false,
 			})
 			require("buftabline.utils").map({ prefix = "<leader>b", cmd = "buffer" })

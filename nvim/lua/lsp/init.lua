@@ -1,26 +1,27 @@
 local lspconfig = require("lspconfig")
 -- vim.lsp.set_log_level("debug")
 
-local border = {
-	{ "🭽", "FloatBorder" },
-	{ "▔", "FloatBorder" },
-	{ "🭾", "FloatBorder" },
-	{ "▕", "FloatBorder" },
-	{ "🭿", "FloatBorder" },
-	{ "▁", "FloatBorder" },
-	{ "🭼", "FloatBorder" },
-	{ "▏", "FloatBorder" },
-}
+-- Change diagnostic symbols in the sign column (gutter)
+local signs = { Error = "", Warning = "", Hint = "", Information = "" }
+for type, icon in pairs(signs) do
+	local hl = "LspDiagnosticsSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
 
---- Format on Save
+--- Filter format on Save and add borders for hover/signature help popup
+local disable_format_servers = "tsserver"
 local on_attach = function(client)
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-	if client.resolved_capabilities.document_formatting then
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+
+	if client.resolved_capabilities.document_formatting and client.name ~= disable_format_servers then
 		vim.api.nvim_command([[augroup Format]])
 		vim.api.nvim_command([[autocmd! * <buffer>]])
 		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({}, 1000)]])
 		vim.api.nvim_command([[augroup END]])
+	else
+		client.resolved_capabilities.document_formatting = false
 	end
 end
 
@@ -30,6 +31,7 @@ local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
 -- Python
 lspconfig.pyright.setup({
 	cmd = { lspinstallPath .. "python/node_modules/pyright/langserver.index.js", "--stdio" },
+	on_attach = on_attach,
 })
 
 -- R
@@ -38,11 +40,7 @@ lspconfig.r_language_server.setup({ on_attach = on_attach })
 -- Javascript / Typescript
 lspconfig.tsserver.setup({
 	cmd = { lspinstallPath .. "typescript/node_modules/typescript-language-server/lib/cli.js", "--stdio" },
-	on_attach = function(client)
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-		client.resolved_capabilities.document_formatting = false
-	end,
+	on_attach = on_attach,
 })
 
 -- C / C++
@@ -74,6 +72,14 @@ end
 local prefix = lspinstallPath .. "lua/sumneko-lua/extension/server/"
 require("lspconfig").sumneko_lua.setup({
 	cmd = { prefix .. "bin/" .. system_name .. "/lua-language-server", "-E", prefix .. "main.lua" },
+	on_attach = on_attach,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim", "use" },
+			},
+		},
+	},
 })
 
 local M = {}
