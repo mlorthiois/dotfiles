@@ -14,7 +14,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	----------------------------------------------------------------------
-	-- EDITING
+	-- editing
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -24,7 +24,12 @@ return require("packer").startup(function(use)
 		keys = "<space>",
 	})
 
-	use("airblade/vim-rooter")
+	use({
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup()
+		end,
+	})
 
 	use({
 		"terrortylor/nvim-comment",
@@ -39,7 +44,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("hop").setup()
 		end,
-		event = "BufReadPre",
+		cmd = { "HopChar2", "HopChar1" },
 	})
 
 	use({ "windwp/nvim-autopairs", opt = true, after = "nvim-compe" })
@@ -55,7 +60,7 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	})
 
-	use({ "kabouzeid/nvim-lspinstall", event = "BufReadPre" })
+	use({ "kabouzeid/nvim-lspinstall", cmd = { "LspInstall", "LspUninstall" } })
 
 	use({
 		"neovim/nvim-lspconfig",
@@ -88,7 +93,7 @@ return require("packer").startup(function(use)
 	use({
 		"simrat39/rust-tools.nvim",
 		config = function()
-			require("rust-tools").setup({})
+			require("rust-tools").setup({ server = { on_attach = require("lsp.utils").on_attach } })
 		end,
 		ft = "rust",
 		requires = { "neovim/nvim-lspconfig" },
@@ -145,6 +150,15 @@ return require("packer").startup(function(use)
 		config = function()
 			require("colorizer").setup()
 		end,
+	})
+
+	use({
+		"TimUntersberger/neogit",
+		config = function()
+			require("neogit").setup({ integrations = { diffview = true } })
+		end,
+		cmd = "Neogit",
+		requires = { "nvim-lua/plenary.nvim", { "sindrets/diffview.nvim", after = "neogit" } },
 	})
 
 	----------------------------------------------------------------------

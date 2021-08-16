@@ -1,4 +1,5 @@
 set noswapfile                  " Don't create .swp files
+set ignorecase                  " Be case insensitive during search
 set hidden                      " Required to keep multiple buffers open multiple buffers
 set wrap                        " Display long lines as just one line
 set encoding=utf-8              " The encoding displayed
@@ -33,12 +34,13 @@ set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
 
 " Set background based on hour
-let hr = (strftime('%H'))
-if (hr >= 19) || (hr < 8)
-  set background=dark
-else
-  set background=light
-endif
+" let hr = (strftime('%H'))
+" if (hr >= 19) || (hr < 8)
+"   set background=dark
+" else
+"   set background=light
+" endif
+set background=dark
 colorscheme rsms
 
 " Languages

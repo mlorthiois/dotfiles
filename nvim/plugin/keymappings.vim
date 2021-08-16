@@ -26,7 +26,7 @@ nnoremap <S-Down> :res -5<CR>
 "----Plugins-----------
 " Hop (vim-sneak)
 nnoremap <silent>  s <cmd>HopChar2<cr>
-nnoremap <silent>  S <cmd>HopPattern<cr>
+nnoremap <silent>  S <cmd>HopChar1<cr>
 
 " Languages Shortcuts
 autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
@@ -45,7 +45,7 @@ nnoremap <Tab> <cmd>BufNext<CR>
 nnoremap <S-Tab> <cmd>BufPrev<CR>
 
 " Avoid long press of j
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap hh <nop>
-nnoremap ll <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap hh <nop>
+" nnoremap ll <nop>
