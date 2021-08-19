@@ -29,7 +29,7 @@ wk.register({
 		o = { "<cmd>Telescope vim_options<cr>", "vim_options" },
 		g = { "<cmd>Telescope live_grep<cr>", "Text" },
 		r = { "<cmd>Telescope registers<cr>", "Registers" },
-		w = { "<cmd>Telescope file_browser<cr>", "buf_fuz_find" },
+		b = { "<cmd>Telescope file_browser<cr>", "buf_fuz_find" },
 	},
 	g = {
 		name = "+Git",

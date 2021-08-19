@@ -10,7 +10,7 @@ M.on_attach = function(client)
 	if client.resolved_capabilities.document_formatting and client.name ~= disable_format_servers then
 		vim.api.nvim_command([[augroup Format]])
 		vim.api.nvim_command([[autocmd! * <buffer>]])
-		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({}, 1000)]])
+		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]])
 		vim.api.nvim_command([[augroup END]])
 	else
 		client.resolved_capabilities.document_formatting = false
