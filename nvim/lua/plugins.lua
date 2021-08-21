@@ -131,17 +131,10 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons" },
 	})
 
+	-- Simple tab line to respect vim tab
 	use({
-		"jose-elias-alvarez/buftabline.nvim",
-		config = function()
-			require("buftabline").setup({
-				tab_format = " #{n}:#{b}#{f} ",
-				go_to_maps = false,
-			})
-			require("buftabline.utils").map({ prefix = "<leader>b", cmd = "buffer" })
-		end,
-		event = "BufReadPre",
-		requires = { "kyazdani42/nvim-web-devicons" },
+		"mkitt/tabline.vim",
+		event = "BufRead",
 	})
 
 	use({

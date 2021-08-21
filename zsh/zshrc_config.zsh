@@ -4,22 +4,18 @@ plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 CASE_SENSITIVE="true"
 source $ZSH/oh-my-zsh.sh
 
-
 ### imports
 source $HOME/dotfiles/zsh/minimal.zsh
 
 ### app themes
-# bat
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
 
-# man page
 export LESS_TERMCAP_us=$'\e[1;4;0m'
 export LESS_TERMCAP_md=$'\e[1;34m'
 
 ### Remove base conda env from Prompt
-PS1=$(echo $PS1 | sed 's/(miniconda3) //')
-PS1=$(echo $PS1 | sed 's/(base) //')
+PS1=$(echo $PS1 | sed 's/(miniconda3) //' | sed 's/(base) //')
 
 ### Aliases
 alias count='ls | wc -l'
@@ -60,13 +56,17 @@ extract() {
   fi
 }
 
+# Speed up completion init, see: https://htr3n.github.io/2018/07/faster-zsh/
+autoload -Uz compinit
+
 ### History Configuration
-HISTSIZE=5000           #How many lines of history to keep in memory
-HISTFILE=~/.zsh_history #Where to save history to disk
-SAVEHIST=5000           #Number of history entries to save to disk
-setopt appendhistory    #Append history to the history file (no overwriting)
-setopt sharehistory     #Share history across terminals
-setopt incappendhistory #Immediately append to the history file, not just when a term is killed
+HISTSIZE=5000            #How many lines of history to keep in memory
+HISTFILE=~/.zsh_history  #Where to save history to disk
+SAVEHIST=5000            #Number of history entries to save to disk
+setopt appendhistory     #Append history to the history file (no overwriting)
+setopt sharehistory      #Share history across terminals
+setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
+setopt HIST_SAVE_NO_DUPS # Dont write duplicate entries in the history file.
 
 ### iTerm2
 source ~/.iterm2_shell_integration.zsh
@@ -101,3 +101,16 @@ tmux-dev() {
   fi
 } 
 
+### FZF
+# Use key-bindings and cli utils
+if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+fi
+
+# Use ripgrep
+if type fzf &> /dev/null && type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
+  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+fi

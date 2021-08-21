@@ -118,6 +118,7 @@ local get_theme = function()
 		markdownH3Delimiter = { fg = c.operator },
 
 		-- UI
+		VertSplit = { fg = c.fg_dim, bg = c.bg },
 		ColorColumn = {},
 		Conceal = { fg = c.disabled },
 		Cursor = { fg = c.fg_dim },
@@ -276,21 +277,19 @@ local get_theme = function()
 		IndentBlanklineChar = { fg = c.bg_dim, sp = "nocombine" },
 		IndentBlanklineContextChar = { fg = c.fg_dim, sp = "nocombine" },
 
-		-- Galaxyline
-		GalaxyLeftLspInactive = { fg = c.fg_dim, bg = c.bg },
+		-- Gline
 		GalaxyMapperCommon1 = { fg = c.bg_dim, bg = c.bg },
 		GalaxyMapperCommon2 = { bg = c.bg_accent, fg = c.fg },
 		GalaxyMapperCommon3 = { bg = c.bg_dim, fg = c.fg },
 		GalaxyMapperCommon5 = { bg = c.bg, fg = c.fg_dim },
 		GalaxyMapperCommon7 = { bg = c.bg_dim, fg = c.bg_accent },
-		GalaxyMidFileStatusModified = { bg = c.bg, fg = c.value },
-		GalaxyMidFileStatusReadonly = { bg = c.bg, fg = c.operator },
-		GalaxyMidFileStatusRestricted = { bg = c.bg, fg = c.error },
-		GalaxyMidFileStatusUnmodified = { bg = c.bg, fg = c.fg_dim },
-		GalaxyRightLspErrorActive = { bg = c.bg, fg = c.error },
+
+		GalaxyLeftLspInactive = { fg = c.fg_dim, bg = c.bg },
+		GalaxyRightLspError = { bg = c.bg, fg = c.error },
 		GalaxyRightLspHintActive = { bg = c.bg, fg = c.value },
 		GalaxyRightLspInformationActive = { bg = c.bg, fg = c.keyword },
 		GalaxyRightLspWarningActive = { bg = c.bg, fg = c.operator },
+
 		GalaxyViModeCommandInverted = { bg = c.bg_dim, fg = c.keyword },
 		GalaxyViModeCommandUnturned = { bg = c.keyword, fg = c.bg_accent },
 		GalaxyViModeCommonVisualInverted = { bg = c.bg_dim, fg = c.type },

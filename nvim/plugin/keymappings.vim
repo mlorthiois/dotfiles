@@ -28,24 +28,13 @@ nnoremap <S-Down> :res -5<CR>
 nnoremap <silent>  s <cmd>HopChar2<cr>
 nnoremap <silent>  S <cmd>HopChar1<cr>
 
-" Languages Shortcuts
-autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:!clear && python %<CR>
-autocmd Filetype r nnoremap <buffer> <F5> :w<CR>:!clear && Rscript %<CR>
-autocmd Filetype tex nnoremap <buffer> <F5> :w<CR>:!clear && pdflatex %<CR>
-autocmd Filetype c nnoremap <buffer> <F5> :w<CR>:!clang % -o %:r && clear && ./%:r<CR>
-
 " Compe
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
-" Use comment in visual mode
-vnoremap <silent> <leader>c <cmd>CommentToggle<cr>
-
 " Use TAB to switch between buffers
-nnoremap <Tab> <cmd>BufNext<CR>
-nnoremap <S-Tab> <cmd>BufPrev<CR>
+nnoremap <Tab> <cmd>:Telescope buffers previewer=false theme=get_ivy<CR>
+nnoremap <ù> <cmd>tabnext<CR>
 
-" Avoid long press of j
-" nnoremap jj <nop>
-" nnoremap kk <nop>
-" nnoremap hh <nop>
-" nnoremap ll <nop>
+
+set wildcharm=<C-z>
+nnoremap <Tab> :buffer <C-z>

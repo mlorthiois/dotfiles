@@ -1,12 +1,8 @@
 local M = {}
 
---- Filter format on Save and add borders for hover/signature help popup
+--- Filter format on Save
 local disable_format_servers = "tsserver"
-M.on_attach = function(client)
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
-
+M.formatOnSave = function(client)
 	if client.resolved_capabilities.document_formatting and client.name ~= disable_format_servers then
 		vim.api.nvim_command([[augroup Format]])
 		vim.api.nvim_command([[autocmd! * <buffer>]])
@@ -15,6 +11,13 @@ M.on_attach = function(client)
 	else
 		client.resolved_capabilities.document_formatting = false
 	end
+end
+
+M.on_attach = function(client)
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+	M.formatOnSave(client)
 end
 
 -- Change diagnostic symbols in the sign column (gutter)
