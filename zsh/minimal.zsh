@@ -8,7 +8,7 @@ MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
 MNML_ELLIPSIS_CHAR="${MNML_ELLIPSIS_CHAR:-..}"
 MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 
-[ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
+[ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_status)
 
 [ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
 
@@ -33,12 +33,6 @@ function mnml_status {
     fi
 
     printf '%b' "%{\e[$job_ansi;3${err_ansi}m%}%(!.#.$uchar)%{\e[0m%}"
-}
-
-function mnml_keymap {
-    local kmstat="$MNML_INSERT_CHAR"
-    [ "$KEYMAP" = 'vicmd' ] && kmstat="$MNML_NORMAL_CHAR"
-    printf '%b' "$kmstat"
 }
 
 function mnml_cwd {
@@ -132,13 +126,6 @@ function mnml_uhp {
 function mnml_ssh {
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
         printf '%b' "[$(hostname -s)]"
-    fi
-}
-
-function mnml_pyenv {
-    if [ -n "$VIRTUAL_ENV" ]; then
-        _venv="$(basename $VIRTUAL_ENV)"
-        printf '%b' "${_venv%%.*}"
     fi
 }
 
@@ -240,10 +227,6 @@ function _mnml_zle-line-init {
     zle reset-prompt
 }
 
-# redraw prompt on keymap select
-function _mnml_zle-keymap-select {
-    zle reset-prompt
-}
 
 # draw infoline if no command is given
 function _mnml_buffer-empty {
@@ -262,7 +245,7 @@ function _mnml_bind_widgets() {
     zmodload zsh/zleparameter
 
     local -a to_bind
-    to_bind=(zle-line-init zle-keymap-select buffer-empty)
+    to_bind=(zle-line-init buffer-empty)
 
     typeset -F SECONDS
     local zle_wprefix=s$SECONDS-r$RANDOM

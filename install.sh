@@ -1,6 +1,6 @@
 #! /bin/bash
 
-files="gitconfig"
+files="gitconfig tmux.conf"
 dotfiles=$(pwd)
 
 # Symlink of files into ~
@@ -30,4 +30,15 @@ if ! grep -q "source ~/dotfiles/zsh/zshrc_config.zsh" $HOME/.zshrc; then
   echo "source ~/dotfiles/zsh/zshrc_config.zsh" >>$HOME/.zshrc
 fi
 
+# Install zsh plugins
+plugins="zsh-syntax-highlighting zsh-autosuggestions"
+for plugin in $plugins; do
+  if [ ! -d "$HOME/.zsh/$plugin/" ]; then
+    echo "Installing $plugin"
+    mkdir -p $HOME/.zsh
+    cd $HOME/.zsh
+    git clone https://github.com/zsh-users/$plugin.git
+  fi
+done
+cd $dotfiles
 echo "Setup completed!"

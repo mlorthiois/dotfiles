@@ -1,30 +1,37 @@
-### Oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
-CASE_SENSITIVE="true"
-source $ZSH/oh-my-zsh.sh
-
-### imports
+###############
+# UI
+###############
 source $HOME/dotfiles/zsh/minimal.zsh
 
-### app themes
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
-
 export LESS_TERMCAP_us=$'\e[1;4;0m'
 export LESS_TERMCAP_md=$'\e[1;34m'
 
-### Remove base conda env from Prompt
-PS1=$(echo $PS1 | sed 's/(miniconda3) //' | sed 's/(base) //')
+###############
+# COMPLETION
+###############
+# Add completions installed through Homebrew packages
+# See: https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null; then
+  FPATH=/usr/local/share/zsh/site-functions:$FPATH
+fi
 
-### Aliases
-alias count='ls | wc -l'
-alias dcu='docker-compose up'
-alias dcd='docker-compose down'
-alias dcb='docker-compose build'
-alias dcr='docker-compose run'
+# Speed up completion init, see: https://htr3n.github.io/2018/07/faster-zsh/
+autoload -Uz compinit
 
-### Functions
+### History Configuration
+HISTSIZE=5000            #How many lines of history to keep in memory
+HISTFILE=~/.zsh_history  #Where to save history to disk
+SAVEHIST=5000            #Number of history entries to save to disk
+setopt appendhistory     #Append history to the history file (no overwriting)
+setopt sharehistory      #Share history across terminals
+setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
+setopt HIST_SAVE_NO_DUPS # Dont write duplicate entries in the history file.
+
+##############
+# FUNCTIONS
+##############
 extract() {
   if [ -f $1 ]; then
     output=$(echo "${1%.*}")
@@ -56,24 +63,6 @@ extract() {
   fi
 }
 
-# Speed up completion init, see: https://htr3n.github.io/2018/07/faster-zsh/
-autoload -Uz compinit
-
-### History Configuration
-HISTSIZE=5000            #How many lines of history to keep in memory
-HISTFILE=~/.zsh_history  #Where to save history to disk
-SAVEHIST=5000            #Number of history entries to save to disk
-setopt appendhistory     #Append history to the history file (no overwriting)
-setopt sharehistory      #Share history across terminals
-setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
-setopt HIST_SAVE_NO_DUPS # Dont write duplicate entries in the history file.
-
-### iTerm2
-source ~/.iterm2_shell_integration.zsh
-iterm2_print_user_vars() {
-  it2git
-}
-
 ### Use Ctrl-Z to fg - return in NeoVim without adding fg to ZSH History
 function Resume {  
     fg
@@ -84,24 +73,44 @@ function Resume {
 zle -N Resume
 bindkey "^Z" Resume
 
+#############
+# TMUX
+#############
+# Reload conda https://github.com/conda/conda/issues/6826#issuecomment-397287212
+if [ ! -z $TMUX ]; then
+  conda deactivate; conda activate base
+fi
 
-### TMUX session
-tmux-dev() {  
-  session=$1
-  tmux has-session -t $session
-  if [ $? != 0 ]
-  then
-    tmux new-session -s $session -n editor -d nvim
-    tmux split-window -h -p0
-    tmux split-window
-    tmux select-pane -t 0
-    tmux attach -t $session
-  else
-    echo 'SESSION ALREADY EXISTS'
+# tmux with full dev layout session with FZF (CTRL-F)
+# based on https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer
+tmux-dev() {
+  items=`find ~/Developer -maxdepth 2 -mindepth 2 -type d`
+  items+=("\n$HOME/Developer")
+  items+=("\n$HOME/dotfiles")
+  selected=`echo "$items" | fzf`
+
+  # If no project selected, exit function
+  if [ ! $? -eq 0 ]; then
+    return 1
   fi
-} 
 
-### FZF
+  tmux_session_name=`basename $selected | tr . _`
+
+  tmux has-session -t="$tmux_session_name" 2> /dev/null
+  if [ ! $? -eq 0 ]; then
+    tmux new-session -c $selected -d -s $tmux_session_name
+    tmux split-window -h -f -p 35 -c $selected
+    tmux split-window -v -c $selected
+    tmux select-pane -t 0
+  fi
+
+  tmux attach -t $tmux_session_name
+}
+bindkey -s '^f' 'tmux-dev^M'
+
+###########
+# FZF
+###########
 # Use key-bindings and cli utils
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/key-bindings.zsh
@@ -111,6 +120,13 @@ fi
 # Use ripgrep
 if type fzf &> /dev/null && type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
-  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 fi
+
+#############
+# LAST MODIFS
+#############
+PS1=$(echo $PS1 | sed 's/(miniconda3) //' | sed 's/(base) //')
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -32,6 +32,7 @@ set scrolloff=3                 " Don't stick line to top/bottom
 set relativenumber              " Show relative number in left column
 set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
+set wildmode=list:lastused      " When list in suggestion popup, sort by lastused
 
 " Set background based on hour
 " let hr = (strftime('%H'))
@@ -47,9 +48,6 @@ colorscheme rsms
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
 autocmd TermOpen * setlocal nonumber norelativenumber
-
-" To stop Rooter echoing the project directory
-let g:rooter_silent_chdir = 1
 
 " IndentBlankLine settings
 let g:indent_blankline_use_treesitter = v:true
