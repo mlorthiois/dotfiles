@@ -65,10 +65,10 @@ extract() {
 
 ### Use Ctrl-Z to fg - return in NeoVim without adding fg to ZSH History
 function Resume {  
-    fg
-    zle push-input 
-    BUFFER=""
-    zle accept-line
+  fg
+  zle push-input 
+  BUFFER=""
+  zle accept-line
 } 
 zle -N Resume
 bindkey "^Z" Resume

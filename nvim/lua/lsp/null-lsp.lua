@@ -8,6 +8,7 @@ null_ls.config({
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" }),
 		null_ls.builtins.formatting.format_r,
+		null_ls.builtins.formatting.shfmt,
 	},
 })
 
