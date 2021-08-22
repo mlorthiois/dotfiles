@@ -1,3 +1,6 @@
+# macOS: use zsh from brew (https://rick.cogley.info/post/use-homebrew-zsh-instead-of-the-osx-default/)
+# if problem, Settings -> Users and groups -> Ctrl+clic on username -> Advanced options -> Shell
+
 ###############
 # UI
 ###############
@@ -28,6 +31,7 @@ setopt appendhistory     #Append history to the history file (no overwriting)
 setopt sharehistory      #Share history across terminals
 setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
 setopt HIST_SAVE_NO_DUPS # Dont write duplicate entries in the history file.
+setopt AUTO_CD           # Jump without cd
 
 ##############
 # FUNCTIONS

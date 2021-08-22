@@ -32,7 +32,6 @@ set scrolloff=3                 " Don't stick line to top/bottom
 set relativenumber              " Show relative number in left column
 set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
-set wildmode=list:lastused      " When list in suggestion popup, sort by lastused
 
 " Set background based on hour
 " let hr = (strftime('%H'))

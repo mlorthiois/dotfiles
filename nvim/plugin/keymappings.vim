@@ -36,5 +36,4 @@ nnoremap <Tab> <cmd>:Telescope buffers previewer=false theme=get_ivy<CR>
 nnoremap <ù> <cmd>tabnext<CR>
 
 
-set wildcharm=<C-z>
 nnoremap <Tab> :buffer <C-z>
