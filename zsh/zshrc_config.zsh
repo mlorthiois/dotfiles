@@ -36,6 +36,32 @@ setopt AUTO_CD           # Jump without cd
 ##############
 # FUNCTIONS
 ##############
+# Switch kitty theme by replacing in kitty.conf
+kitty-switch-theme() {
+  if [ ! -z $TMUX ]; then
+    echo "Oops... Inside tmux"
+    return 1
+  fi
+
+  kitty_config_dir="$HOME/.config/kitty"
+  config_file="$kitty_config_dir/kitty.conf"
+  if [ -f "$config_file" ]; then
+    if [[ $(grep "themes/dark" "$config_file") ]];then  
+      echo "Switching to light theme..."
+      sed -i.bak -e 's/themes\/dark.conf/themes\/light.conf/g' $config_file
+      kitty @ set-colors -a "$kitty_config_dir/themes/light.conf"
+    else
+      echo "Switching to dark theme..."
+      sed -i.bak -e 's/themes\/light.conf/themes\/dark.conf/g' $config_file
+      kitty @ set-colors -a "$kitty_config_dir/themes/dark.conf"
+    fi
+    rm $kitty_config_dir/kitty.conf.bak
+  else
+    echo "Kitty config file not found"
+  fi
+
+}
+
 extract() {
   if [ -f $1 ]; then
     output=$(echo "${1%.*}")
@@ -81,15 +107,14 @@ bindkey "^Z" Resume
 # TMUX
 #############
 # Reload conda https://github.com/conda/conda/issues/6826#issuecomment-397287212
-if [ ! -z $TMUX ]; then
-  conda deactivate; conda activate base
-fi
+# if [ ! -z $TMUX ]; then
+#   conda deactivate; conda activate base
+# fi
 
 # tmux with full dev layout session with FZF (CTRL-F)
 # based on https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer
 tmux-dev() {
   items=`find ~/Developer -maxdepth 2 -mindepth 2 -type d`
-  items+=("\n$HOME/Developer")
   items+=("\n$HOME/dotfiles")
   selected=`echo "$items" | fzf`
 
@@ -98,17 +123,20 @@ tmux-dev() {
     return 1
   fi
 
-  tmux_session_name=`basename $selected | tr . _`
+#   tmux_session_name=`basename $selected | tr . _`
+#   tmux has-session -t="$tmux_session_name" 2> /dev/null
+#   if [ ! $? -eq 0 ]; then
+#     tmux new-session -c $selected -d -s $tmux_session_name
+#     tmux split-window -h -f -p 35 -c $selected
+#     tmux split-window -v -c $selected
+#     tmux select-pane -t 0
+#   fi
+#   tmux attach -t $tmux_session_name
 
-  tmux has-session -t="$tmux_session_name" 2> /dev/null
-  if [ ! $? -eq 0 ]; then
-    tmux new-session -c $selected -d -s $tmux_session_name
-    tmux split-window -h -f -p 35 -c $selected
-    tmux split-window -v -c $selected
-    tmux select-pane -t 0
-  fi
-
-  tmux attach -t $tmux_session_name
+  kitty @ new-window --keep-focus --cwd $selected
+  kitty @ new-window --keep-focus --cwd $selected
+  cd $selected
+  clear
 }
 bindkey -s '^f' 'tmux-dev^M'
 

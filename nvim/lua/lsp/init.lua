@@ -1,7 +1,6 @@
 local lspconfig = require("lspconfig")
 
 local utils = require("lsp.utils")
-utils.setup()
 
 --- Root path to LSP server installed by lspinstall
 local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
@@ -36,6 +35,12 @@ lspconfig.gopls.setup({
 -- TailwindCSS
 lspconfig.tailwindcss.setup({
 	cmd = { lspinstallPath .. "tailwindcss/tailwindcss-intellisense.sh", "--stdio" },
+})
+
+-- LaTeX
+require("lspconfig").texlab.setup({
+	cmd = { lspinstallPath .. "latex/texlab" },
+	on_attach = utils.on_attach,
 })
 
 -- Lua

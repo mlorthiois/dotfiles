@@ -27,34 +27,4 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-function M.setup()
-	local icons = {
-		Class = " Class",
-		Color = " Color",
-		Constant = " Constant",
-		Constructor = " Constructor",
-		Enum = "了Enum",
-		EnumMember = " Enum Member",
-		Field = " Field",
-		File = " File",
-		Folder = " Folder",
-		Function = " Function",
-		Interface = "ﰮ Interface",
-		Keyword = " Keyword",
-		Method = "ƒ Method",
-		Module = " Module",
-		Property = " Property",
-		Snippet = "﬌ Snippet",
-		Struct = " Struct",
-		Text = " Text",
-		Unit = " Unit",
-		Value = " Value",
-		Variable = " Variable",
-	}
-	local kinds = vim.lsp.protocol.CompletionItemKind
-	for i, kind in ipairs(kinds) do
-		kinds[i] = icons[kind] or kind
-	end
-end
-
 return M

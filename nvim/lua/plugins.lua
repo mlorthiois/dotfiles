@@ -15,6 +15,8 @@ return require("packer").startup(function(use)
 
 	----------------------------------------------------------------------
 	-- editing
+	use({ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" })
+
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -47,7 +49,7 @@ return require("packer").startup(function(use)
 		cmd = { "HopChar2", "HopChar1" },
 	})
 
-	use({ "windwp/nvim-autopairs", opt = true, after = "nvim-compe" })
+	-- use({ "windwp/nvim-autopairs", opt = true, after = "nvim-compe" })
 
 	----------------------------------------------------------------------
 	-- LSP
@@ -58,29 +60,34 @@ return require("packer").startup(function(use)
 			require("lsp.null-lsp")
 		end,
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		after = "nvim-lspconfig",
 	})
 
 	use({ "kabouzeid/nvim-lspinstall", cmd = { "LspInstall", "LspUninstall" } })
 
 	use({
 		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
+		-- event = "BufReadPre",
 		config = function()
 			require("lsp")
 		end,
 	})
 
 	use({
-		"hrsh7th/nvim-compe",
+		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		config = function()
 			require("completion")
 		end,
+		requires = {
+			{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+			{ "L3MON4D3/LuaSnip", event = "InsertEnter" },
+			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+		},
+		after = { "nvim-lspconfig" },
 	})
 
 	use({ "kosayoda/nvim-lightbulb", event = "BufReadPre" })
-
-	use({ "hrsh7th/vim-vsnip", event = "InsertEnter" })
 
 	use({
 		"lewis6991/gitsigns.nvim",

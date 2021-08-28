@@ -29,11 +29,12 @@ nnoremap <silent>  s <cmd>HopChar2<cr>
 nnoremap <silent>  S <cmd>HopChar1<cr>
 
 " Compe
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 " Use TAB to switch between buffers
-nnoremap <Tab> <cmd>:Telescope buffers previewer=false theme=get_ivy<CR>
+" nnoremap <Tab> <cmd>:Telescope buffers previewer=false theme=get_ivy<CR>
 nnoremap <ù> <cmd>tabnext<CR>
-
-
 nnoremap <Tab> :buffer <C-z>
+
+" 
+nnoremap U <cmd>redo<CR>

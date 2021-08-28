@@ -8,7 +8,7 @@ wk.register({
 	n = { "<cmd>lnext<cr>", "Next in localfix" },
 	p = { "<cmd>lprev<cr>", "Prev in localfix" },
 	w = { "<cmd>bdelete<cr>", "Close buffer" },
-  b = { "<cmd>Telescope buffers<cr>", "list open buffers" },
+	b = { "<cmd>Telescope buffers<cr>", "list open buffers" },
 	f = {
 		name = "+Telescope",
 		p = { "<cmd>Telescope projects<cr>", "Previous projects" },
@@ -18,7 +18,7 @@ wk.register({
 		o = { "<cmd>Telescope vim_options<cr>", "vim_options" },
 		g = { "<cmd>Telescope live_grep<cr>", "Text" },
 		r = { "<cmd>Telescope registers<cr>", "Registers" },
-		b = { "<cmd>Telescope file_browser<cr>", "buf_fuz_find" },
+		b = { "<cmd>Telescope buffers<cr>", "buf_fuz_find" },
 	},
 	g = {
 		name = "+Git",

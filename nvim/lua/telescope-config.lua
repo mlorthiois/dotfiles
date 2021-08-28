@@ -1,5 +1,17 @@
 require("telescope").setup({
 	defaults = {},
+	pickers = {
+		find_files = {
+			theme = "ivy",
+		},
+		buffers = {
+			sort_lastused = true,
+			theme = "dropdown",
+		},
+		old_files = {
+			theme = "ivy",
+		},
+	},
 	extensions = {
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
