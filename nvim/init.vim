@@ -4,6 +4,7 @@
 " _/ // / / / / /__| |/ / / / / / / /
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
+lua require('impatient')
 if !exists('g:vscode')
     lua require('plugins')
 else

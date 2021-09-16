@@ -40,7 +40,7 @@ set showmatch                   " Show matching brackets when text indicator is 
 " else
 "   set background=light
 " endif
-if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+if $KITTY_COLORS == "dark"
   set background=dark   " for the dark version of the theme
 else
   set background=light  " for the light version of the theme
@@ -48,9 +48,19 @@ endif
 colorscheme rsms
 
 " Languages
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.nf set syntax=groovy
 autocmd TermOpen * setlocal nonumber norelativenumber
+augroup ft_markdown
+  au!
+  au BufNewFile,BufRead *.md setlocal filetype=markdown
+  au Filetype markdown setlocal textwidth=100 smartindent nolist
+  " Taken from here: https://github.com/plasticboy/vim-markdown/issues/232
+  au FileType markdown
+      \ set formatoptions-=q |
+      \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+augroup END
+
 
 " IndentBlankLine settings
 let g:indent_blankline_use_treesitter = v:true

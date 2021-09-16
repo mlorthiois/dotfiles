@@ -6,7 +6,6 @@ require("telescope").setup({
 		},
 		buffers = {
 			sort_lastused = true,
-			theme = "dropdown",
 		},
 		old_files = {
 			theme = "ivy",

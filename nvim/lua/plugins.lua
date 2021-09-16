@@ -1,3 +1,4 @@
+vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -12,11 +13,10 @@ vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when t
 
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
+	use({ "lewis6991/impatient.nvim", rocks = "mpack" })
 
 	----------------------------------------------------------------------
 	-- editing
-	use({ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" })
-
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -48,8 +48,6 @@ return require("packer").startup(function(use)
 		end,
 		cmd = { "HopChar2", "HopChar1" },
 	})
-
-	-- use({ "windwp/nvim-autopairs", opt = true, after = "nvim-compe" })
 
 	----------------------------------------------------------------------
 	-- LSP
@@ -89,13 +87,13 @@ return require("packer").startup(function(use)
 
 	use({ "kosayoda/nvim-lightbulb", event = "BufReadPre" })
 
-	use({
-		"lewis6991/gitsigns.nvim",
-		event = "BufReadPre",
-		config = function()
-			require("git")
-		end,
-	})
+	-- use({
+	-- 	"lewis6991/gitsigns.nvim",
+	-- 	event = "BufReadPre",
+	-- 	config = function()
+	-- 		require("git")
+	-- 	end,
+	-- })
 
 	use({
 		"simrat39/rust-tools.nvim",
@@ -146,10 +144,11 @@ return require("packer").startup(function(use)
 
 	use({
 		"norcalli/nvim-colorizer.lua",
-		event = "BufReadPre",
+		-- event = "BufReadPre",
 		config = function()
 			require("colorizer").setup()
 		end,
+		cmd = "ColorizerAttachToBuffer",
 	})
 
 	use({
@@ -166,7 +165,6 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 		},
