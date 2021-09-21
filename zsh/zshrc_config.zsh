@@ -40,7 +40,7 @@ setopt AUTO_CD           # Jump without cd
 check-kitty-theme() {
   kitty_config_dir="$HOME/.config/kitty"
   config_file="$kitty_config_dir/kitty.conf"
-  if [ $(grep "themes/dark" "$config_file") ];then  
+  if [[ $(grep "themes/dark" "$config_file") ]];then  
     export KITTY_COLORS="dark"
   else
     export KITTY_COLORS="light"
