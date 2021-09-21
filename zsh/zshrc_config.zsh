@@ -46,7 +46,11 @@ check-kitty-theme() {
     export KITTY_COLORS="light"
   fi
 }
-check-kitty-theme
+case $OSTYPE in
+  darwin*)
+    check-kitty-theme
+  ;;
+esac
 
 # Switch kitty theme by replacing in kitty.conf
 kitty-switch-theme() {
