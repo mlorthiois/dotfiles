@@ -37,44 +37,44 @@ setopt AUTO_CD           # Jump without cd
 # FUNCTIONS
 ##############
 # Set env var based on theme set in kitty conf file
-check-kitty-theme() {
-  kitty_config_dir="$HOME/.config/kitty"
-  config_file="$kitty_config_dir/kitty.conf"
-  if [[ $(grep "themes/dark" "$config_file") ]];then  
-    export KITTY_COLORS="dark"
-  else
-    export KITTY_COLORS="light"
-  fi
-}
 case $OSTYPE in
   darwin*)
+    check-kitty-theme() {
+      kitty_config_dir="$HOME/.config/kitty"
+      config_file="$kitty_config_dir/kitty.conf"
+      if [[ $(grep "themes/dark" "$config_file") ]];then  
+        export KITTY_COLORS="dark"
+      else
+        export KITTY_COLORS="light"
+      fi
+    }
     check-kitty-theme
+    # Switch kitty theme by replacing in kitty.conf
+    kitty-switch-theme() {
+      if [ ! -z $TMUX ]; then
+        echo "Oops... Inside tmux"
+        return 1
+      fi
+
+      kitty_config_dir="$HOME/.config/kitty"
+      config_file="$kitty_config_dir/kitty.conf"
+
+      if [[ $KITTY_COLORS == "dark" ]];then  
+        echo "Switching to light theme..."
+        sed -i.bak -e 's/themes\/dark.conf/themes\/light.conf/g' $config_file
+        kitty @ set-colors -a "$kitty_config_dir/themes/light.conf"
+        export KITTY_COLORS="light"
+      else
+        echo "Switching to dark theme..."
+        sed -i.bak -e 's/themes\/light.conf/themes\/dark.conf/g' $config_file
+        kitty @ set-colors -a "$kitty_config_dir/themes/dark.conf"
+        export KITTY_COLORS="dark"
+      fi
+      rm $kitty_config_dir/kitty.conf.bak
+    }
   ;;
 esac
 
-# Switch kitty theme by replacing in kitty.conf
-kitty-switch-theme() {
-  if [ ! -z $TMUX ]; then
-    echo "Oops... Inside tmux"
-    return 1
-  fi
-
-  kitty_config_dir="$HOME/.config/kitty"
-  config_file="$kitty_config_dir/kitty.conf"
-
-  if [[ $KITTY_COLORS == "dark" ]];then  
-    echo "Switching to light theme..."
-    sed -i.bak -e 's/themes\/dark.conf/themes\/light.conf/g' $config_file
-    kitty @ set-colors -a "$kitty_config_dir/themes/light.conf"
-    export KITTY_COLORS="light"
-  else
-    echo "Switching to dark theme..."
-    sed -i.bak -e 's/themes\/light.conf/themes\/dark.conf/g' $config_file
-    kitty @ set-colors -a "$kitty_config_dir/themes/dark.conf"
-    export KITTY_COLORS="dark"
-  fi
-  rm $kitty_config_dir/kitty.conf.bak
-}
 
 extract() {
   if [ -f $1 ]; then
