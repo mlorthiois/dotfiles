@@ -93,7 +93,7 @@ require("galaxyline").section.left = {
 			highlight = "GalaxyMapperCommon3",
 			provider = function()
 				if require("galaxyline.condition").check_git_workspace() then
-					return " " .. require("galaxyline.provider_vcs").get_git_branch()
+					return " " .. require("galaxyline.providers.vcs").get_git_branch()
 				else
 					return " "
 				end
@@ -112,39 +112,20 @@ require("galaxyline").section.left = {
 			separator_highlight = "GalaxyMapperCommon1",
 		},
 	},
-}
-
-require("galaxyline").section.mid = {
 	{
-		MidFileStatus = {
-			highlight = "GalaxyMapperCommon5",
-			provider = function()
-				if require("nvim-web-devicons").get_icon(vim.fn.expand("%:e")) then
-					return require("nvim-web-devicons").get_icon(vim.fn.expand("%:e")) .. " "
-				elseif not vim.bo.modified then
-					return " "
-				end
-			end,
-			separator = " ",
-			separator_highlight = "GalaxyMapperCommon5",
-		},
-	},
-	{
-		MidFileName = {
+		LeftFileName = {
 			highlight = "GalaxyMapperCommon5",
 			provider = function()
 				if #vim.fn.expand("%:p") == 0 then
 					return "-"
 				end
-				if vim.fn.winwidth(0) > 150 then
-					return vim.fn.expand("%:~")
-				else
-					return vim.fn.expand("%:t")
-				end
+				return vim.fn.expand("%:r") .. "." .. vim.fn.expand("%:e")
 			end,
 		},
 	},
 }
+
+require("galaxyline").section.mid = {}
 
 require("galaxyline").section.right = {
 	{

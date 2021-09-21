@@ -127,8 +127,7 @@ return require("packer").startup(function(use)
 	----------------------------------------------------------------------
 	-- EDITOR
 	use({
-		"glepnir/galaxyline.nvim",
-		branch = "main",
+		"NTBBloodbath/galaxyline.nvim",
 		event = "BufReadPre",
 		config = function()
 			require("gline")

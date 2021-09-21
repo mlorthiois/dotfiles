@@ -43,6 +43,13 @@ require("lspconfig").texlab.setup({
 	on_attach = utils.on_attach,
 })
 
+-- CSS
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+require("lspconfig").cssls.setup({
+	capabilities = capabilities,
+})
+
 -- Lua
 local system_name
 if vim.fn.has("mac") == 1 then
