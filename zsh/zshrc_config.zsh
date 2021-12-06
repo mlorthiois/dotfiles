@@ -1,10 +1,11 @@
-# macOS: use zsh from brew (https://rick.cogley.info/post/use-homebrew-zsh-instead-of-the-osx-default/)
-# if problem, Settings -> Users and groups -> Ctrl+clic on username -> Advanced options -> Shell
-
 ###############
 # UI
 ###############
 source $HOME/dotfiles/zsh/minimal.zsh
+
+# if [ -z "$TMUX" ]; then
+#     tmux attach -t TMUX || tmux new -s TMUX && exit
+# fi
 
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
@@ -30,7 +31,7 @@ SAVEHIST=5000            #Number of history entries to save to disk
 setopt appendhistory     #Append history to the history file (no overwriting)
 setopt sharehistory      #Share history across terminals
 setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
-setopt HIST_SAVE_NO_DUPS # Dont write duplicate entries in the history file.
+setopt histignoredups    # Dont write duplicate entries in the history file.
 setopt AUTO_CD           # Jump without cd
 
 ##############
@@ -49,6 +50,7 @@ darwin*)
 		fi
 	}
 	check-kitty-theme
+
 	# Switch kitty theme by replacing in kitty.conf
 	kitty-switch-theme() {
 		if [ ! -z $TMUX ]; then
@@ -120,9 +122,10 @@ bindkey "^Z" Resume
 # TMUX
 #############
 # Reload conda https://github.com/conda/conda/issues/6826#issuecomment-397287212
-# if [ ! -z $TMUX ]; then
-#   conda deactivate; conda activate base
-# fi
+if [ ! -z $TMUX ]; then
+  conda deactivate
+  conda activate base
+fi
 
 # tmux with full dev layout session with FZF (CTRL-F)
 # based on https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer
@@ -136,18 +139,20 @@ tmux-dev() {
 		return 1
 	fi
 
-	#   tmux_session_name=`basename $selected | tr . _`
-	#   tmux has-session -t="$tmux_session_name" 2> /dev/null
-	#   if [ ! $? -eq 0 ]; then
-	#     tmux new-session -c $selected -d -s $tmux_session_name
-	#     tmux split-window -h -f -p 35 -c $selected
-	#     tmux split-window -v -c $selected
-	#     tmux select-pane -t 0
-	#   fi
-	#   tmux attach -t $tmux_session_name
-
-	kitty @ new-window --keep-focus --cwd $selected
-	kitty @ new-window --keep-focus --cwd $selected
+  if [ ! -z $TMUX ]; then
+	  tmux_session_name=`basename $selected | tr . _`
+	  tmux has-session -t="$tmux_session_name" 2> /dev/null
+      if [ ! $? -eq 0 ]; then
+        tmux new-session -c $selected -d -s $tmux_session_name
+        tmux split-window -h -f -p 35 -c $selected
+        tmux split-window -v -c $selected
+        tmux select-pane -t 0
+      fi
+	  tmux attach -t $tmux_session_name
+  else
+    kitty @ new-window --keep-focus --cwd $selected
+    kitty @ new-window --keep-focus --cwd $selected
+  fi
 	cd $selected
 	clear
 }
@@ -174,5 +179,4 @@ fi
 #############
 PS1=$(echo $PS1 | sed 's/(miniconda3) //' | sed 's/(base) //')
 source $HOME/.zsh/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/zdharma-continuum/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

@@ -33,6 +33,17 @@ set relativenumber              " Show relative number in left column
 set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
 
+" Neoterm
+let g:neoterm_default_mod="botright"
+let g:neoterm_size=20
+let g:neoterm_autoscroll=1
+let g:neoterm_repl_enable_ipython_paste_magic=1
+
+" Hide banner of netrw
+let g:netrw_banner = 0
+
+" Execute region of code 
+
 " Set background based on hour
 " let hr = (strftime('%H'))
 " if (hr >= 19) || (hr < 8)

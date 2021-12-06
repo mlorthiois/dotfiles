@@ -9,6 +9,8 @@ wk.register({
 	p = { "<cmd>lprev<cr>", "Prev in localfix" },
 	w = { "<cmd>bdelete<cr>", "Close buffer" },
 	b = { "<cmd>Telescope buffers<cr>", "list open buffers" },
+	o = { "<cmd><Plug>(neoterm-repl-send)<CR>" },
+	r = { "<cmd>TREPLSendRegion<CR>", "Run Tressitter Node" },
 	f = {
 		name = "+Telescope",
 		p = { "<cmd>Telescope projects<cr>", "Previous projects" },

@@ -16,6 +16,17 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use({ "lewis6991/impatient.nvim", rocks = "mpack" })
 
+	use("kassio/neoterm")
+
+	use({
+		"mlorthiois/repl-region.nvim",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+			"kassio/neoterm",
+		},
+		cmd = "TREPLSendRegion",
+	})
+
 	----------------------------------------------------------------------
 	-- editing
 	use({
@@ -80,8 +91,6 @@ return require("packer").startup(function(use)
 		end,
 		requires = {
 			{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
-			{ "L3MON4D3/LuaSnip", event = "InsertEnter" },
-			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 		},
 		after = { "nvim-lspconfig" },
 	})
@@ -110,20 +119,20 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufRead",
-		branch = "0.5-compat",
 		run = ":TSUpdate",
 		config = function()
 			require("treesitter")
 		end,
+		requires = { { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" } },
 	})
 
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		event = "BufReadPre",
-		config = function()
-			require("indentline")
-		end,
-	})
+	-- use({
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	event = "BufReadPre",
+	-- 	config = function()
+	-- 		require("indentline")
+	-- 	end,
+	-- })
 
 	----------------------------------------------------------------------
 	-- EDITOR

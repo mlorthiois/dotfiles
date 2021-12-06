@@ -7,7 +7,6 @@ local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
 
 -- Python
 lspconfig.pyright.setup({
-	cmd = { lspinstallPath .. "python/node_modules/pyright/langserver.index.js", "--stdio" },
 	on_attach = utils.on_attach,
 })
 
@@ -16,26 +15,21 @@ lspconfig.r_language_server.setup({ on_attach = utils.on_attach })
 
 -- Javascript / Typescript
 lspconfig.tsserver.setup({
-	cmd = { lspinstallPath .. "typescript/node_modules/typescript-language-server/lib/cli.js", "--stdio" },
 	on_attach = utils.on_attach,
 })
 
 -- C / C++
 lspconfig.clangd.setup({
-	cmd = { lspinstallPath .. "cpp/clangd/bin/clangd", "--background-index" },
 	on_attach = utils.on_attach,
 })
 
 -- Go
 lspconfig.gopls.setup({
-	cmd = { lspinstallPath .. "go/gopls" },
 	on_attach = utils.on_attach,
 })
 
 -- TailwindCSS
-lspconfig.tailwindcss.setup({
-	cmd = { lspinstallPath .. "tailwindcss/tailwindcss-intellisense.sh", "--stdio" },
-})
+lspconfig.tailwindcss.setup({})
 
 -- LaTeX
 require("lspconfig").texlab.setup({

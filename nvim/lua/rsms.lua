@@ -177,6 +177,13 @@ local get_theme = function()
 		healthSuccess = { fg = c.green },
 		healthWarning = { fg = c.yellow },
 
+		-- Diagnostics
+		DiagnosticError = { fg = c.red },
+		DiagnosticSignError = { fg = c.red },
+		DiagnosticWarn = { fg = c.orange },
+		DiagnosticSignWarn = { fg = c.orange },
+		DiagnosticInfo = { fg = c.blue },
+
 		-- Treesitter
 		TSAnnotation = { fg = c.fg },
 		TSAttribute = { fg = c.fg },

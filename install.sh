@@ -7,7 +7,7 @@ dotfiles=$(pwd)
 for file in $files; do
 	if [ -e "$HOME/$file" ]; then
 		echo "Symlink of $file to ~"
-		ln -s $dotfiles/$file ~/.$file
+		ln -s "$dotfiles/$file" "$HOME/.$file"
 	fi
 done
 
@@ -16,7 +16,7 @@ config_dirs="nvim kitty"
 for dir in $config_dirs; do
 	if [ ! -d "$HOME/.config/$dir" ]; then
 		echo "Symlink of $dir config to ~/.config/$dir"
-		ln -s $dotfiles/$dir ~/.config
+		ln -s "$dotfiles/$dir" "$HOME/.config"
 	fi
 done
 
@@ -25,9 +25,9 @@ if [ ! -f "$HOME/.zshrc" ]; then
 	echo "Creating .zshrc file"
 	touch ~/.zshrc
 fi
-if ! grep -q "source ~/dotfiles/zsh/zshrc_config.zsh" $HOME/.zshrc; then
+if ! grep -q "source ~/dotfiles/zsh/zshrc_config.zsh" "$HOME/.zshrc"; then
 	echo "Add zshrc_config.zsh in .zshrc"
-	echo "source ~/dotfiles/zsh/zshrc_config.zsh" >>$HOME/.zshrc
+	echo "source ~/dotfiles/zsh/zshrc_config.zsh" >>"$HOME/.zshrc"
 fi
 
 # Install zsh plugins
@@ -35,10 +35,10 @@ plugins="zsh-users/zsh-autosuggestions zdharma-continuum/fast-syntax-highlightin
 for plugin in $plugins; do
 	if [ ! -d "$HOME/.zsh/$plugin/" ]; then
 		echo "Installing $plugin"
-		mkdir -p $HOME/.zsh
-		cd $HOME/.zsh
-		git clone https://github.com/$plugin $plugin
+		mkdir -p "$HOME/.zsh"
+		cd "$HOME/.zsh" || exit
+		git clone --depth 1 "https://github.com/$plugin" "$plugin"
 	fi
 done
-cd $dotfiles
+
 echo "Setup completed!"

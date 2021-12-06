@@ -26,7 +26,6 @@ local icons = {
 
 local source = {
 	nvim_lsp = "[LSP]",
-	luasnip = "[Snip]",
 }
 
 local cmp = require("cmp")
@@ -44,15 +43,8 @@ cmp.setup({
 		}),
 	},
 
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
 	},
 
 	formatting = {
@@ -64,8 +56,4 @@ cmp.setup({
 	},
 })
 
--- Use tab to jumb in selection (https://github.com/L3MON4D3/LuaSnip#setup)
-vim.api.nvim_command(
-	"imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' "
-)
 vim.cmd([[highlight link CompeDocumentation NormalFloat]])
