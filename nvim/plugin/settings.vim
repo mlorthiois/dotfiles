@@ -1,11 +1,8 @@
 set noswapfile                  " Don't create .swp files
 set ignorecase                  " Be case insensitive during search
-set hidden                      " Required to keep multiple buffers open multiple buffers
 set wrap                        " Display long lines as just one line
-set encoding=utf-8              " The encoding displayed
 set pumheight=15                " Makes popup menu smaller
 set fileencoding=utf-8          " The encoding written to file
-set ruler              			    " Show the cursor position all the time
 set iskeyword+=-                " treat dash separated words as a word text object"
 set mouse=a                     " Enable your mouse
 set splitbelow                  " Horizontal splits will automatically be below
@@ -14,7 +11,6 @@ set t_Co=256                    " Support 256 colors
 set conceallevel=0              " So that I can see `` in markdown files
 set tabstop=2                   " Insert 2 spaces for a tab
 set shiftwidth=2                " Change the number of space characters inserted for indentation
-set smarttab                    " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                   " Converts tabs to spaces
 set smartindent                 " Makes indenting smart
 set number                      " Line numbers
@@ -42,20 +38,13 @@ let g:neoterm_repl_enable_ipython_paste_magic=1
 " Hide banner of netrw
 let g:netrw_banner = 0
 
-" Execute region of code 
-
-" Set background based on hour
-" let hr = (strftime('%H'))
-" if (hr >= 19) || (hr < 8)
-"   set background=dark
+" Colorscheme based on Kitty
+" if $KITTY_COLORS == "dark"
+"   set background=dark   " for the dark version of the theme
 " else
-"   set background=light
+"   set background=light  " for the light version of the theme
 " endif
-if $KITTY_COLORS == "dark"
-  set background=dark   " for the dark version of the theme
-else
-  set background=light  " for the light version of the theme
-endif
+set background=dark
 colorscheme rsms
 
 " Languages
@@ -71,7 +60,6 @@ augroup ft_markdown
       \ set formatoptions-=q |
       \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 augroup END
-
 
 " IndentBlankLine settings
 let g:indent_blankline_use_treesitter = v:true

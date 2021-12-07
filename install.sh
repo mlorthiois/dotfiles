@@ -1,9 +1,9 @@
 #! /bin/bash
 
-files="gitconfig tmux.conf"
 dotfiles=$(pwd)
 
-# Symlink of files into ~
+# Symlinks for file/dir placed in $HOME/
+files="gitconfig tmux.conf"
 for file in $files; do
 	if [ -e "$HOME/$file" ]; then
 		echo "Symlink of $file to ~"
@@ -11,16 +11,16 @@ for file in $files; do
 	fi
 done
 
-# Symlinks for dir in ~/.config
-config_dirs="nvim kitty"
-for dir in $config_dirs; do
-	if [ ! -d "$HOME/.config/$dir" ]; then
-		echo "Symlink of $dir config to ~/.config/$dir"
-		ln -s "$dotfiles/$dir" "$HOME/.config"
+# Symlinks for file/dir placed in $HOME/.config
+configs="nvim kitty black"
+for config in $configs; do
+	if [ ! -d "$HOME/.config/$config" ] && [ ! -f "$HOME/.config/$config" ]; then
+		echo "Symlink of $config config to ~/.config/$config"
+		ln -s "$dotfiles/$config" "$HOME/.config"
 	fi
 done
 
-# Add dependencies for .zshrc
+# Dependencies for .zshrc
 if [ ! -f "$HOME/.zshrc" ]; then
 	echo "Creating .zshrc file"
 	touch ~/.zshrc
