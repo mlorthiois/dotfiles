@@ -104,23 +104,31 @@ require("galaxyline").section.left = {
 	},
 	{
 		LeftGitDiffSeparator = {
+			highlight = "GalaxyMapperCommon3",
+			provider = function()
+				return " "
+			end,
+		},
+	},
+	{
+		LeftFileName = {
+			highlight = "GalaxyMapperCommon3",
+			provider = function()
+				if #vim.fn.expand("%:p") == 0 then
+					return "-"
+				end
+				return vim.fn.expand("%:r") .. "." .. vim.fn.expand("%:e") .. " "
+			end,
+		},
+	},
+	{
+		LeftMiddleSeparator = {
 			highlight = "GalaxyMapperCommon1",
 			provider = function()
 				return ""
 			end,
 			separator = " ",
 			separator_highlight = "GalaxyMapperCommon1",
-		},
-	},
-	{
-		LeftFileName = {
-			highlight = "GalaxyMapperCommon5",
-			provider = function()
-				if #vim.fn.expand("%:p") == 0 then
-					return "-"
-				end
-				return vim.fn.expand("%:r") .. "." .. vim.fn.expand("%:e")
-			end,
 		},
 	},
 }

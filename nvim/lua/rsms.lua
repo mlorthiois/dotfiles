@@ -10,8 +10,8 @@ local color_palette = {
 		blue = "#94b3d1",
 		pink = "#ba9cd9",
 		--Background and Foreground
-		bg = "#1d1d1c",
-		bg_dim = "#2e2e2e",
+		bg = "#1d1d1d",
+		bg_dim = "#282828",
 		bg_accent = "#000000",
 		bg_variant = "#3e4452",
 		fg = "#d1d1d1",
@@ -54,7 +54,7 @@ local color_palette = {
 	},
 }
 
---Set theme based on background color
+-- Set theme based on background color
 local get_theme = function()
 	local c
 	if vim.o.background == "light" then
@@ -74,7 +74,7 @@ local get_theme = function()
 		Character = { fg = c.value },
 		Number = { fg = c.value },
 		Boolean = { fg = c.value },
-		Float = { fg = c.value, bg = c.bg },
+		Float = { fg = c.value, bg = c.bg_dim },
 		FloatBorder = { fg = c.fg, bg = c.bg },
 		Statement = { fg = c.keyword },
 		Label = { fg = c.keyword },
@@ -139,7 +139,7 @@ local get_theme = function()
 		ModeMsg = { fg = c.fg_accent },
 		MoreMsg = { fg = c.fg_accent },
 		NonText = { fg = c.disabled },
-		Pmenu = { fg = c.fg, bg = c.bg },
+		Pmenu = { fg = c.fg, bg = c.bg_dim },
 		PmenuSel = { fg = c.fg_accent, bg = c.bg_accent },
 		PmenuSbar = { fg = c.value, bg = c.bg_accent },
 		PmenuThumb = { fg = c.bg, bg = c.fg },
@@ -236,6 +236,20 @@ local get_theme = function()
 		TSVariable = { fg = c.fg },
 		TSVariableBuiltin = { fg = c.fg },
 
+		-- Completion
+		CmpItemAbbrDeprecated = { fg = "#808080" },
+		CmpItemAbbrMatch = { fg = "#9CDCFE" },
+		CmpItemAbbrMatchFuzzy = { fg = "#9CDCFE", style = "bold" },
+		CmpItemKindVariable = { fg = "#9CDCFE" },
+		CmpItemKindInterface = { fg = "#9CDCFE" },
+		CmpItemKindText = { fg = "#9CDCFE" },
+
+		CmpItemKindFunction = { fg = "#C586C0" },
+		CmpItemKindMethod = { fg = "#C586C0" },
+		CmpItemKindKeyword = { fg = "#D4D4D4" },
+		CmpItemKindProperty = { fg = "#D4D4D4" },
+		CmpItemKindUnit = { fg = "#D4D4D4" },
+
 		-- Lsp
 		LspDiagnosticsDefaultError = { fg = c.error },
 		LspDiagnosticsSignError = { fg = c.error },
@@ -283,36 +297,6 @@ local get_theme = function()
 		-- Indent Blankline
 		IndentBlanklineChar = { fg = c.bg_dim, sp = "nocombine" },
 		IndentBlanklineContextChar = { fg = c.fg_dim, sp = "nocombine" },
-
-		-- Gline
-		GalaxyMapperCommon1 = { fg = c.bg_accent, bg = c.bg_dim },
-		GalaxyMapperCommon2 = { bg = c.fg, fg = c.bg },
-		GalaxyMapperCommon3 = { bg = c.bg_accent, fg = c.fg },
-		GalaxyMapperCommon5 = { bg = c.bg_dim, fg = c.fg_dim },
-		GalaxyMapperCommon7 = { bg = c.bg_accent, fg = c.fg }, --TODO
-
-		GalaxyLeftLspInactive = { fg = c.fg_dim, bg = c.bg_dim },
-		GalaxyRightLspError = { bg = c.bg_dim, fg = c.error },
-		GalaxyRightLspHintActive = { bg = c.bg_dim, fg = c.value },
-		GalaxyRightLspInformationActive = { bg = c.bg_dim, fg = c.keyword },
-		GalaxyRightLspWarningActive = { bg = c.bg_dim, fg = c.operator },
-
-		GalaxyViModeCommandInverted = { bg = c.bg_accent, fg = c.keyword },
-		GalaxyViModeCommandUnturned = { bg = c.keyword, fg = c.bg_accent },
-		GalaxyViModeCommonVisualInverted = { bg = c.bg_accent, fg = c.type },
-		GalaxyViModeCommonVisualUnturned = { bg = c.type, fg = c.bg_accent },
-		GalaxyViModeEmptyInverted = { bg = c.bg_accent, fg = c.fg },
-		GalaxyViModeEmptyUnturned = { bg = c.bg_accent, fg = c.bg_accent },
-		GalaxyViModeInsertInverted = { bg = c.bg_accent, fg = c.value },
-		GalaxyViModeInsertUnturned = { bg = c.value, fg = c.bg_accent },
-		GalaxyViModeNormalInverted = { bg = c.bg_accent, fg = c.fg },
-		GalaxyViModeNormalUnturned = { bg = c.fg, fg = c.bg },
-		GalaxyViModeReplaceInverted = { bg = c.bg_accent, fg = c.error },
-		GalaxyViModeReplaceUnturned = { bg = c.error, fg = c.fg },
-		GalaxyViModeShellInverted = { bg = c.bg_accent, fg = c.keyword },
-		GalaxyViModeShellUnturned = { bg = c.keyword, fg = c.fg },
-		GalaxyViModeTerminalInverted = { bg = c.bg_accent, fg = c.keyword },
-		GalaxyViModeTerminalUnturned = { bg = c.keyword, fg = c.fg },
 	}
 end
 

@@ -1,40 +1,38 @@
 vim.o.completeopt = "menuone,noselect"
 
 local icons = {
-	Class = " Class",
-	Color = " Color",
-	Constant = " Constant",
-	Constructor = " Constructor",
-	Enum = "了Enum",
-	EnumMember = " Enum Member",
-	Field = " Field",
-	File = " File",
-	Folder = " Folder",
-	Function = " Function",
-	Interface = "ﰮ Interface",
-	Keyword = " Keyword",
-	Method = "ƒ Method",
-	Module = " Module",
-	Property = " Property",
-	Snippet = "﬌ Snippet",
-	Struct = " Struct",
-	Text = " Text",
-	Unit = " Unit",
-	Value = " Value",
-	Variable = " Variable",
-}
-
-local source = {
-	nvim_lsp = "[LSP]",
+	Text = "  ",
+	Method = "  ",
+	Function = "  ",
+	Constructor = "  ",
+	Field = "  ",
+	Variable = "  ",
+	Class = "  ",
+	Interface = "  ",
+	Module = "  ",
+	Property = "  ",
+	Unit = "  ",
+	Value = "  ",
+	Enum = "  ",
+	Keyword = "  ",
+	Snippet = "  ",
+	Color = "  ",
+	File = "  ",
+	Reference = "  ",
+	Folder = "  ",
+	EnumMember = "  ",
+	Constant = "  ",
+	Struct = "  ",
+	Event = "  ",
+	Operator = "  ",
+	TypeParameter = "  ",
 }
 
 local cmp = require("cmp")
 cmp.setup({
 	mapping = {
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<C-j>"] = cmp.mapping.select_next_item(),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
@@ -45,14 +43,22 @@ cmp.setup({
 
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "path" },
 	},
 
 	formatting = {
 		format = function(entry, vim_item)
-			vim_item.kind = icons[vim_item.kind]
-			vim_item.menu = source[entry.source.name]
+			vim_item.kind = (icons[vim_item.kind] or "") .. vim_item.kind
+			vim_item.menu = ({
+				nvim_lsp = "[LSP]",
+				nvim_path = "[PATH]",
+			})[entry.source.name]
 			return vim_item
 		end,
+	},
+
+	experimental = {
+		ghost_text = true,
 	},
 })
 

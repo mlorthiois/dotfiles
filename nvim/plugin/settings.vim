@@ -29,14 +29,40 @@ set relativenumber              " Show relative number in left column
 set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
 
+" Status line
+let g:currentmode={
+	\ 'n'  : 'NORMAL',
+	\ 'v'  : 'VISUAL',
+	\ 'V'  : 'V·LINE',
+	\ '' : 'V·BLOCK',
+	\ 's'  : 'SELECT',
+	\ 'S'  : 'S·LINE',
+	\ '' : 'S·BLOCK',
+	\ 'i'  : 'INSERT',
+	\ 'R'  : 'REPLACE',
+  \ 'Rv' : 'V·REPLACE',
+	\ 'c'  : 'COMMAND',
+	\}
+set statusline=%<\ %{g:currentmode[mode()]}\ \|\ %f%m\ 
+set statusline+=%=\ %{v:lua.lsp_statusline()}%{&filetype}\ \|\ %l/%L\(%c\)\ 
+
+" Switch layout
+function! ToggleWindowLayout()
+  if !exists('t:splitType') || t:splitType == 'vertical'
+    windo wincmd K
+    let t:splitType = 'horizontal'
+  else
+    windo wincmd H
+    let t:splitType = 'vertical'
+  endif
+endfunction
+
 " Neoterm
 let g:neoterm_default_mod="botright"
 let g:neoterm_size=20
 let g:neoterm_autoscroll=1
 let g:neoterm_repl_enable_ipython_paste_magic=1
-
-" Hide banner of netrw
-let g:netrw_banner = 0
+let g:neoterm_keep_term_open = 1
 
 " Colorscheme based on Kitty
 " if $KITTY_COLORS == "dark"
@@ -44,7 +70,6 @@ let g:netrw_banner = 0
 " else
 "   set background=light  " for the light version of the theme
 " endif
-set background=dark
 colorscheme rsms
 
 " Languages
