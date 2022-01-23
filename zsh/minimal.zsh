@@ -177,7 +177,11 @@ function mnml_me_dirs {
 }
 
 function mnml_me_ls {
-  tree -L 1 -Cp --noreport
+  if [ "$(uname)" = "Darwin" ] && ! ls --version &> /dev/null; then
+      COLUMNS=$COLUMNS CLICOLOR_FORCE=1 ls -lGF | tail -n+2
+  else
+      env ls -lF --color="always" -w $COLUMNS
+  fi
 }
 
 function mnml_me_git {

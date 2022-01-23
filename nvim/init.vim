@@ -7,6 +7,9 @@
 lua require('impatient')
 if !exists('g:vscode')
     lua require('plugins')
+    lua require('statusline')
+    lua require "disable_builtin"
 else
     source $HOME/.config/nvim/vscode.vim
 endif
+colorscheme rsms

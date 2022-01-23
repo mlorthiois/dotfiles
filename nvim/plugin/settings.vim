@@ -14,7 +14,6 @@ set shiftwidth=2                " Change the number of space characters inserted
 set expandtab                   " Converts tabs to spaces
 set smartindent                 " Makes indenting smart
 set number                      " Line numbers
-set cursorline                  " Enable highlighting of the current line
 set noshowmode                  " We don't need to see things like -- INSERT -- anymore
 set updatetime=300              " Faster completion
 set timeoutlen=500              " By default timeoutlen is 1000 ms
@@ -25,26 +24,11 @@ set termguicolors               " Use right colors
 set shortmess+=c                " Avoid Pattern not found with lsp-compe
 set signcolumn=yes              " Always show signcolumn to avoid shifting on display
 set scrolloff=3                 " Don't stick line to top/bottom
-set relativenumber              " Show relative number in left column
 set colorcolumn=99999           " Fix problem with indentline and empty line
 set showmatch                   " Show matching brackets when text indicator is over them
-
-" Status line
-let g:currentmode={
-	\ 'n'  : 'NORMAL',
-	\ 'v'  : 'VISUAL',
-	\ 'V'  : 'V·LINE',
-	\ '' : 'V·BLOCK',
-	\ 's'  : 'SELECT',
-	\ 'S'  : 'S·LINE',
-	\ '' : 'S·BLOCK',
-	\ 'i'  : 'INSERT',
-	\ 'R'  : 'REPLACE',
-  \ 'Rv' : 'V·REPLACE',
-	\ 'c'  : 'COMMAND',
-	\}
-set statusline=%<\ %{g:currentmode[mode()]}\ \|\ %f%m\ 
-set statusline+=%=\ %{v:lua.lsp_statusline()}%{&filetype}\ \|\ %l/%L\(%c\)\ 
+set showtabline=0               " Don't show any tabline on top
+" set relativenumber            " Show relative number in left column
+" set cursorline                " Enable highlighting of the current line
 
 " Switch layout
 function! ToggleWindowLayout()
@@ -57,34 +41,32 @@ function! ToggleWindowLayout()
   endif
 endfunction
 
+" Colorscheme based on Kitty
+if $KITTY_COLORS == "light"
+  set background=light   " for the dark version of the theme
+endif
+
 " Neoterm
 let g:neoterm_default_mod="botright"
 let g:neoterm_size=20
 let g:neoterm_autoscroll=1
 let g:neoterm_repl_enable_ipython_paste_magic=1
-let g:neoterm_keep_term_open = 1
-
-" Colorscheme based on Kitty
-" if $KITTY_COLORS == "dark"
-"   set background=dark   " for the dark version of the theme
-" else
-"   set background=light  " for the light version of the theme
-" endif
-colorscheme rsms
+" let g:neoterm_keep_term_open = 1
 
 " Languages
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufNewFile,BufRead *.nf set syntax=groovy
-autocmd TermOpen * setlocal nonumber norelativenumber
-augroup ft_markdown
+augroup TermDetect
   au!
-  au BufNewFile,BufRead *.md setlocal filetype=markdown
-  au Filetype markdown setlocal textwidth=100 smartindent nolist
-  " Taken from here: https://github.com/plasticboy/vim-markdown/issues/232
-  au FileType markdown
-      \ set formatoptions-=q |
-      \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+  au TermOpen term://* set filetype=term
+  autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
 augroup END
 
-" IndentBlankLine settings
-let g:indent_blankline_use_treesitter = v:true
+" netrw
+let g:netrw_banner = 0 " Press I to show temporarly
+let g:netrw_winsize = 25
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+
+" vim-test
+let g:test#neovim#start_normal = 1 " Switch to normal mode to scroll through the test 
+let g:test#echo_command = 0

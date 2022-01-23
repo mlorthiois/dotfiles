@@ -1,6 +1,12 @@
 local lspconfig = require("lspconfig")
 local utils = require("lsp.utils")
 
+vim.diagnostic.config({
+	virtual_text = false,
+	update_in_insert = false,
+})
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+
 --- Root path to LSP server installed by lspinstall
 local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
 
@@ -32,7 +38,6 @@ lspconfig.tailwindcss.setup({})
 
 -- LaTeX
 require("lspconfig").texlab.setup({
-	cmd = { lspinstallPath .. "latex/texlab" },
 	on_attach = utils.on_attach,
 })
 
@@ -65,32 +70,3 @@ require("lspconfig").sumneko_lua.setup({
 		},
 	},
 })
-
-function _G.lsp_statusline()
-	-- Get number of lsp servers running
-	local num = #vim.lsp.get_active_clients()
-	if num == 0 then
-		return ""
-	end
-	local separator = " | "
-	local num_servers = "LSP: " .. num .. separator
-
-	-- Get diagnostics on whole workspace
-	local status = {}
-	for _, v in pairs({ "ERROR", "WARNING", "HINT", "INFO" }) do
-		local num_diagnostics = #vim.diagnostic.get(
-			0,
-			{ severity = { min = vim.diagnostic.severity[v], max = vim.diagnostic.severity[v] } }
-		)
-		if num_diagnostics > 0 then
-			table.insert(status, string.sub(v, 1, 1) .. ": " .. num_diagnostics)
-		end
-	end
-
-	-- Return both in string format
-	if #status > 0 then
-		return num_servers .. table.concat(status, ", ") .. separator
-	else
-		return num_servers
-	end
-end

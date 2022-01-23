@@ -1,15 +1,6 @@
-" Disable arrow keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
-
-nnoremap m }
-nnoremap M {
+" Scroll
+nnoremap <silent> m :keepjumps normal! }<CR>
+nnoremap <silent> M :keepjumps normal! {<CR>
 
 " Easily switch between splits
 nnoremap <C-J> <C-W><C-J>
@@ -23,18 +14,18 @@ nnoremap <S-left> :vert res -5<CR>
 nnoremap <S-Up> :res +5<CR>
 nnoremap <S-Down> :res -5<CR>
 
-"----Plugins-----------
 " Hop (vim-sneak)
-nnoremap <silent>  s <cmd>HopChar2<cr>
-nnoremap <silent>  S <cmd>HopChar1<cr>
-
-" Compe
-" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+nnoremap <silent> s <cmd>HopChar2<cr>
+nnoremap <silent> S <cmd>HopChar1<cr>
 
 " Use TAB to switch between buffers
-" nnoremap <Tab> <cmd>:Telescope buffers previewer=false theme=get_ivy<CR>
 nnoremap <ù> <cmd>tabnext<CR>
-nnoremap <Tab> :buffer <C-z>
+" nnoremap <Tab> :buffer<C-z>
+nnoremap <Tab> :lua require"telescope.builtin".buffers()<CR>
 
-" 
+" Redo
 nnoremap U <cmd>redo<CR>
+
+" Indent in visual mode
+vn < <gv
+vn > >gv

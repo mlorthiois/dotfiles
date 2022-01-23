@@ -1,3 +1,5 @@
+-- TODO: nvim 0.7 https://www.reddit.com/r/neovim/comments/sihuq7/psa_now_you_can_set_global_highlight_groups_ie/
+
 local color_palette = {
 	dark = {
 		white = "#ffffff",
@@ -13,7 +15,7 @@ local color_palette = {
 		bg = "#1d1d1d",
 		bg_dim = "#282828",
 		bg_accent = "#000000",
-		bg_variant = "#3e4452",
+		bg_variant = "#333333",
 		fg = "#d1d1d1",
 		fg_dim = "#777775",
 		fg_accent = "#ffffff",
@@ -40,7 +42,7 @@ local color_palette = {
 		bg = "#ffffff",
 		bg_dim = "#f5f5f5",
 		bg_accent = "#e0e0e0",
-		bg_variant = "#aeafad",
+		bg_variant = "#cdcdcd",
 		fg = "#333333",
 		fg_dim = "#84847f",
 		fg_accent = "#000000",
@@ -103,19 +105,14 @@ local get_theme = function()
 		Function = { fg = c.fg_accent },
 		Identifier = { fg = c.type },
 
-		-- Language specific
-		htmlLink = { fg = c.value, style = "underline" },
-		htmlH1 = { fg = c.keyword, style = "bold" },
-		htmlH2 = { fg = c.keyword, style = "bold" },
-		htmlH3 = { fg = c.keyword, style = "bold" },
-		htmlH4 = { fg = c.keyword, style = "bold" },
-		htmlH5 = { fg = c.keyword, style = "bold" },
-		markdownH1 = { fg = c.keyword, style = "bold" },
-		markdownH2 = { fg = c.value, style = "bold" },
-		markdownH3 = { fg = c.operator, style = "bold" },
-		markdownH1Delimiter = { fg = c.keyword },
-		markdownH2Delimiter = { fg = c.value },
-		markdownH3Delimiter = { fg = c.operator },
+		-- Statusline
+		StatusLine = { fg = c.fg, bg = c.bg_variant },
+		StatusLineNC = { fg = c.fg_dim, bg = c.bg_dim },
+		StatusLineNormal = { fg = c.bg, bg = c.keyword },
+		StatusLineInsert = { fg = c.bg, bg = c.value },
+		StatusLineVisual = { fg = c.bg, bg = c.type },
+		StatusLineCommand = { fg = c.bg, bg = c.operator },
+		StatusLineTerminal = { fg = c.bg, bg = c.fg },
 
 		-- UI
 		VertSplit = { fg = c.fg_dim, bg = c.bg },
@@ -152,10 +149,6 @@ local get_theme = function()
 		SpellCap = { fg = c.blue },
 		SpellLocal = { fg = c.blue },
 		SpellRare = { fg = c.pink },
-		StatusLine = { fg = c.fg, bg = c.bg_dim },
-		StatusLineNC = { fg = c.fg_dim },
-		StatusLineTerm = { fg = c.fg },
-		StatusLineTermNC = { fg = c.fg },
 		TabLineFill = { fg = c.fg_dim, bg = c.bg_accent },
 		TabLineSel = { fg = c.fg_accent, bg = c.bg },
 		TabLine = { fg = c.fg, bg = c.bg_accent },
@@ -168,10 +161,6 @@ local get_theme = function()
 		CursorLine = { bg = c.bg_dim },
 		ToolbarLine = { fg = c.fg },
 		ToolbarButton = { fg = c.fg },
-		NormalMode = { fg = c.fg_accent },
-		InsertMode = { fg = c.green },
-		ReplacelMode = { fg = c.red },
-		CommandMode = { fg = c.gray },
 		Warnings = { fg = c.yellow },
 		healthError = { fg = c.error },
 		healthSuccess = { fg = c.green },
@@ -179,10 +168,13 @@ local get_theme = function()
 
 		-- Diagnostics
 		DiagnosticError = { fg = c.red },
-		DiagnosticSignError = { fg = c.red },
 		DiagnosticWarn = { fg = c.orange },
-		DiagnosticSignWarn = { fg = c.orange },
 		DiagnosticInfo = { fg = c.blue },
+		DiagnosticHint = { fg = c.green },
+		DiagnosticsUnderlineError = { style = "undercurl", sp = c.error },
+		DiagnosticsUnderlineWarning = { style = "undercurl", sp = c.orange },
+		DiagnosticsUnderlineInformation = { style = "undercurl", sp = c.blue },
+		DiagnosticsUnderlineHint = { fg = c.green },
 
 		-- Treesitter
 		TSAnnotation = { fg = c.fg },
@@ -238,53 +230,21 @@ local get_theme = function()
 
 		-- Completion
 		CmpItemAbbrDeprecated = { fg = "#808080" },
-		CmpItemAbbrMatch = { fg = "#9CDCFE" },
-		CmpItemAbbrMatchFuzzy = { fg = "#9CDCFE", style = "bold" },
-		CmpItemKindVariable = { fg = "#9CDCFE" },
-		CmpItemKindInterface = { fg = "#9CDCFE" },
-		CmpItemKindText = { fg = "#9CDCFE" },
-
-		CmpItemKindFunction = { fg = "#C586C0" },
-		CmpItemKindMethod = { fg = "#C586C0" },
-		CmpItemKindKeyword = { fg = "#D4D4D4" },
-		CmpItemKindProperty = { fg = "#D4D4D4" },
-		CmpItemKindUnit = { fg = "#D4D4D4" },
-
-		-- Lsp
-		LspDiagnosticsDefaultError = { fg = c.error },
-		LspDiagnosticsSignError = { fg = c.error },
-		LspDiagnosticsFloatingError = { fg = c.error },
-		LspDiagnosticsVirtualTextError = { fg = c.error },
-		LspDiagnosticsUnderlineError = { style = "undercurl", sp = c.error },
-		LspDiagnosticsDefaultWarning = { fg = c.orange },
-		LspDiagnosticsSignWarning = { fg = c.orange },
-		LspDiagnosticsFloatingWarning = { fg = c.orange },
-		LspDiagnosticsVirtualTextWarning = { fg = c.orange },
-		LspDiagnosticsUnderlineWarning = { style = "undercurl", sp = c.orange },
-		LspDiagnosticsDefaultInformation = { fg = c.blue },
-		LspDiagnosticsSignInformation = { fg = c.blue },
-		LspDiagnosticsFloatingInformation = { fg = c.blue },
-		LspDiagnosticsVirtualTextInformation = { fg = c.blue },
-		LspDiagnosticsUnderlineInformation = { style = "undercurl", sp = c.blue },
-		LspDiagnosticsDefaultHint = { fg = c.green },
-		LspDiagnosticsSignHint = { fg = c.green },
-		LspDiagnosticsFloatingHint = { fg = c.green },
-		LspDiagnosticsVirtualTextHint = { fg = c.green },
-		LspDiagnosticsUnderlineHint = { fg = c.green },
+		CmpItemAbbrMatch = { fg = c.blue },
+		CmpItemAbbrMatchFuzzy = { fg = c.blue, style = "bold" },
+		CmpItemKindVariable = { fg = c.blue },
+		CmpItemKindInterface = { fg = c.blue },
+		CmpItemKindText = { fg = c.blue },
+		CmpItemKindFunction = { fg = c.pink },
+		CmpItemKindMethod = { fg = c.pink },
+		CmpItemKindKeyword = { fg = c.fg },
+		CmpItemKindProperty = { fg = c.fg },
+		CmpItemKindUnit = { fg = c.fg },
+		CmpItemKindClass = { fg = c.yellow },
+		CmpItemKindModule = { fg = c.yellow },
 
 		-- Telescope
 		TelescopeSelection = { fg = c.fg_accent, bg = c.bg_accent },
-
-		-- GitSigns
-		GitSignsAdd = { fg = c.green },
-		GitSignsAddNr = { fg = c.green },
-		GitSignsAddLn = { fg = c.green },
-		GitSignsChange = { fg = c.blue },
-		GitSignsChangeNr = { fg = c.blue },
-		GitSignsChangeLn = { fg = c.blue },
-		GitSignsDelete = { fg = c.error },
-		GitSignsDeleteNr = { fg = c.error },
-		GitSignsDeleteLn = { fg = c.error },
 
 		-- WhichKey
 		WhichKey = { fg = c.value, style = "bold" },
@@ -302,12 +262,11 @@ end
 
 --Go trough the table and highlight the group with the color values
 local highlight = function(group, color)
-	local style = color.style and "gui=" .. color.style or "gui=NONE"
-	local fg = color.fg and "guifg=" .. color.fg or "guifg=NONE"
-	local bg = color.bg and "guibg=" .. color.bg or "guibg=NONE"
-	local sp = color.sp and "guisp=" .. color.sp or ""
-
-	local hl = "highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp
+	local style = color.style and string.format("gui=%s", color.style) or "gui=NONE"
+	local fg = color.fg and string.format("guifg=%s", color.fg) or "guifg=NONE"
+	local bg = color.bg and string.format("guibg=%s", color.bg) or "guibg=NONE"
+	local sp = color.sp and string.format("guisp=%s", color.sp) or ""
+	local hl = string.format("hi %s %s %s %s %s", group, style, fg, bg, sp)
 	vim.cmd(hl)
 end
 
@@ -317,7 +276,6 @@ local set = function()
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
 	end
-
 	vim.o.termguicolors = true
 	vim.g.colors_name = "rsms"
 	local theme = get_theme()

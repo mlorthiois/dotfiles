@@ -23,13 +23,6 @@ return require("packer").startup(function(use)
 		keys = "<space>",
 	})
 
-	-- use({
-	-- 	"ahmedkhalf/project.nvim",
-	-- 	config = function()
-	-- 		require("project_nvim").setup()
-	-- 	end,
-	-- })
-
 	use({
 		"terrortylor/nvim-comment",
 		event = "BufReadPre",
@@ -45,12 +38,12 @@ return require("packer").startup(function(use)
 		end,
 		cmd = { "HopChar2", "HopChar1" },
 	})
+	use({ "vim-test/vim-test", cmd = { "TestFile", "TestSuite" } })
 
 	----------------------------------------------------------------------
 	-- LSP
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
-		event = "BufReadPre",
 		config = function()
 			require("lsp.null-lsp")
 		end,
@@ -73,6 +66,15 @@ return require("packer").startup(function(use)
 		requires = {
 			{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
 			{ "hrsh7th/cmp-path", event = "InsertEnter" },
+			{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+			{ "rafamadriz/friendly-snippets" },
+			{
+				"L3MON4D3/LuaSnip",
+				config = function()
+					require("snippets")
+				end,
+				event = "InsertEnter",
+			},
 		},
 		event = "InsertEnter",
 		after = { "nvim-lspconfig" },
@@ -110,10 +112,10 @@ return require("packer").startup(function(use)
 
 	----------------------------------------------------------------------
 	-- EDITOR
-	use({
-		"mkitt/tabline.vim",
-		event = "TabEnter",
-	})
+	-- use({
+	-- 	"mkitt/tabline.vim",
+	-- 	event = "TabEnter",
+	-- })
 
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -125,16 +127,16 @@ return require("packer").startup(function(use)
 
 	----------------------------------------------------------------------
 	-- TELESCOPE
+	use("kyazdani42/nvim-web-devicons")
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-			{ "kyazdani42/nvim-web-devicons", cmd = "Telescope" },
 		},
 		config = function()
 			require("telescope-config")
 		end,
-		cmd = "Telescope",
+		keys = "<space>f",
 	})
 end)

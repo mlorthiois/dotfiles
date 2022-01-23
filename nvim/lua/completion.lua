@@ -15,7 +15,7 @@ local icons = {
 	Value = "  ",
 	Enum = "  ",
 	Keyword = "  ",
-	Snippet = "  ",
+	Snippet = "  ",
 	Color = "  ",
 	File = "  ",
 	Reference = "  ",
@@ -31,11 +31,9 @@ local icons = {
 local cmp = require("cmp")
 cmp.setup({
 	mapping = {
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
+		["<C-j>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
@@ -44,6 +42,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "path" },
+		{ name = "luasnip" },
 	},
 
 	formatting = {
@@ -52,8 +51,15 @@ cmp.setup({
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				nvim_path = "[PATH]",
+				luasnip = "[SNP]",
 			})[entry.source.name]
 			return vim_item
+		end,
+	},
+
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
 		end,
 	},
 
