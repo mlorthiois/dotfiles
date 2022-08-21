@@ -7,11 +7,11 @@ if ! command -v brew &>/dev/null; then
 fi
 
 echo "Installing softwares..."
-brew install --cask brave-browser kitty spotify discord visual-studio-code \
-	raycast beekeeper-studio firefox vlc rectangle
+brew install --cask brave-browser kitty spotify discord raycast rectangle
+# beekeeper-studio firefox vlc
 
-brew install bat black fd fzf gh go htop jq neovim node pandoc ripgrep rsync shfmt tmux tree \
-	zsh whet shellcheck
+brew install bat black fd fzf neovim ripgrep rsync tree zsh
+# wget shellcheck gh go htop jq node pandoc shfmt tmux
 
 if ! command -v conda &>/dev/null; then
 	echo "Installing miniconda3"
