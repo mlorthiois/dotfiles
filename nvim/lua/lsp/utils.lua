@@ -1,16 +1,16 @@
 local M = {}
 
 --- Filter format on Save
-local disable_format_servers = "tsserver"
+local disable_format_servers = { "tsserver", "sumneko_lua" }
 M.formatOnSave = function(client)
-	if client.resolved_capabilities.document_formatting and client.name ~= disable_format_servers then
-		vim.api.nvim_command([[augroup Format]])
-		vim.api.nvim_command([[autocmd! * <buffer>]])
-		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]])
-		vim.api.nvim_command([[augroup END]])
-	else
-		client.resolved_capabilities.document_formatting = false
+	for _, value in ipairs(disable_format_servers) do
+		if client.resolved_capabilities.document_formatting and client.name == value then
+			client.resolved_capabilities.document_formatting = false
+			return
+		end
 	end
+
+	vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]])
 end
 
 M.on_attach = function(client)

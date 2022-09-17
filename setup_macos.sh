@@ -10,7 +10,7 @@ echo "Installing softwares..."
 brew install --cask brave-browser kitty spotify discord raycast rectangle
 # beekeeper-studio firefox vlc
 
-brew install bat black fd fzf neovim ripgrep rsync tree zsh
+brew install bat black fd fzf neovim ripgrep tree zsh stylua pyright lua-language-server
 # wget shellcheck gh go htop jq node pandoc shfmt tmux
 
 if ! command -v conda &>/dev/null; then

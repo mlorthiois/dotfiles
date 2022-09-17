@@ -7,9 +7,6 @@ vim.diagnostic.config({
 })
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 
---- Root path to LSP server installed by lspinstall
-local lspinstallPath = vim.fn.stdpath("data") .. "/lspinstall/"
-
 -- Python
 lspconfig.pyright.setup({
 	on_attach = utils.on_attach,
@@ -20,11 +17,6 @@ lspconfig.r_language_server.setup({ on_attach = utils.on_attach })
 
 -- Javascript / Typescript
 lspconfig.tsserver.setup({
-	on_attach = utils.on_attach,
-})
-
--- C / C++
-lspconfig.clangd.setup({
 	on_attach = utils.on_attach,
 })
 
@@ -49,18 +41,7 @@ require("lspconfig").cssls.setup({
 })
 
 -- Lua
-local system_name
-if vim.fn.has("mac") == 1 then
-	system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-	system_name = "Linux"
-else
-	print("Unsupported system for sumneko")
-end
-local prefix = lspinstallPath .. "lua/sumneko-lua/extension/server/"
-
 require("lspconfig").sumneko_lua.setup({
-	cmd = { prefix .. "bin/" .. system_name .. "/lua-language-server", "-E", prefix .. "main.lua" },
 	on_attach = utils.on_attach,
 	settings = {
 		Lua = {
