@@ -1,0 +1,84 @@
+format = """$character"""
+right_format = """$all"""
+add_newline = false
+
+#################################################################
+[aws]
+format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+force_display = true
+
+[character]
+success_symbol = '[λ](bold green) ›'
+error_symbol = '[λ](bold red) ›'
+
+[cmd_duration]
+disabled = true
+
+[conda]
+format = '\[[$symbol$environment]($style)\]'
+
+[directory]
+truncation_length = 2
+style = "dimmed"
+
+[docker_context]
+format = '\[[$symbol$context]($style)\]'
+
+[git_branch]
+symbol = ""
+style = "green"
+format = '\[[$symbol$branch]($style)'
+
+[git_status]
+format = '([$modified]($style))\]'
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+
+[helm]
+format = '\[[$symbol($version)]($style)\]'
+
+[julia]
+format = '\[[$symbol($version)]($style)\]'
+
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+
+[memory_usage]
+format = '\[$symbol[$ram( | $swap)]($style)\]'
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+
+[package]
+disabled = true
+format = '\[[$symbol$version]($style)\]'
+
+[python]
+symbol = "PY "
+style = "green bold"
+version_format= "${major}.${minor}"
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+
+[rlang]
+format = '\[[$symbol($version)]($style)\]'
+
+[rust]
+format = '\[[$symbol($version)]($style)\]'
+
+[scala]
+format = '\[[$symbol($version)]($style)\]'
+
+[terraform]
+symbol = "TF "
+style = ""
+format = '\[[$symbol$workspace]($style)\]'
+
+[time]
+format = '\[[$time]($style)\]'
+
+[username]
+format = '\[[$user]($style)\]'

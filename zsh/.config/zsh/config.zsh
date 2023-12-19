@@ -23,6 +23,11 @@ setopt AUTO_CD          # Jump without cd
 # FUNCTIONS
 ##############
 # Kitty
+open-overlay() {	
+	kitty @ launch --cwd current --type overlay-main --no-response $@
+}
+
+
 check-kitty-theme() {
 	kitty_config_dir="$HOME/.config/kitty"
 	config_file="$kitty_config_dir/kitty.conf"
@@ -105,14 +110,6 @@ bindkey "^Z" Resume
 #############
 # TMUX
 #############
-# If start in tmux, relaunch conda, else create and join tmux session
-# if [ -z "$TMUX" ]; then
-#     tmux attach -t TMUX || tmux new -s TMUX && exit
-# else  # Reload conda https://github.com/conda/conda/issues/6826#issuecomment-397287212
-#     conda deactivate
-#     conda activate base
-# fi
-
 # tmux with full dev layout session with FZF (CTRL-F) (github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer)
 devmode() {
 	items=$(find ~/Developer -maxdepth 2 -mindepth 2 -type d)
@@ -157,16 +154,13 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 
 ##############
-# PyENV
+# PyEnv
 ##############
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-##############
-# LSP
-##############
-export PATH="$HOME/.local/share/nvim/lsp/lua-language-server/bin:$PATH"
+if [ -d "$HOME/.pyenv" ]; then
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
+	eval "$(pyenv init --path zsh -)"
+fi
 
 ##############
 # PLUGINS

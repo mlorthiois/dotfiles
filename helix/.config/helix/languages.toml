@@ -1,0 +1,14 @@
+[[language]]
+name = "python"
+auto-format = true
+language-servers = [
+  { name = "ruff", only-features = [ "format", "diagnostics" ] },
+  { name = "pyright", except-features = [ "format" ] },
+]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+[language-server.ruff]
+command = "ruff-lsp"
+config = { settings = { run = "onSave" } }
