@@ -4,7 +4,7 @@ set wrap                        " Display long lines as just one line
 set pumheight=15                " Makes popup menu smaller
 set fileencoding=utf-8          " The encoding written to file
 set iskeyword+=-                " treat dash separated words as a word text object"
-set mouse=a                     " Enable your mouse
+set mouse=""                     " Enable your mouse
 set splitbelow                  " Horizontal splits will automatically be below
 set splitright                  " Vertical splits will automatically be to the right
 set t_Co=256                    " Support 256 colors

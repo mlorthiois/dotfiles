@@ -4,13 +4,13 @@ local M = {}
 local disable_format_servers = { "tsserver", "sumneko_lua" }
 M.formatOnSave = function(client)
 	for _, value in ipairs(disable_format_servers) do
-		if client.resolved_capabilities.document_formatting and client.name == value then
-			client.resolved_capabilities.document_formatting = false
+		if client.server_capabilities.documentFormattingProvider and client.name == value then
+			client.server_capabilities.documentFormattingProvider = false
 			return
 		end
 	end
 
-	vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]])
+	vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
 end
 
 M.on_attach = function(client)

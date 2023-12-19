@@ -178,9 +178,9 @@ function mnml_me_dirs {
 
 function mnml_me_ls {
   if [ "$(uname)" = "Darwin" ] && ! ls --version &> /dev/null; then
-      COLUMNS=$COLUMNS CLICOLOR_FORCE=1 ls -lGF | tail -n+2
+      COLUMNS=$COLUMNS CLICOLOR_FORCE=1 ls -laGF | tail -n+4
   else
-      env ls -lF --color="always" -w $COLUMNS
+      env ls -laF --color="always" -w $COLUMNS | tail -n+4
   fi
 }
 

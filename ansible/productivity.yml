@@ -1,0 +1,20 @@
+- name: "Install core system packages"
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: "Install system packages"
+  become: true
+  apt:
+    name: ["git", "fzf", "tmux"]
+
+- name: "Install ripgrep"
+  become: true
+  shell: |
+    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb &&
+    dpkg -i ripgrep_13.0.0_amd64.deb &&
+    rm ripgrep_13.0.0_amd64.deb

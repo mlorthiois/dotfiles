@@ -1,7 +1,6 @@
 ###############
 # UI
 ###############
-source $HOME/dotfiles/zsh/minimal.zsh
 PS1=$(echo $PS1 | sed 's/(miniconda3) |(base) //')
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
@@ -161,5 +160,5 @@ export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 ##############
 # PLUGINS
 ##############
-source "$HOME/.zsh/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.zsh/zdharma-continuum/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOME/.local/share/zsh/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.local/share/zsh/zdharma-continuum/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"

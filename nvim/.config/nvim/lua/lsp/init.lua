@@ -41,7 +41,7 @@ require("lspconfig").cssls.setup({
 })
 
 -- Lua
-require("lspconfig").sumneko_lua.setup({
+require("lspconfig").lua_ls.setup({
 	on_attach = utils.on_attach,
 	settings = {
 		Lua = {

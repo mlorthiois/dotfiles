@@ -1,0 +1,67 @@
+###############################################################################
+- name: check for existing neovim install
+  stat:
+    path: "/usr/local/bin/nvim"
+  register: nvim_bin
+  tags:
+    - install
+    - neovim
+
+###############################################################################
+- name: "Landing place for nvim download exists."
+  when: "not nvim_bin.stat.exists"
+  ansible.builtin.file:
+    state: directory
+    owner: root
+    group: root
+    mode: "0777"
+    path: "/opt/nvim/"
+  become: true
+  tags:
+    - neovim
+    - install
+
+- name: Install neovim
+  when: "not nvim_bin.stat.exists"
+  ansible.builtin.get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    dest: "/opt/nvim/nvim.appimage"
+    mode: '0777'
+
+- name: Extract neovim
+  when: "not nvim_bin.stat.exists"
+  shell: |
+    /opt/nvim/nvim.appimage --appimage-extract && mv squashfs-root /opt/nvim/
+  tags:
+    - install
+    - neovim
+
+- name: Make neovim available in path
+  when: "not nvim_bin.stat.exists"
+  file:
+    src: "/opt/nvim/squashfs-root/AppRun"
+    dest: "/usr/local/bin/nvim"
+    state: link
+  tags:
+    - install
+    - neovim
+  become: true
+
+- name: check for existing neovim packer package install
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  register: packer
+  tags:
+    - install
+    - neovim
+
+###############################################################################
+- name: Get Packer
+  when: "not packer.stat.exists"
+  ansible.builtin.git:
+    repo: 'https://github.com/wbthomason/packer.nvim'
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    depth: 1
+  tags:
+    - install
+    - neovim

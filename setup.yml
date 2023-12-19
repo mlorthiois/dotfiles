@@ -1,0 +1,19 @@
+- name: "Setup local development workspace"
+  hosts: localhost
+  vars:
+    - user: "mlorthiois"
+    - source_key: "./.ssh/id_rsa"
+    - dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+  pre_tasks:
+  - name: Update Apt
+    become: true
+    apt:
+      force_apt_get: true
+      update_cache: true
+      state: present
+    tags:
+      - install
+      - core
+  tasks:
+    - import_tasks: ansible/neovim.yml
+    - import_tasks: ansible/productivity.yml
