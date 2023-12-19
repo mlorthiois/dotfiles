@@ -1,7 +1,6 @@
 ###############
 # UI
 ###############
-PS1=$(echo $PS1 | sed 's/(miniconda3) |(base) //')
 export BAT_THEME="base16"
 export BAT_STYLE="numbers,changes,header"
 export LESS_TERMCAP_us=$'\e[1;4;0m'
@@ -156,6 +155,18 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
+
+##############
+# PyENV
+##############
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+##############
+# LSP
+##############
+export PATH="$HOME/.local/share/nvim/lsp/lua-language-server/bin:$PATH"
 
 ##############
 # PLUGINS

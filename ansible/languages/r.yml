@@ -1,0 +1,23 @@
+- name: "Check pyenv available"
+  shell: R --version 2>&1
+  register: r_result
+  failed_when: "r_result.rc not in [0, 127]"
+  tags:
+    - r
+
+- name: "Install R"
+  shell: |
+    apt update -qq &&
+    apt install --no-install-recommends software-properties-common dirmngr &&
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc &&
+    sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" &&
+    apt install --no-install-recommends r-base
+  when: "r_result.rc == 127"
+  tags:
+    - r
+  become: true
+
+- name: "Install R LSP"
+  shell: Rscript -e 'install.packages("languageserver", repos="https://cloud.r-project.org")'
+  tags:
+    - r

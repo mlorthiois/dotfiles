@@ -1,0 +1,9 @@
+- name: "Install lua_lsp"
+  shell: |
+    mkdir -p $HOME/.local/share/nvim/lsp/lua-language-server &&
+    curl -LO https://github.com/LuaLS/lua-language-server/releases/download/3.6.11/lua-language-server-3.6.11-linux-x64.tar.gz &&
+    tar -xf lua-language-server-3.6.11-linux-x64.tar.gz -C $HOME/.local/share/nvim/lsp/lua-language-server/ &&
+    rm lua-language-server-3.6.11-linux-x64.tar.gz
+  tags:
+    - install
+    - neovim

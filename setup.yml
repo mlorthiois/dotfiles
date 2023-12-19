@@ -2,8 +2,6 @@
   hosts: localhost
   vars:
     - user: "mlorthiois"
-    - source_key: "./.ssh/id_rsa"
-    - dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
   pre_tasks:
   - name: Update Apt
     become: true
@@ -14,6 +12,17 @@
     tags:
       - install
       - core
+      - dotfiles
+      - python
+      - r
+      - lua
   tasks:
+    - import_tasks: ansible/core.yml
+    - import_tasks: ansible/dotfiles.yml
+
     - import_tasks: ansible/neovim.yml
     - import_tasks: ansible/productivity.yml
+
+    - import_tasks: ansible/languages/python.yml
+    - import_tasks: ansible/languages/lua.yml
+    - import_tasks: ansible/languages/r.yml
