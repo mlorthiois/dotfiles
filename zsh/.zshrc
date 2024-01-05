@@ -3,6 +3,7 @@
 #################################################################
 source $HOME/.config/zsh/config.zsh
 source $HOME/.config/zsh/private.zsh
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
@@ -27,5 +28,7 @@ bindkey '^M' my-accept-line
 #################################################################
 # Init starship
 #################################################################
+export PATH="$PATH:$HOME/.local/bin"
 export TERM=xterm
 eval "$(starship init zsh)"
+

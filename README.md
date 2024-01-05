@@ -1,29 +1,24 @@
 # Personnal dotfiles
 
-Main repository to setup a new development workspace.
-
-Everything is automated from an Ansible playbook: `setup.yml`
+Main repository to setup PDE.
 
 ## Install
 
-1. [Install
-   Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
-2. Run the playbook
+Clone this repo:
 
 ```sh
-ansible-playbook -K setup.yml
+git clone git@github.com:mlorthiois/dotfiles.git $HOME/dotfiles
 ```
 
-Ansible will proceded to the installation and setup of:
-- ZSH and configuration
-- NVIM with all its plugins, LSP servers, etc.
-- Python language: pyenv, LSP.
-- ...
+Ensure stow is available and run.
+
+```sh
+stow .
+```
 
 ## Main tools
 
 - Kitty as terminal emulator
 - neovim as code editor
 - zsh as shell
-- JetBrains Mono Nerd Font with VSCode icons as monotype font
+- JetBrains Mono Nerd Font

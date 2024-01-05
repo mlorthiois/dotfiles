@@ -4,6 +4,7 @@ add_newline = false
 
 #################################################################
 [aws]
+symbol = "AWS "
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 force_display = true
 
@@ -33,12 +34,11 @@ format = '\[[$symbol$branch]($style)'
 format = '([$modified]($style))\]'
 
 [golang]
+symbol = "GO "
+version_format= "v${major}.${minor}"
 format = '\[[$symbol($version)]($style)\]'
 
 [helm]
-format = '\[[$symbol($version)]($style)\]'
-
-[julia]
 format = '\[[$symbol($version)]($style)\]'
 
 [kubernetes]
@@ -60,21 +60,14 @@ format = '\[[$symbol$version]($style)\]'
 [python]
 symbol = "PY "
 style = "green bold"
-version_format= "${major}.${minor}"
+version_format= "v${major}.${minor}"
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [rlang]
 format = '\[[$symbol($version)]($style)\]'
 
-[rust]
-format = '\[[$symbol($version)]($style)\]'
-
-[scala]
-format = '\[[$symbol($version)]($style)\]'
-
 [terraform]
 symbol = "TF "
-style = ""
 format = '\[[$symbol$workspace]($style)\]'
 
 [time]

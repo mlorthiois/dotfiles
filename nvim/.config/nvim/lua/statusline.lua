@@ -38,7 +38,7 @@ local get_file_infos = function()
 	if fpath == "" or fpath == "." then
 		fpath = " "
 	else
-		fpath = string.format(" %%<%s/", fpath)
+		fpath = string.format("%%<%s/", fpath)
 	end
 
 	local fname = fn.expand("%:t")
@@ -46,33 +46,7 @@ local get_file_infos = function()
 		fname = fname .. " "
 	end
 
-	local fextension = fn.expand("%:e")
-	local icon = require("nvim-web-devicons").get_icon(fname, fextension, { default = true })
-	return string.format("%s%s%s", icon, fpath, fname)
-end
-
-local get_lsp_infos = function()
-	-- Number servers attached
-	if #vim.lsp.get_active_clients() == 0 then
-		return ""
-	end
-
-	-- Diagnostics
-	local levels = {
-		{ type = "Error", icon = " " },
-		{ type = "Warn", icon = " " },
-		{ type = "Info", icon = " " },
-		{ type = "Hint", icon = " " },
-	}
-
-	local diags = ""
-	for _, level in pairs(levels) do
-		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = level.type }))
-		if count ~= 0 then
-			diags = string.format("%s%s%s ", diags, level.icon, count)
-		end
-	end
-	return "LSP " .. diags .. "| "
+	return string.format("%s%s", fpath, fname)
 end
 
 local get_lineinfo = function()
@@ -89,7 +63,6 @@ Statusline.active = function()
 		get_current_formatted_mode(),
 		get_file_infos(),
 		"%=",
-		get_lsp_infos(),
 		get_lineinfo(),
 	})
 end

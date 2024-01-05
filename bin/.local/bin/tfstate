@@ -1,0 +1,10 @@
+#! /bin/bash
+
+set -eu
+
+terraform state list "$@" |
+	fzf \
+		--layout=reverse \
+		--preview-window "right:70%" \
+		--border \
+		--preview "terraform state show $* {} | bat -l Terraform -p --color=always"

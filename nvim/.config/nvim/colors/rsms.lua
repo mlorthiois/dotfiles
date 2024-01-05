@@ -1,5 +1,3 @@
--- TODO: nvim 0.7 https://www.reddit.com/r/neovim/comments/sihuq7/psa_now_you_can_set_global_highlight_groups_ie/
-
 local color_palette = {
 	dark = {
 		white = "#ffffff",
@@ -76,7 +74,7 @@ local get_theme = function()
 		Character = { fg = c.value },
 		Number = { fg = c.value },
 		Boolean = { fg = c.value },
-		Float = { fg = c.value, bg = c.bg_dim },
+		Float = { fg = c.value, bg = c.bg },
 		FloatBorder = { fg = c.fg, bg = c.bg },
 		Statement = { fg = c.keyword },
 		Label = { fg = c.keyword },
@@ -94,11 +92,11 @@ local get_theme = function()
 		Delimiter = { fg = c.keyword },
 		SpecialComment = { fg = c.fg_dim },
 		Debug = { fg = c.error },
-		Underlined = { fg = c.link, style = "underline" },
+		Underlined = { fg = c.link, underline = true },
 		Ignore = { fg = c.fg_dim },
-		Error = { fg = c.error, style = "bold,underline" },
-		Todo = { fg = c.yellow, style = "bold,italic" },
-		Comment = { fg = c.fg_dim, style = "italic" },
+		Error = { fg = c.error, bold = true, underline = true },
+		Todo = { fg = c.yellow, bold = true, italic = true },
+		Comment = { fg = c.fg_dim, italic = true },
 		Conditional = { fg = c.keyword },
 		Keyword = { fg = c.keyword },
 		Repeat = { fg = c.keyword },
@@ -171,9 +169,9 @@ local get_theme = function()
 		DiagnosticWarn = { fg = c.orange },
 		DiagnosticInfo = { fg = c.blue },
 		DiagnosticHint = { fg = c.green },
-		DiagnosticsUnderlineError = { style = "undercurl", sp = c.error },
-		DiagnosticsUnderlineWarning = { style = "undercurl", sp = c.orange },
-		DiagnosticsUnderlineInformation = { style = "undercurl", sp = c.blue },
+		DiagnosticsUnderlineError = { undercurl = true, sp = c.error },
+		DiagnosticsUnderlineWarning = { undercurl = true, sp = c.orange },
+		DiagnosticsUnderlineInformation = { undercurl = true, sp = c.blue },
 		DiagnosticsUnderlineHint = { fg = c.green },
 
 		-- Treesitter
@@ -212,12 +210,12 @@ local get_theme = function()
 		TSText = { fg = c.value },
 		TSTextReference = { fg = c.value },
 		TSEmphasis = { fg = c.value },
-		TSUnderline = { fg = c.fg, style = "underline" },
+		TSUnderline = { fg = c.fg, underline = true },
 		TSStrike = {},
 		TSTitle = { fg = c.value },
 		TSLiteral = { fg = c.fg },
 		TSURI = { fg = c.value },
-		TSComment = { fg = c.fg_dim, style = "italic" },
+		TSComment = { fg = c.fg_dim, italic = true },
 		TSFunction = { fg = c.fg_accent },
 		TSMethod = { fg = c.fg_accent },
 		TSFuncBuiltin = { fg = c.fg_accent },
@@ -231,7 +229,7 @@ local get_theme = function()
 		-- Completion
 		CmpItemAbbrDeprecated = { fg = "#808080" },
 		CmpItemAbbrMatch = { fg = c.blue },
-		CmpItemAbbrMatchFuzzy = { fg = c.blue, style = "bold" },
+		CmpItemAbbrMatchFuzzy = { fg = c.blue, bold = true },
 		CmpItemKindVariable = { fg = c.blue },
 		CmpItemKindInterface = { fg = c.blue },
 		CmpItemKindText = { fg = c.blue },
@@ -247,27 +245,17 @@ local get_theme = function()
 		TelescopeSelection = { fg = c.fg_accent, bg = c.bg_accent },
 
 		-- WhichKey
-		WhichKey = { fg = c.value, style = "bold" },
+		WhichKey = { fg = c.value, bold = true },
 		WhichKeyGroup = { fg = c.error },
-		WhichKeyDesc = { fg = c.keyword, style = "italic" },
+		WhichKeyDesc = { fg = c.keyword, italic = true },
 		WhichKeySeperator = { fg = c.fg_dim },
 		WhichKeyFloating = { bg = c.bg },
 		WhichKeyFloat = { bg = c.bg },
 
 		-- Indent Blankline
-		IndentBlanklineChar = { fg = c.bg_dim, sp = "nocombine" },
-		IndentBlanklineContextChar = { fg = c.fg_dim, sp = "nocombine" },
+		IndentBlanklineChar = { fg = c.bg_dim, nocombine = true },
+		IndentBlanklineContextChar = { fg = c.fg_dim, nocombine = true },
 	}
-end
-
---Go trough the table and highlight the group with the color values
-local highlight = function(group, color)
-	local style = color.style and string.format("gui=%s", color.style) or "gui=NONE"
-	local fg = color.fg and string.format("guifg=%s", color.fg) or "guifg=NONE"
-	local bg = color.bg and string.format("guibg=%s", color.bg) or "guibg=NONE"
-	local sp = color.sp and string.format("guisp=%s", color.sp) or ""
-	local hl = string.format("hi %s %s %s %s %s", group, style, fg, bg, sp)
-	vim.cmd(hl)
 end
 
 --Set the theme
@@ -279,9 +267,13 @@ local set = function()
 	vim.o.termguicolors = true
 	vim.g.colors_name = "rsms"
 	local theme = get_theme()
+
+	--Go trough the table and highlight the group with the color values
 	for group, colors in pairs(theme) do
-		highlight(group, colors)
+		vim.api.nvim_set_hl(0, group, colors)
 	end
 end
 
-return { set = set }
+-- Set theme
+package.loaded["rsms"] = nil
+set()

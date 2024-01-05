@@ -1,0 +1,35 @@
+#! /bin/bash
+set -e
+
+extract() {
+	if [ -f "$1" ]; then
+		output=$(${1%.*})
+		case "$1" in
+		*.7z) 7z x "$1" ;;
+		*.lzma) unlzma "$1" ;;
+		*.rar) unrar x "$1" ;;
+		*.tar) tar xvf "$1" ;;
+		*.tar.bz2) tar xvjf "$1" ;;
+		*.bz2) bunzip2 "$1" ;;
+		*.tar.gz) tar xvzf "$1" ;;
+		*.gz) gunzip -c "$1" >"$output" ;;
+		*.tar.xz) tar Jxvf "$1" ;;
+		*.xz) xz -d "$1" ;;
+		*.tbz2) tar xvjf "$1" ;;
+		*.tgz) tar xvzf "$1" ;;
+		*.zip) unzip "$1" ;;
+		*.Z) uncompress ;;
+		*)
+			echo "don't know how to extract $1..."
+			return 1
+			;;
+		esac
+		echo -e "\e[92m$output successfully created"
+		return 0
+	else
+		echo -e "\e[91mError: the file '$1' doesn't exist!"
+		return 2
+	fi
+}
+
+extract "$@"

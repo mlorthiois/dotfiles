@@ -1,11 +1,11 @@
-theme = "rasmus"
+theme = "github_light"
 
 [editor]
 color-modes = true
 cursorline = true
 line-number = "relative"
 mouse = true
-rulers = [120]
+rulers = [100]
 
 
 [editor.cursor-shape]
@@ -15,13 +15,15 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
+git-ignore = true
 
 [editor.indent-guides]
 render = true
 character = "|"
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
+
 
 [keys.normal]                                                                                                                                                                                                                                                                                                                                                                                                                                         
 C-h = "jump_view_left"                                                                                                                                                                                                                                                                                                                                                                                                                           

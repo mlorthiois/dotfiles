@@ -1,0 +1,70 @@
+#! /bin/bash
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+Linux*) open_cmd=xdg-open ;;
+Darwin*) open_cmd=open ;;
+esac
+export open_cmd
+
+export BASE="https://registry.terraform.io"
+
+curl_terraform() {
+	curl -s \
+		-H "Content-Type: application/json" \
+		"$BASE/$1"
+}
+export -f curl_terraform
+
+get_provider() {
+	curl_terraform "v2/providers?filter\\[tier\\]=official&page\\[size\\]=100" |
+		jq -r '.data[] | [.attributes.name, .id] | @tsv' |
+		fzf \
+			--with-nth=1 \
+			--prompt "Provider>" \
+			--bind 'enter:execute(echo {1})+abort'
+}
+
+get_latest_provider_version() {
+	curl_terraform "v2/providers/hashicorp/${1}?include=provider-versions" |
+		jq -r '.included | max_by(.attributes."published-at") | .id'
+}
+export -f get_latest_provider_version
+
+get_provider_resources() {
+	curl_terraform "v2/provider-versions/${1}?include=provider-docs" |
+		jq -r '.included[].attributes | 
+     select((.category == "resources") or (.category == "data-sources")) |
+     [.title, .category] | 
+     @tsv' |
+		column -t |
+		fzf \
+			--prompt "Data/Resource>" \
+			--bind "enter:execute-silent($open_cmd '$BASE/providers/hashicorp/${2}/latest/docs/{2}/{1}')+abort"
+}
+
+main() {
+	if [ "$#" == 0 ]; then
+		PROVIDER=$(get_provider)
+	elif [ "$#" == 1 ]; then
+		PROVIDER="$1"
+	else
+		echo "Can't use 2 args"
+		exit 1
+	fi
+
+	if [ -z "$PROVIDER" ]; then
+		exit 1
+	fi
+
+	VERSION_ID=$(get_latest_provider_version "$PROVIDER")
+
+	if [ -z "$VERSION_ID" ]; then
+		exit 1
+	fi
+
+	get_provider_resources "$VERSION_ID" "$PROVIDER"
+	exit 0
+}
+
+main "$@"
