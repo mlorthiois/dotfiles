@@ -35,7 +35,7 @@ return {
 
 	{
 		"vim-test/vim-test",
-		cmd = { "TestFile", "TestSuite" },
+		cmd = { "TestFile", "TestSuite", "TestNearest", "TestLast", "TestVisit" },
 		init = function()
 			vim.g["test#neovim#start_normal"] = 1
 			vim.g["test#echo_command"] = 0
@@ -167,6 +167,7 @@ return {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-path" },
 		},
+		event = "InsertEnter",
 	},
 
 	{

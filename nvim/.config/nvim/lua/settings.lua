@@ -1,22 +1,5 @@
-vim.g.loaded_gzip = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_logiPat = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_tutor = 1
-vim.g.loaded_rplugin = 1
-vim.g.loaded_man = 1
-
 -------------------------------
+-- Global settings
 vim.g.mapleader = " "
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
@@ -50,6 +33,27 @@ vim.opt.showmatch = true
 vim.opt.showtabline = 0
 
 -------------------------------
+-- Disable builtin loading to speedup
+vim.g.loaded_gzip = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_logiPat = 1
+vim.g.loaded_rrhelper = 1
+vim.g.loaded_tutor = 1
+vim.g.loaded_rplugin = 1
+vim.g.loaded_man = 1
+
+-------------------------------
+-- Netrw settings
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.netrw_liststyle = 3
@@ -99,6 +103,7 @@ vim.cmd([[
 ]])
 
 -------------------------------
+-- Icons for completion
 local icons = {
 	Text = "  ",
 	Method = "  ",
