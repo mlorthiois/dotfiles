@@ -1,13 +1,13 @@
 #! /bin/bash
 
+export BASE="https://registry.terraform.io"
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
 Linux*) open_cmd=xdg-open ;;
 Darwin*) open_cmd=open ;;
 esac
 export open_cmd
-
-export BASE="https://registry.terraform.io"
 
 curl_terraform() {
 	curl -s \
@@ -18,19 +18,22 @@ export -f curl_terraform
 
 get_provider() {
 	curl_terraform "v2/providers?filter\\[tier\\]=official&page\\[size\\]=100" |
-		jq -r '.data[] | [.attributes.name, .id] | @tsv' |
+		jq -r '.data[].attributes.name' |
+		sort |
 		fzf \
-			--with-nth=1 \
+			--height 50% --layout=reverse \
 			--prompt "Provider>" \
-			--bind 'enter:execute(echo {1})+abort'
+			--bind 'enter:execute(echo {})+abort'
 }
 
+# $1 = provider name
 get_latest_provider_version() {
 	curl_terraform "v2/providers/hashicorp/${1}?include=provider-versions" |
 		jq -r '.included | max_by(.attributes."published-at") | .id'
 }
 export -f get_latest_provider_version
 
+# $1 = provider version id, $2 = provider name
 get_provider_resources() {
 	curl_terraform "v2/provider-versions/${1}?include=provider-docs" |
 		jq -r '.included[].attributes | 
@@ -38,11 +41,13 @@ get_provider_resources() {
      [.title, .category] | 
      @tsv' |
 		column -t |
+		sort |
 		fzf \
 			--prompt "Data/Resource>" \
 			--bind "enter:execute-silent($open_cmd '$BASE/providers/hashicorp/${2}/latest/docs/{2}/{1}')+abort"
 }
 
+# $1 can be null -> fetch providers, or a provider name -> tfdoc aws
 main() {
 	if [ "$#" == 0 ]; then
 		PROVIDER=$(get_provider)
