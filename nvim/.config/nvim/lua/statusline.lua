@@ -4,31 +4,31 @@
 local fn = vim.fn
 local api = vim.api
 
-local modes = {
-	["n"] = { "NORMAL", "%#StatusLineNormal#" },
-	["no"] = { "NORMAL", "%#StatusLineNormal#" },
-	["v"] = { "VISUAL", "%#StatuslineVisual#" },
-	["V"] = { "VISUAL LINE", "%#StatuslineVisual#" },
-	[""] = { "VISUAL BLOCK", "%#StatusLineVisual#" },
-	["s"] = { "SELECT", "%#StatusLineVisual#" },
-	["S"] = { "SELECT LINE", "%#StatusLineVisual#" },
-	[""] = { "SELECT BLOCK", "%#StatusLineVisual#" },
-	["i"] = { "INSERT", "%#StatusLineInsert#" },
-	["ic"] = { "INSERT", "%#StatusLineInsert#" },
-	["R"] = { "REPLACE", "%#StatuslineReplace#" },
-	["Rv"] = { "VISUAL REPLACE", "%#StatuslineReplace#" },
-	["c"] = { "COMMAND", "%#StatusLineCommand#" },
-	["cv"] = { "VIM EX", "" },
-	["ce"] = { "EX", "" },
-	["r"] = { "PROMPT", "" },
-	["rm"] = { "MOAR", "" },
-	["r?"] = { "CONFIRM", "" },
-	["!"] = { "SHELL", "" },
-	["t"] = { "TERMINAL", "%#StatusLineTerminal#" },
-	["nt"] = { "TERMINAL", "%#StatusLineTerminal#" },
-}
-
 local get_current_formatted_mode = function()
+	local modes = {
+		["n"] = { "NORMAL", "%#StatusLineNormal#" },
+		["no"] = { "NORMAL", "%#StatusLineNormal#" },
+		["v"] = { "VISUAL", "%#StatuslineVisual#" },
+		["V"] = { "VISUAL LINE", "%#StatuslineVisual#" },
+		[""] = { "VISUAL BLOCK", "%#StatusLineVisual#" },
+		["s"] = { "SELECT", "%#StatusLineVisual#" },
+		["S"] = { "SELECT LINE", "%#StatusLineVisual#" },
+		[""] = { "SELECT BLOCK", "%#StatusLineVisual#" },
+		["i"] = { "INSERT", "%#StatusLineInsert#" },
+		["ic"] = { "INSERT", "%#StatusLineInsert#" },
+		["R"] = { "REPLACE", "%#StatuslineReplace#" },
+		["Rv"] = { "VISUAL REPLACE", "%#StatuslineReplace#" },
+		["c"] = { "COMMAND", "%#StatusLineCommand#" },
+		["cv"] = { "VIM EX", "" },
+		["ce"] = { "EX", "" },
+		["r"] = { "PROMPT", "" },
+		["rm"] = { "MOAR", "" },
+		["r?"] = { "CONFIRM", "" },
+		["!"] = { "SHELL", "" },
+		["t"] = { "TERMINAL", "%#StatusLineTerminal#" },
+		["nt"] = { "TERMINAL", "%#StatusLineTerminal#" },
+	}
+
 	local mode_options = modes[api.nvim_get_mode().mode]
 	return string.format("%s %s %%#StatusLine# ", mode_options[2], mode_options[1])
 end
@@ -56,7 +56,9 @@ local get_lineinfo = function()
 	return "%l/%L(%c) "
 end
 
+-- ----------------------------------------------
 Statusline = {}
+
 Statusline.active = function()
 	return table.concat({
 		"%#StatusLine#",
@@ -75,14 +77,21 @@ Statusline.disabled = function()
 	return "%#StatusLine#" .. get_current_formatted_mode()
 end
 
-api.nvim_exec(
-	[[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-  au TermOpen * setlocal statusline=%!v:lua.Statusline.disabled()
-  augroup END
-]],
-	false
-)
+-- ----------------------------------------------
+local auStatusLine = vim.api.nvim_create_augroup("MyStatusLine", { clear = true })
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+	group = auStatusLine,
+	pattern = "*",
+	callback = function()
+		vim.wo.statusline = "%{%v:lua.Statusline.active()%}"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+	group = auStatusLine,
+	pattern = "*",
+	callback = function()
+		vim.wo.statusline = "%{%v:lua.Statusline.inactive()%}"
+	end,
+})
