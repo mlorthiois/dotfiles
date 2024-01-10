@@ -97,18 +97,27 @@ for type, icon in pairs({
 end
 
 -------------------------------
-vim.cmd([[
-  function! ToggleWindowLayout()
-    if !exists('t:splitType') || t:splitType == 'vertical'
-      windo wincmd K 
-      let t:splitType = 'horizontal'
-    else
-      windo wincmd H
-      let t:splitType = 'vertical'
-    endif
-  endfunction
-]])
-vim.keymap.set("n", "<leader>l", "<cmd>call ToggleWindowLayout()<cr>", { desc = "Toogle Window Layout" })
+-- Handle layout
+local toggle_layout = function()
+	if vim.t.layout == nil or vim.t.layout == "vertical" then
+		vim.t.layout = "horizontal"
+		vim.api.nvim_command("wincmd K")
+	else
+		vim.t.layout = "vertical"
+		vim.api.nvim_command("wincmd H")
+	end
+end
+vim.keymap.set("n", "<leader>l", toggle_layout, { desc = "Layout: Toogle Window" })
+
+local switch_layout = function()
+	if vim.t.layout == nil or vim.t.layout == "vertical" then
+		vim.t.layout = "vertical"
+		vim.api.nvim_command("wincmd r")
+	else
+		vim.api.nvim_command("wincmd R")
+	end
+end
+vim.keymap.set("n", "<leader>L", switch_layout, { desc = "Layout: Switch Windows" })
 
 -------------------------------
 -- Icons for completion
