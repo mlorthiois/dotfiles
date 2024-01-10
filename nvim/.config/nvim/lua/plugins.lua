@@ -13,7 +13,7 @@ return {
 			vim.keymap.set("n", "s", "<cmd>HopChar2<CR>", { desc = "HopChar2" })
 		end,
 		config = function()
-			require("hop").setup()
+			require("phaazon/hop.nvim").setup({})
 		end,
 	},
 
@@ -31,7 +31,6 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		config = function()
 			local disable_format_servers = { "tsserver", "sumneko_lua" }
 			local on_attach = function(client)
@@ -55,30 +54,24 @@ return {
 				})
 			end
 
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 			local lspconfig = require("lspconfig")
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 			})
 			lspconfig.ruff_lsp.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 			})
 			lspconfig.terraformls.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 					local set_opts = function(desc)
 						return { buffer = ev.buf, desc = "LSP: " .. desc }
@@ -150,58 +143,29 @@ return {
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
-			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-
 			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-
 				preselect = cmp.PreselectMode.None,
-
 				mapping = {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
 						elseif has_words_before() then
 							cmp.complete()
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
-
-					["<S-Tab>"] = cmp.mapping(function(fallback)
+					["<S-Tab>"] = cmp.mapping(function()
 						if cmp.visible() then
 							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
 						end
 					end, { "i", "s" }),
-
-					["<CR>"] = cmp.mapping({
-						i = function(fallback)
-							if cmp.visible() and cmp.get_active_entry() then
-								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-							else
-								fallback()
-							end
-						end,
-						s = cmp.mapping.confirm({ select = true }),
-						c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-					}),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				},
-
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "luasnip" },
 				},
 
 				formatting = {
@@ -219,8 +183,6 @@ return {
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-path" },
-			{ "L3MON4D3/LuaSnip" },
-			{ "saadparwaiz1/cmp_luasnip" },
 		},
 		event = "InsertEnter",
 	},
@@ -245,6 +207,7 @@ return {
 					"go",
 					"sql",
 					"bash",
+					"typescript",
 					"terraform",
 					"yaml",
 					"toml",
@@ -254,6 +217,7 @@ return {
 				highlight = { enable = true },
 				indent = { enable = true, disable = { "python" } },
 				autotag = { enable = true },
+				playground = { enable = true },
 			})
 		end,
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSInstallInfo" },
@@ -264,8 +228,19 @@ return {
 		dependencies = {
 			{ "kyazdani42/nvim-web-devicons" },
 			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+				config = function()
+					require("telescope").load_extension("fzf")
+				end,
+			},
+			{
+				"nvim-telescope/telescope-ui-select.nvim",
+				config = function()
+					require("telescope").load_extension("ui-select")
+				end,
+			},
 		},
 		branch = "0.1.x",
 		cmd = "Telescope",
@@ -275,6 +250,7 @@ return {
 			end
 
 			builtin = require("telescope.builtin")
+
 			set("<leader>f", builtin.find_files, "Telescope files")
 			set("<leader>g", builtin.live_grep, "Telescope live grep")
 			set("<leader>d", function()
@@ -299,23 +275,32 @@ return {
 					file_ignore_patterns = { "^.git/", "^node_modules/" },
 				},
 				pickers = {
+					find_files = {
+						hidden = true,
+					},
 					live_grep = {
 						layout_strategy = "vertical",
 						addition_args = function(opts)
 							return "--hidden"
 						end,
 					},
-					find_files = { hidden = true },
-					diagnostics = { layout_strategy = "vertical" },
-					buffers = { sort_lastused = true },
-					lsp_references = { layout_strategy = "vertical" },
-					lsp_document_symbols = { layout_strategy = "vertical" },
-					lsp_workspace_symbols = { layout_strategy = "vertical" },
+					diagnostics = {
+						layout_strategy = "vertical",
+					},
+					buffers = {
+						sort_lastused = true,
+					},
+					lsp_references = {
+						layout_strategy = "vertical",
+					},
+					lsp_document_symbols = {
+						layout_strategy = "vertical",
+					},
+					lsp_workspace_symbols = {
+						layout_strategy = "vertical",
+					},
 				},
 			})
-
-			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("ui-select")
 		end,
 	},
 }
