@@ -31,6 +31,7 @@ vim.opt.scrolloff = 3
 vim.opt.colorcolumn = "99999"
 vim.opt.showmatch = true
 vim.opt.showtabline = 0
+vim.opt.cmdheight = 0
 
 -------------------------------
 -- Disable builtin loading to speedup
@@ -61,22 +62,28 @@ vim.g.netrw_altv = 1
 
 -------------------------------
 -- Keymapping
-vim.keymap.set("n", "<C-J>", "<C-W><C-J>", { noremap = true })
-vim.keymap.set("n", "<C-K>", "<C-W><C-K>", { noremap = true })
-vim.keymap.set("n", "<C-L>", "<C-W><C-L>", { noremap = true })
-vim.keymap.set("n", "<C-H>", "<C-W><C-H>", { noremap = true })
-vim.keymap.set("n", "m", "}", { noremap = true })
-vim.keymap.set("n", "M", "{", { noremap = true })
+vim.keymap.set("n", "<C-J>", "<C-W><C-J>", { desc = "Window down", noremap = true })
+vim.keymap.set("n", "<C-K>", "<C-W><C-K>", { desc = "Window up", noremap = true })
+vim.keymap.set("n", "<C-L>", "<C-W><C-L>", { desc = "Window right", noremap = true })
+vim.keymap.set("n", "<C-H>", "<C-W><C-H>", { desc = "Window left", noremap = true })
+vim.keymap.set("n", "m", "}", { desc = "Jump paragraph", noremap = true })
+vim.keymap.set("n", "M", "{", { desc = "Jump previous paragraph", noremap = true })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("n", "U", "<cmd>redo<cr>", { desc = "Redo" })
 
 -------------------------------
--- Set diagnostic
+-- Diagnostic
 vim.diagnostic.config({
 	virtual_text = false,
 	update_in_insert = false,
 })
-vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]])
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, { focus = false })
+	end,
+})
 
 -- Change diagnostic symbols in the sign column (gutter)
 for type, icon in pairs({
@@ -93,7 +100,7 @@ end
 vim.cmd([[
   function! ToggleWindowLayout()
     if !exists('t:splitType') || t:splitType == 'vertical'
-      windo wincmd K
+      windo wincmd K 
       let t:splitType = 'horizontal'
     else
       windo wincmd H
@@ -101,6 +108,7 @@ vim.cmd([[
     endif
   endfunction
 ]])
+vim.keymap.set("n", "<leader>l", "<cmd>call ToggleWindowLayout()<cr>", { desc = "Toogle Window Layout" })
 
 -------------------------------
 -- Icons for completion

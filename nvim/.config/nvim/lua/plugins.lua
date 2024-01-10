@@ -1,27 +1,5 @@
 return {
 	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-			require("which-key").register(require("keymaps"))
-		end,
-		opts = {
-			window = {
-				border = "single",
-				padding = { 0, 0, 0, 0 },
-				margin = { 0, 0, 0, 0 },
-			},
-			plugins = {
-				presets = {
-					g = false,
-				},
-			},
-		},
-	},
-
-	{
 		"numToStr/Comment.nvim",
 		opts = {},
 		event = "BufReadPre",
@@ -30,7 +8,13 @@ return {
 	{
 		"phaazon/hop.nvim",
 		opts = {},
-		cmd = { "HopChar2", "HopChar1" },
+		cmd = { "HopChar2" },
+		init = function()
+			vim.keymap.set("n", "s", "<cmd>HopChar2<CR>", { desc = "HopChar2" })
+		end,
+		config = function()
+			require("phaazon/hop.nvim").setup({})
+		end,
 	},
 
 	{
@@ -39,6 +23,9 @@ return {
 		init = function()
 			vim.g["test#neovim#start_normal"] = 1
 			vim.g["test#echo_command"] = 0
+
+			vim.keymap.set("n", "<leader>t", "<cmd>TestFile<CR>", { desc = "Test file" })
+			vim.keymap.set("n", "<leader>T", "<cmd>TestSuite<CR>", { desc = "Test suite" })
 		end,
 	},
 
@@ -59,7 +46,12 @@ return {
 					end
 				end
 
-				vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = 0,
+					callback = function()
+						vim.lsp.buf.format()
+					end,
+				})
 			end
 
 			local lspconfig = require("lspconfig")
@@ -74,6 +66,31 @@ return {
 			})
 			lspconfig.terraformls.setup({
 				on_attach = on_attach,
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+					local set_opts = function(desc)
+						return { buffer = ev.buf, desc = "LSP: " .. desc }
+					end
+
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, set_opts("Go to declaration"))
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, set_opts("Go to definition"))
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, set_opts("Hover"))
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, set_opts("Go to Implementation"))
+					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, set_opts("Signature help"))
+					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, set_opts("Type definition"))
+					vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, set_opts("Rename"))
+					vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, set_opts("Code action"))
+
+					local telescope = require("telescope.builtin")
+					vim.keymap.set("n", "gr", telescope.lsp_references, set_opts("Go to references"))
+					vim.keymap.set("n", "<leader>s", telescope.lsp_document_symbols, set_opts("Document symbols"))
+					vim.keymap.set("n", "<leader>S", telescope.lsp_workspace_symbols, set_opts("Workspace symbols"))
+				end,
 			})
 		end,
 		event = "BufReadPre",
@@ -225,38 +242,65 @@ return {
 				end,
 			},
 		},
-		opts = {
-			defaults = {
-				borderchars = {
-					{ "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-					prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-					results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-					preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-				},
-				file_ignore_patterns = { "^.git/" },
-			},
-			pickers = {
-				live_grep = {
-					layout_strategy = "vertical",
-				},
-				diagnostics = {
-					layout_strategy = "vertical",
-				},
-				buffers = {
-					sort_lastused = true,
-				},
-				lsp_references = {
-					layout_strategy = "vertical",
-				},
-				lsp_document_symbols = {
-					layout_strategy = "vertical",
-				},
-				lsp_workspace_symbols = {
-					layout_strategy = "vertical",
-				},
-			},
-		},
 		branch = "0.1.x",
 		cmd = "Telescope",
+		config = function()
+			local set = function(key, f, desc)
+				vim.keymap.set("n", key, f, { desc = desc })
+			end
+
+			builtin = require("telescope.builtin")
+
+			set("<leader>f", builtin.find_files, "Telescope files")
+			set("<leader>g", builtin.live_grep, "Telescope live grep")
+			set("<leader>d", function()
+				builtin.diagnostics({ bufnr = 0 })
+			end, "Document diagnostics")
+			set("<leader>D", builtin.diagnostics, "Workspace diagnostics")
+			set("<leader>k", function()
+				builtin.keymaps({ modes = { "n" }, show_plug = false, only_buf = true })
+			end, "Telescope keymaps")
+			set("<leader>c", function()
+				builtin.find_files({ cwd = vim.fn.stdpath("config") })
+			end, "Telescope config")
+
+			require("telescope").setup({
+				defaults = {
+					borderchars = {
+						{ "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+						prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+						results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+						preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+					},
+					file_ignore_patterns = { "^.git/", "^node_modules/" },
+				},
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+					live_grep = {
+						layout_strategy = "vertical",
+						addition_args = function(opts)
+							return "--hidden"
+						end,
+					},
+					diagnostics = {
+						layout_strategy = "vertical",
+					},
+					buffers = {
+						sort_lastused = true,
+					},
+					lsp_references = {
+						layout_strategy = "vertical",
+					},
+					lsp_document_symbols = {
+						layout_strategy = "vertical",
+					},
+					lsp_workspace_symbols = {
+						layout_strategy = "vertical",
+					},
+				},
+			})
+		end,
 	},
 }
