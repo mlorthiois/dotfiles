@@ -1,6 +1,7 @@
 -------------------------------
 -- Global settings
 vim.g.mapleader = " "
+vim.g.editorconfig = false
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.wrap = true
@@ -28,7 +29,7 @@ vim.opt.termguicolors = true
 vim.opt.shortmess:append("c")
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 3
-vim.opt.colorcolumn = "99999"
+vim.opt.colorcolumn = "90"
 vim.opt.showmatch = true
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 0

@@ -5,22 +5,58 @@ export BAT_THEME="ansi"
 export BAT_STYLE="numbers,changes,header"
 export LESS_TERMCAP_us=$'\e[1;4;0m'
 export LESS_TERMCAP_md=$'\e[1;34m'
+export TERM=xterm
 
 ###############
 # COMPLETION
 ###############
-autoload -Uz compinit   # Speed up completion init, see: https://htr3n.github.io/2018/07/faster-zsh/
-HISTSIZE=10000          # How many lines of history to keep in memory
+typeset -U PATH
+autoload colors; colors;
+
 HISTFILE=~/.zsh_history # Where to save history to disk
+HISTSIZE=10000          # How many lines of history to keep in memory
 SAVEHIST=10000          # Number of history entries to save to disk
-setopt appendhistory    # Append history to the history file (no overwriting)
-setopt sharehistory     # Share history across terminals
-setopt incappendhistory # Immediately append to the history file, not just when a term is killed
-setopt histignoredups   # Dont write duplicate entries in the history file.
+
+setopt EXTENDED_HISTORY
+setopt HIST_VERIFY
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Dont record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Dont record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Dont write duplicate entries in the history file.
+
+setopt inc_append_history
+setopt share_history
+unsetopt flowcontrol
+setopt auto_menu
+setopt complete_in_word
+setopt always_to_end
+setopt auto_pushd
+
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 ##############
 # FUNCTIONS
 ##############
+my-accept-line () {
+  # check if the buffer does not contain any words
+  if [ ${#${(z)BUFFER}} -eq 0 ]; then
+    # output doesnt start next to the prompt
+    echo
+    eza -lFa --icons --group-directories-first --no-filesize
+    zle redisplay
+  else
+    zle accept-line
+  fi
+}
+zle -N my-accept-line
+bindkey '^M' my-accept-line
+
 # Kitty
 open-overlay() {
 	kitty @ launch --cwd current --type overlay-main --no-response $@
@@ -80,43 +116,30 @@ zle -N Resume
 bindkey "^Z" Resume
 
 #############
-# TMUX
+# Dev
 #############
-# tmux with full dev layout session with FZF (CTRL-F)
-# (github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer)
 devmode() {
-	items=$(find ~/Developer -maxdepth 2 -mindepth 2 -type d)
-	items+=("\n$HOME/dotfiles")
-	selected=$(echo "$items" | fzf)
+	cd "$HOME"
+	items=$(find "./Developer" -maxdepth 1 -mindepth 1 -type d)
+	items+=("\n./dotfiles")
+	selected=$(echo "$items" | fzf | awk '{$1=$1};1') # awk = remove tailing space
 
 	# If no project selected, exit function
 	if [ ! $? -eq 0 ]; then
 		return 1
 	fi
 
-	if [ -n "$TMUX" ]; then
-		tmux_session_name=$(basename "$selected" | tr . _)
-		tmux has-session -t="$tmux_session_name" 2>/dev/null
-		if [ ! $? -eq 0 ]; then
-			tmux new-session -c "$selected" -d -s "$tmux_session_name"
-			tmux split-window -h -f -p 35 -c "$selected"
-			tmux split-window -v -c "$selected"
-			tmux select-pane -t 0
-		fi
-		tmux attach -t "$tmux_session_name"
-	else
-		kitty @ new-window --keep-focus --cwd "$selected"
-		kitty @ new-window --keep-focus --cwd "$selected"
-	fi
+	kitty @ new-window --keep-focus --cwd "$selected"
+	kitty @ new-window --keep-focus --cwd "$selected"
 	cd "$selected"
 	clear
+	nvim
 }
 bindkey -s '^f' 'devmode^M'
 
 ############
 # FZF
 ############
-# Use key-bindings and cli utils
 if [ -e /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
 	source /usr/local/opt/fzf/shell/key-bindings.zsh
 elif [ -e /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
@@ -129,13 +152,9 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 
 ##############
-# PyEnv
+# PATH
 ##############
-if [ -d "$HOME/.pyenv" ]; then
-	export PYENV_ROOT="$HOME/.pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	eval "$(pyenv init --path zsh -)"
-fi
+export PATH="$PATH:$HOME/.local/bin"
 
 ##############
 # PLUGINS

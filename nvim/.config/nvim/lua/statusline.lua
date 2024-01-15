@@ -57,9 +57,9 @@ local get_lineinfo = function()
 end
 
 -- ----------------------------------------------
-Statusline = {}
+local statusline = {}
 
-Statusline.active = function()
+statusline.active = function()
 	return table.concat({
 		"%#StatusLine#",
 		get_current_formatted_mode(),
@@ -69,29 +69,31 @@ Statusline.active = function()
 	})
 end
 
-Statusline.inactive = function()
+statusline.inactive = function()
 	return get_file_infos()
 end
 
-Statusline.disabled = function()
+statusline.disabled = function()
 	return "%#StatusLine#" .. get_current_formatted_mode()
 end
 
 -- ----------------------------------------------
-local auStatusLine = vim.api.nvim_create_augroup("MyStatusLine", { clear = true })
+local group = vim.api.nvim_create_augroup("MyStatusLine", { clear = true })
 
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-	group = auStatusLine,
+	group = group,
 	pattern = "*",
 	callback = function()
-		vim.wo.statusline = "%{%v:lua.Statusline.active()%}"
+		vim.wo.statusline = '%{%v:lua.require("statusline").active()%}'
 	end,
 })
 
 vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-	group = auStatusLine,
+	group = group,
 	pattern = "*",
 	callback = function()
-		vim.wo.statusline = "%{%v:lua.Statusline.inactive()%}"
+		vim.wo.statusline = '%{%v:lua.require("statusline").inactive()%}'
 	end,
 })
+
+return statusline

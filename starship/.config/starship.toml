@@ -38,9 +38,6 @@ symbol = "GO "
 version_format= "v${major}.${minor}"
 format = '\[[$symbol($version)]($style)\]'
 
-[helm]
-format = '\[[$symbol($version)]($style)\]'
-
 [kubernetes]
 format = '\[[$symbol$context( \($namespace\))]($style)\]'
 
@@ -64,14 +61,11 @@ version_format= "v${major}.${minor}"
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [rlang]
-format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [terraform]
 symbol = "TF "
 format = '\[[$symbol$workspace]($style)\]'
-
-[time]
-format = '\[[$time]($style)\]'
 
 [username]
 format = '\[[$user]($style)\]'

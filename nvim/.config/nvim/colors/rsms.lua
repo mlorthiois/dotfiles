@@ -114,7 +114,7 @@ local get_theme = function()
 
 		-- UI
 		VertSplit = { fg = c.fg_dim, bg = c.bg },
-		ColorColumn = {},
+		ColorColumn = { bg = c.bg_dim },
 		Conceal = { fg = c.disabled },
 		Cursor = { fg = c.fg_dim },
 		Directory = { fg = c.blue },

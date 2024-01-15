@@ -13,7 +13,7 @@ return {
 			vim.keymap.set("n", "s", "<cmd>HopChar2<CR>", { desc = "HopChar2" })
 		end,
 		config = function()
-			require("phaazon/hop.nvim").setup({})
+			require("hop").setup()
 		end,
 	},
 
@@ -71,25 +71,26 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+					-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-					local set_opts = function(desc)
-						return { buffer = ev.buf, desc = "LSP: " .. desc }
+					local km = function(modes, keymap, f, desc)
+						vim.keymap.set(modes, keymap, f, { buffer = ev.buf, desc = "LSP: " .. desc })
 					end
 
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, set_opts("Go to declaration"))
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, set_opts("Go to definition"))
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, set_opts("Hover"))
-					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, set_opts("Go to Implementation"))
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, set_opts("Signature help"))
-					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, set_opts("Type definition"))
-					vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, set_opts("Rename"))
-					vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, set_opts("Code action"))
+					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+					km("n", "gd", vim.lsp.buf.definition, "Go to definition")
+					km("n", "K", vim.lsp.buf.hover, "Hover")
+					km("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
+					-- km("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+					km("n", "<leader>D", vim.lsp.buf.type_definition, "Type definition")
+					km("n", "<leader>r", vim.lsp.buf.rename, "Rename")
+					km({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, "Code action")
 
 					local telescope = require("telescope.builtin")
-					vim.keymap.set("n", "gr", telescope.lsp_references, set_opts("Go to references"))
-					vim.keymap.set("n", "<leader>s", telescope.lsp_document_symbols, set_opts("Document symbols"))
-					vim.keymap.set("n", "<leader>S", telescope.lsp_workspace_symbols, set_opts("Workspace symbols"))
+					km("n", "gr", telescope.lsp_references, "Go to references")
+					km("n", "<leader>s", telescope.lsp_document_symbols, "Document symbols")
+					km("n", "<leader>S", telescope.lsp_workspace_symbols, "Workspace symbols")
 				end,
 			})
 		end,
@@ -117,7 +118,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				go = { "gofmt" },
 				sh = { "shfmt" },
 				zsh = { "shfmt" },
 			},
