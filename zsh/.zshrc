@@ -140,7 +140,9 @@ alias tp="terraform plan"
 alias ta="terraform apply"
 
 ####################################################
-source $HOME/.config/zsh/private.zsh
+if [ -e $HOME/.config/zsh/private.zsh ]; then
+  source $HOME/.config/zsh/private.zsh
+fi
 
 ############
 # Brew
