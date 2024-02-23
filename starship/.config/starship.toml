@@ -8,6 +8,9 @@ symbol = "AWS "
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 force_display = true
 
+[battery]
+disabled = true
+
 [character]
 success_symbol = '[λ](bold green) ›'
 error_symbol = '[λ](bold red) ›'
@@ -64,6 +67,7 @@ format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 disabled = true
 
 [terraform]
+disabled = true
 symbol = "TF "
 format = '\[[$symbol$workspace]($style)\]'
 
