@@ -77,17 +77,16 @@ return {
 						vim.keymap.set(modes, keymap, f, { buffer = ev.buf, desc = "LSP: " .. desc })
 					end
 
-					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-					km("n", "gd", vim.lsp.buf.definition, "Go to definition")
 					km("n", "K", vim.lsp.buf.hover, "Hover")
-					km("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
-					-- km("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
-					km("n", "<leader>D", vim.lsp.buf.type_definition, "Type definition")
+					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 					km("n", "<leader>r", vim.lsp.buf.rename, "Rename")
 					km({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, "Code action")
+					km("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
 					local telescope = require("telescope.builtin")
+					km("n", "gi", telescope.lsp_implementations, "Go to implementation")
+					km("n", "gd", telescope.lsp_definitions, "Go to definition")
+					km("n", "<leader>D", telescope.lsp_definitions, "Go to Type definition")
 					km("n", "gr", telescope.lsp_references, "Go to references")
 					km("n", "<leader>s", telescope.lsp_document_symbols, "Document symbols")
 					km("n", "<leader>S", telescope.lsp_workspace_symbols, "Workspace symbols")
@@ -210,6 +209,7 @@ return {
 					"bash",
 					"typescript",
 					"terraform",
+          "hcl",
 					"yaml",
 					"toml",
 					"dockerfile",
@@ -222,6 +222,7 @@ return {
 			})
 		end,
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSInstallInfo" },
+    event = "BufEnter"
 	},
 
 	{
@@ -277,6 +278,7 @@ return {
 				},
 				pickers = {
 					find_files = {
+						layout_strategy = "vertical",
 						hidden = true,
 					},
 					live_grep = {
