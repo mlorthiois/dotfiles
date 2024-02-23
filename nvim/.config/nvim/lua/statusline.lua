@@ -28,7 +28,6 @@ local get_current_formatted_mode = function()
 		["t"] = { "TERMINAL", "%#StatusLineTerminal#" },
 		["nt"] = { "TERMINAL", "%#StatusLineTerminal#" },
 	}
-
 	local mode_options = modes[api.nvim_get_mode().mode]
 	return string.format("%s %s %%#StatusLine# ", mode_options[2], mode_options[1])
 end

@@ -6,6 +6,35 @@ return {
 	},
 
 	{
+		"nvim-neo-tree/neo-tree.nvim",
+		cmd = { "Neotree" },
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+		init = function()
+			vim.keymap.set("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "Neotree" })
+		end,
+		config = function()
+			require("neo-tree").setup({
+				window = {
+					position = "current",
+					mappings = {
+						["<space>"] = {
+							"toggle_node",
+							nowait = true,
+						},
+						["c"] = { "copy", config = { show_path = "relative" } },
+					},
+				},
+				filesystem = { filtered_items = { visible = true } },
+			})
+		end,
+	},
+
+	{
 		"phaazon/hop.nvim",
 		opts = {},
 		cmd = { "HopChar2" },
@@ -67,12 +96,13 @@ return {
 			lspconfig.terraformls.setup({
 				on_attach = on_attach,
 			})
+			lspconfig.yamlls.setup({
+				on_attach = on_attach,
+			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
 					local km = function(modes, keymap, f, desc)
 						vim.keymap.set(modes, keymap, f, { buffer = ev.buf, desc = "LSP: " .. desc })
 					end
@@ -81,7 +111,7 @@ return {
 					km("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 					km("n", "<leader>r", vim.lsp.buf.rename, "Rename")
 					km({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, "Code action")
-					km("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+					-- km("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
 					local telescope = require("telescope.builtin")
 					km("n", "gi", telescope.lsp_implementations, "Go to implementation")
@@ -119,6 +149,7 @@ return {
 				lua = { "stylua" },
 				sh = { "shfmt" },
 				zsh = { "shfmt" },
+				yaml = { "prettierd" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
@@ -209,7 +240,7 @@ return {
 					"bash",
 					"typescript",
 					"terraform",
-          "hcl",
+					"hcl",
 					"yaml",
 					"toml",
 					"dockerfile",
@@ -222,7 +253,7 @@ return {
 			})
 		end,
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSInstallInfo" },
-    event = "BufEnter"
+		event = "BufEnter",
 	},
 
 	{
@@ -230,6 +261,7 @@ return {
 		dependencies = {
 			{ "kyazdani42/nvim-web-devicons" },
 			{ "nvim-lua/plenary.nvim" },
+			{ "cljoly/telescope-repo.nvim" },
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
@@ -275,35 +307,32 @@ return {
 						preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 					},
 					file_ignore_patterns = { "^.git/", "^node_modules/" },
+					layout_config = { horizontal = { width = 0.95, preview_width = 0.5 } },
 				},
 				pickers = {
-					find_files = {
-						layout_strategy = "vertical",
-						hidden = true,
-					},
+					find_files = { hidden = true },
 					live_grep = {
 						layout_strategy = "vertical",
 						addition_args = function(opts)
 							return "--hidden"
 						end,
 					},
-					diagnostics = {
-						layout_strategy = "vertical",
-					},
-					buffers = {
-						sort_lastused = true,
-					},
-					lsp_references = {
-						layout_strategy = "vertical",
-					},
-					lsp_document_symbols = {
-						layout_strategy = "vertical",
-					},
-					lsp_workspace_symbols = {
-						layout_strategy = "vertical",
+					diagnostics = { layout_strategy = "vertical" },
+					lsp_references = { layout_strategy = "vertical" },
+					lsp_document_symbols = { layout_strategy = "vertical" },
+					lsp_workspace_symbols = { layout_strategy = "vertical" },
+				},
+				extensions = {
+					repo = {
+						list = {
+							search_dirs = {
+								"~/Developer/work/datahub",
+							},
+						},
 					},
 				},
 			})
+			require("telescope").load_extension("repo")
 		end,
 	},
 }

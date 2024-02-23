@@ -1,6 +1,7 @@
 -------------------------------
 -- Global settings
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.g.editorconfig = false
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
@@ -8,10 +9,9 @@ vim.opt.wrap = true
 vim.opt.pumheight = 15
 vim.opt.fileencoding = "utf-8"
 vim.opt.iskeyword:append("-")
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
--- vim.opt.t_Co = 256
 vim.opt.conceallevel = 0
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -19,7 +19,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.number = true
 vim.opt.showmode = false
-vim.opt.updatetime = 300
+vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 vim.opt.formatoptions:remove("c")
 vim.opt.formatoptions:remove("r")
@@ -29,10 +29,9 @@ vim.opt.termguicolors = true
 vim.opt.shortmess:append("c")
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 3
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "80"
 vim.opt.showmatch = true
 vim.opt.showtabline = 0
-vim.opt.cmdheight = 0
 
 -------------------------------
 -- Disable builtin loading to speedup
@@ -56,7 +55,7 @@ vim.g.loaded_man = 1
 
 -------------------------------
 -- Netrw settings
-vim.g.netrw_banner = 0
+-- vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.netrw_liststyle = 3
 vim.g.netrw_altv = 1
@@ -119,6 +118,16 @@ local switch_layout = function()
 	end
 end
 vim.keymap.set("n", "<leader>L", switch_layout, { desc = "Layout: Switch Windows" })
+
+------------------------------
+--Terraform commands
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "terraform",
+	group = vim.api.nvim_create_augroup("TerraformKeymaps", {}),
+	callback = function(ev)
+		vim.keymap.set("n", "<leader>rv", "<cmd>!terraform validate -no-color<CR>", { desc = "Terraform: validate" })
+	end,
+})
 
 -------------------------------
 -- Icons for completion
