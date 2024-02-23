@@ -12,3 +12,6 @@
 	process = git-lfs filter-process
 [pull]
 	rebase = true
+
+[includeIf "gitdir:~/Developer/work/"]
+  path = ~/.gitconfig-work
