@@ -5,8 +5,7 @@ add_newline = false
 #################################################################
 [aws]
 symbol = "AWS "
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
-force_display = true
+format = '\[[$symbol($profile)]($style)\]'
 
 [battery]
 disabled = true
@@ -28,6 +27,11 @@ style = "dimmed"
 [docker_context]
 format = '\[[$symbol$context]($style)\]'
 
+[gcloud]
+symbol = "GCP "
+format = '\[[$symbol$active]($style)\]'
+disabled = true
+
 [git_branch]
 symbol = ""
 style = "green"
@@ -40,6 +44,12 @@ format = '([$modified]($style))\]'
 symbol = "GO "
 version_format= "v${major}.${minor}"
 format = '\[[$symbol($version)]($style)\]'
+
+[scala]
+disabled=true
+
+[java]
+disabled=true
 
 [kubernetes]
 format = '\[[$symbol$context( \($namespace\))]($style)\]'

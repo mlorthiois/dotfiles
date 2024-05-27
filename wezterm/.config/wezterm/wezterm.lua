@@ -15,33 +15,37 @@ if wezterm.gui.get_appearance() == "Light" then
 	config.colors = {
 		foreground = "#333333",
 		background = "#ffffff",
+
 		cursor_bg = "magenta",
 		cursor_fg = "black",
 		cursor_border = "magenta",
+
 		selection_fg = "black",
 		selection_bg = "#fffacd",
-		scrollbar_thumb = "#222222",
-		split = "#444444",
+
 		ansi = {
-			"#000000",
-			"#cc0000",
-			"#116432",
-			"#b58900",
-			"#0344ae",
-			"#750154",
-			"#52529e",
-			"#777777",
+			"#ffffff", -- background
+			"#cc0000", -- red
+			"#116432", -- green
+			"#b58900", -- yellow
+			"#85d1ff", -- blue
+			"#750154", -- purple
+			"#52529e", -- aqua
+			"#777777", -- gray
 		},
 		brights = {
-			"#000000",
-			"#cc0000",
-			"#116432",
-			"#b58900",
-			"#0344ae",
-			"#750154",
-			"#52529e",
-			"#777777",
+			"#000000", -- gray
+			"#cc0000", -- red
+			"#116432", -- green
+			"#b58900", -- yellow
+			"#0344ae", -- blue
+			"#750154", -- purple
+			"#52529e", -- aqua
+			"#333333", -- gray
 		},
+
+		scrollbar_thumb = "#222222",
+		split = "#444444",
 		tab_bar = {
 			background = "#e5e5e5",
 			active_tab = { bg_color = "#ffffff", fg_color = "#000000" },
@@ -82,7 +86,11 @@ else
 			"#92e5e8",
 			"#dddddd",
 		},
+		tab_bar = {
+			active_tab = { bg_color = "#1d1d1c", fg_color = "#d1d1d1" },
+		},
 	}
+	config.window_frame = { active_titlebar_bg = "#e5e5e5" }
 	config.set_environment_variables = { TERMINAL_THEME = "dark" }
 end
 

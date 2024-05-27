@@ -43,6 +43,16 @@ compinit -C
 ##############
 # FUNCTIONS
 ##############
+export XDG_CONFIG_HOME="$HOME/.config"
+
+if [ -e "$XDG_CONFIG_HOME/zsh/utils.zsh" ]; then
+  source "$XDG_CONFIG_HOME/zsh/utils.zsh"
+fi
+
+if [ -e $HOME/.config/zsh/private.zsh ]; then
+  source $HOME/.config/zsh/private.zsh
+fi
+
 my-accept-line () {
   # check if the buffer does not contain any words
   if [ ${#${(z)BUFFER}} -eq 0 ]; then
@@ -57,49 +67,6 @@ my-accept-line () {
 zle -N my-accept-line
 bindkey '^M' my-accept-line
 
-set_fzf_theme() {
-	if [[ "$KITTY_COLORS" == "dark" ]]; then
-		export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#1d1d1c,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#d1d1d1,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
-	else
-		export FZF_DEFAULT_OPTS='--color=bg+:#e0e0e0,bg:#FFFFFF,border:#6B6B6B,spinner:#98BC99,hl:#116432,fg:#333333,header:#719872,info:#bd5890,pointer:#cc0000,marker:#E17899,fg+:#000000,preview-bg:#FFFFFF,prompt:#324d59,hl+:#116432'
-	fi
-}
-
-check_kitty_theme() {
-	kitty_config_dir="$HOME/.config/kitty"
-	config_file="$kitty_config_dir/kitty.conf"
-	if grep -q "themes/dark" "$config_file"; then
-		export KITTY_COLORS="dark"
-	else
-		export KITTY_COLORS="light"
-	fi
-	set_fzf_theme
-}
-check_kitty_theme
-
-kitty-switch-theme() {
-	if [ -n "$TMUX" ]; then
-		echo "Oops... Inside tmux"
-		return 1
-	fi
-
-	kitty_config_dir="$HOME/.config/kitty"
-	config_file="$kitty_config_dir/kitty.conf"
-	old_colors=$KITTY_COLORS
-
-	if [[ "$old_colors" == "dark" ]]; then
-		export KITTY_COLORS="light"
-	else
-		export KITTY_COLORS="dark"
-	fi
-
-	echo "Switching to $KITTY_COLORS theme..."
-	sed -i.bak -e "s/themes\/$old_colors.conf/themes\/$KITTY_COLORS.conf/g" "$config_file"
-	kitty @ set-colors --all --configured "$kitty_config_dir/themes/$KITTY_COLORS.conf"
-	rm "$kitty_config_dir/kitty.conf.bak"
-	set_fzf_theme
-}
-
 ### Use Ctrl-Z to fg - return in NeoVim without adding fg to ZSH History
 function Resume {
 	fg
@@ -110,65 +77,44 @@ function Resume {
 zle -N Resume
 bindkey "^Z" Resume
 
-#############
-# Dev
-#############
-devmode() {
-	cd "$HOME"
-	items=$(find "./Developer" -maxdepth 1 -mindepth 1 -type d)
-	items+=("\n./dotfiles")
-	selected=$(echo "$items" | fzf | awk '{$1=$1};1') # awk = remove tailing space
-
-	# If no project selected, exit function
-	if [ ! $? -eq 0 ]; then
-		return 1
+############
+# CLI utils
+############
+set_fzf_theme() {
+	if [[ "$TERMINAL_THEME" == "dark" ]]; then
+		export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#1d1d1c,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#d1d1d1,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
+	else
+		export FZF_DEFAULT_OPTS='--color=bg+:#e0e0e0,bg:#FFFFFF,border:#6B6B6B,spinner:#98BC99,hl:#116432,fg:#333333,header:#719872,info:#bd5890,pointer:#cc0000,marker:#E17899,fg+:#000000,preview-bg:#FFFFFF,prompt:#324d59,hl+:#116432'
 	fi
-
-	kitty @ new-window --keep-focus --cwd "$selected"
-	kitty @ new-window --keep-focus --cwd "$selected"
-	cd "$selected"
-	clear
-	nvim
 }
-bindkey -s '^f' 'devmode^M'
+set_fzf_theme
 
-#############
-# Aliases
-#############
-alias tv="terraform validate"
-alias tp="terraform plan"
-alias ta="terraform apply"
-
-####################################################
-if [ -e $HOME/.config/zsh/private.zsh ]; then
-  source $HOME/.config/zsh/private.zsh
-fi
-
-############
-# Brew
-############
-# eval $(/opt/homebrew/bin/brew shellenv)
-export PATH="/opt/homebrew/bin/:$PATH"
-
-############
-# FZF
-############
 if [ -e /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
 	source /usr/local/opt/fzf/shell/key-bindings.zsh
 elif [ -e /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
 	source /usr/share/doc/fzf/examples/key-bindings.zsh
+elif [ -e "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" ]; then
+ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 fi
 
-# Use ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 
-##############
-# direnv
-##############
 if type direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
+fi
+
+if type terraform &> /dev/null; then
+  alias ti="terraform init"
+  alias tv="terraform validate"
+  alias tp="terraform plan"
+  alias ta="terraform apply"
+  alias td="terraform destroy"
+fi
+
+if type lazygit &> /dev/null; then
+  alias lg="lazygit"
 fi
 
 ##############

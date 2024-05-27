@@ -1,69 +1,39 @@
 return {
 	{
-		"numToStr/Comment.nvim",
-		opts = {},
-		event = "BufReadPre",
+		"echasnovski/mini.files",
+		version = "*",
+		init = function()
+			vim.keymap.set("n", "<leader>e", function()
+				MiniFiles.open()
+			end, { desc = "File browser" })
+		end,
+		config = true,
 	},
 
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		cmd = { "Neotree" },
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {
+			indent = { char = "│" },
+			scope = { enabled = false },
 		},
-		init = function()
-			vim.keymap.set("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "Neotree" })
-		end,
-		config = function()
-			require("neo-tree").setup({
-				window = {
-					position = "current",
-					mappings = {
-						["<space>"] = {
-							"toggle_node",
-							nowait = true,
-						},
-						["c"] = { "copy", config = { show_path = "relative" } },
-					},
-				},
-				filesystem = { filtered_items = { visible = true } },
-			})
-		end,
 	},
 
 	{
 		"phaazon/hop.nvim",
-		opts = {},
 		cmd = { "HopChar2" },
 		init = function()
 			vim.keymap.set("n", "s", "<cmd>HopChar2<CR>", { desc = "HopChar2" })
 		end,
-		config = function()
-			require("hop").setup()
-		end,
-	},
-
-	{
-		"vim-test/vim-test",
-		cmd = { "TestFile", "TestSuite", "TestNearest", "TestLast", "TestVisit" },
-		init = function()
-			vim.g["test#neovim#start_normal"] = 1
-			vim.g["test#echo_command"] = 0
-
-			vim.keymap.set("n", "<leader>t", "<cmd>TestFile<CR>", { desc = "Test file" })
-			vim.keymap.set("n", "<leader>T", "<cmd>TestSuite<CR>", { desc = "Test suite" })
-		end,
+		config = true,
 	},
 
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			local disable_format_servers = { "tsserver", "sumneko_lua" }
+
 			local on_attach = function(client)
-				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 				vim.lsp.handlers["textDocument/signatureHelp"] =
 					vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
@@ -73,6 +43,12 @@ return {
 						client.server_capabilities.documentFormattingProvider = false
 						return
 					end
+				end
+
+				if client.name == "ruff" then
+					client.server_capabilities.hoverProvider = false -- Disable hover in favor of Pyright
+				else
+					vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 				end
 
 				vim.api.nvim_create_autocmd("BufWritePre", {
@@ -86,19 +62,18 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
+				settings = {
+					pyright = { disableOrganizeImports = true }, -- Using Ruff's import organizer
+					python = {
+						analysis = { ignore = { "*" } }, -- Ignore files for exclusive analysis with Ruff for linting
+					},
+				},
 			})
-			lspconfig.ruff_lsp.setup({
-				on_attach = on_attach,
-			})
-			lspconfig.gopls.setup({
-				on_attach = on_attach,
-			})
-			lspconfig.terraformls.setup({
-				on_attach = on_attach,
-			})
-			lspconfig.yamlls.setup({
-				on_attach = on_attach,
-			})
+			lspconfig.ruff.setup({ on_attach = on_attach })
+			lspconfig.gopls.setup({ on_attach = on_attach })
+			lspconfig.terraformls.setup({ on_attach = on_attach })
+			lspconfig.yamlls.setup({ on_attach = on_attach })
+			lspconfig.metals.setup({ on_attach = on_attach })
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -118,7 +93,7 @@ return {
 					km("n", "gd", telescope.lsp_definitions, "Go to definition")
 					km("n", "<leader>D", telescope.lsp_definitions, "Go to Type definition")
 					km("n", "gr", telescope.lsp_references, "Go to references")
-					km("n", "<leader>s", telescope.lsp_document_symbols, "Document symbols")
+					km("n", "<leader>s", telescope.treesitter, "Document symbols")
 					km("n", "<leader>S", telescope.lsp_workspace_symbols, "Workspace symbols")
 				end,
 			})
@@ -129,10 +104,7 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		config = function()
-			require("lint").linters_by_ft = {
-				sh = { "shellcheck" },
-			}
-
+			require("lint").linters_by_ft = { sh = { "shellcheck" } }
 			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
 				callback = function()
 					require("lint").try_lint()
@@ -151,10 +123,7 @@ return {
 				zsh = { "shfmt" },
 				yaml = { "prettierd" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
+			format_on_save = { timeout_ms = 500, lsp_fallback = true },
 		},
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
@@ -176,23 +145,7 @@ return {
 			local cmp = require("cmp")
 			cmp.setup({
 				preselect = cmp.PreselectMode.None,
-				mapping = {
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif has_words_before() then
-							cmp.complete()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function()
-						if cmp.visible() then
-							cmp.select_prev_item()
-						end
-					end, { "i", "s" }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-				},
+				mapping = cmp.mapping.preset.insert({}),
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
@@ -218,15 +171,6 @@ return {
 	},
 
 	{
-		"kosayoda/nvim-lightbulb",
-		event = "BufReadPre",
-		opts = {
-			autocmd = { enabled = true },
-			sign = { text = "▶" },
-		},
-	},
-
-	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
@@ -238,7 +182,6 @@ return {
 					"go",
 					"sql",
 					"bash",
-					"typescript",
 					"terraform",
 					"hcl",
 					"yaml",
@@ -261,18 +204,11 @@ return {
 		dependencies = {
 			{ "kyazdani42/nvim-web-devicons" },
 			{ "nvim-lua/plenary.nvim" },
-			{ "cljoly/telescope-repo.nvim" },
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
 				config = function()
 					require("telescope").load_extension("fzf")
-				end,
-			},
-			{
-				"nvim-telescope/telescope-ui-select.nvim",
-				config = function()
-					require("telescope").load_extension("ui-select")
 				end,
 			},
 		},
@@ -322,17 +258,7 @@ return {
 					lsp_document_symbols = { layout_strategy = "vertical" },
 					lsp_workspace_symbols = { layout_strategy = "vertical" },
 				},
-				extensions = {
-					repo = {
-						list = {
-							search_dirs = {
-								"~/Developer/work/datahub",
-							},
-						},
-					},
-				},
 			})
-			require("telescope").load_extension("repo")
 		end,
 	},
 }

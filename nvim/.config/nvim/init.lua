@@ -6,18 +6,11 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 -------------------------------
-vim.loader.enable()
 
+vim.loader.enable()
+vim.cmd.colorscheme("rsms")
 require("settings")
 require("statusline")
-
--------------------------------
-if vim.env.KITTY_COLORS == "light" then
-	vim.g.background = "light"
-else
-	vim.g.background = "dark"
-end
-vim.cmd.colorscheme("rsms")
 
 -------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

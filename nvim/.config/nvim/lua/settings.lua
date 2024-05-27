@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 vim.g.editorconfig = false
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.pumheight = 15
 vim.opt.fileencoding = "utf-8"
 vim.opt.iskeyword:append("-")
@@ -29,29 +29,9 @@ vim.opt.termguicolors = true
 vim.opt.shortmess:append("c")
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 3
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 vim.opt.showmatch = true
 vim.opt.showtabline = 0
-
--------------------------------
--- Disable builtin loading to speedup
-vim.g.loaded_gzip = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_logiPat = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_tutor = 1
-vim.g.loaded_rplugin = 1
-vim.g.loaded_man = 1
 
 -------------------------------
 -- Netrw settings
@@ -71,13 +51,11 @@ vim.keymap.set("n", "M", "{", { desc = "Jump previous paragraph", noremap = true
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "U", "<cmd>redo<cr>", { desc = "Redo" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -------------------------------
 -- Diagnostic
-vim.diagnostic.config({
-	virtual_text = false,
-	update_in_insert = false,
-})
+vim.diagnostic.config({ virtual_text = false, update_in_insert = false })
 
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
@@ -122,9 +100,10 @@ vim.keymap.set("n", "<leader>L", switch_layout, { desc = "Layout: Switch Windows
 ------------------------------
 --Terraform commands
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "terraform",
-	group = vim.api.nvim_create_augroup("TerraformKeymaps", {}),
-	callback = function(ev)
+	group = vim.api.nvim_create_augroup("SuperSetTerraform", { clear = true }),
+	pattern = { "terraform", "hcl" },
+	callback = function(_)
+		vim.opt_local.commentstring = "# %s"
 		vim.keymap.set("n", "<leader>rv", "<cmd>!terraform validate -no-color<CR>", { desc = "Terraform: validate" })
 	end,
 })

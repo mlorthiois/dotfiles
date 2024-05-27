@@ -48,6 +48,25 @@ local get_file_infos = function()
 	return string.format("%s%s", fpath, fname)
 end
 
+local get_lsp_infos = function()
+	n_clients = #vim.lsp.get_active_clients()
+	if n_clients == 0 then
+		n_errors = 0
+		n_warn = 0
+	else
+		n_errors = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
+		if n_errors == nil then
+			n_errors = 0
+		end
+
+		n_warn = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
+		if n_warn == nil then
+			n_warn = 0
+		end
+	end
+	return string.format("[LSP: %s, E: %s, W: %s] | ", n_clients, n_errors, n_warn)
+end
+
 local get_lineinfo = function()
 	if vim.bo.filetype == "alpha" then
 		return ""
@@ -64,6 +83,7 @@ statusline.active = function()
 		get_current_formatted_mode(),
 		get_file_infos(),
 		"%=",
+		get_lsp_infos(),
 		get_lineinfo(),
 	})
 end
