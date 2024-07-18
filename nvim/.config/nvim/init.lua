@@ -8,7 +8,7 @@
 -------------------------------
 
 vim.loader.enable()
-vim.cmd.colorscheme("rsms")
+vim.cmd.colorscheme("fleet")
 require("settings")
 require("statusline")
 
