@@ -16,6 +16,21 @@ Ensure stow is available and run.
 stow .
 ```
 
+
+
+To install zsh extensions:
+
+```sh
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.local/share/zsh/zdharma-continuum/fast-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.local/share/zsh/zsh-users/zsh-autosuggestions
+```
+
+To install lazy.nvim:
+
+```sh
+git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git $HOME/.local/share/nvim/lazy/lazy.nvim
+```
+
 ## Main tools
 
 - Kitty as terminal emulator
