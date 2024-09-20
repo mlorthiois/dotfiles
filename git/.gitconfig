@@ -13,5 +13,8 @@
 [pull]
 	rebase = true
 
-[includeIf "gitdir:~/Developer/work/"]
-  path = ~/.gitconfig-work
+[includeIf "gitdir:~/Developer/work/mmb/"]
+  path = ~/.gitconfig-mmb
+
+[includeIf "gitdir:~/Developer/work/revolve/"]
+  path = ~/.gitconfig-revolve
