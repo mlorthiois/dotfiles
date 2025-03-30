@@ -6,9 +6,8 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 -------------------------------
-
 vim.loader.enable()
-vim.cmd.colorscheme("fleet")
+vim.cmd.colorscheme("rsms")
 require("settings")
 require("statusline")
 
@@ -18,6 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
 	change_detection = { notify = false },
 })
+
+-------------------------------
+vim.lsp.enable({ "basedpyright", "ruff", "terraformls", "lua_ls" })
 
 -------------------------------
 vim.api.nvim_create_autocmd("VimEnter", {

@@ -49,20 +49,16 @@ local get_file_infos = function()
 end
 
 local get_lsp_infos = function()
-	n_clients = #vim.lsp.get_active_clients()
-	if n_clients == 0 then
-		n_errors = 0
-		n_warn = 0
-	else
-		n_errors = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
-		if n_errors == nil then
-			n_errors = 0
-		end
+	local n_clients = #vim.lsp.get_clients()
 
-		n_warn = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
-		if n_warn == nil then
-			n_warn = 0
-		end
+	local n_errors = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
+	if n_errors == nil then
+		n_errors = 0
+	end
+
+	local n_warn = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
+	if n_warn == nil then
+		n_warn = 0
 	end
 	return string.format("[LSP: %s, E: %s, W: %s] | ", n_clients, n_errors, n_warn)
 end
