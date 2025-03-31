@@ -7,6 +7,7 @@
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 -------------------------------
 vim.loader.enable()
+vim.o.background = "light"
 vim.cmd.colorscheme("rsms")
 require("settings")
 require("statusline")
