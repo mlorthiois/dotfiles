@@ -13,9 +13,9 @@ HOME_CONFIG=(
 LOCAL_CONFIG=(
     "nvim"
     "lazygit"
-    "kitty"
     "k9s"
     "zsh"
+    "ghostty"
     "starship.toml"
 )
 
