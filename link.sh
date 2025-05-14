@@ -32,13 +32,15 @@ for file in "${HOME_CONFIG[@]}"; do
     fi
 done
 
+mkdir -p "$HOME/.config"
 for config in "${LOCAL_CONFIG[@]}"; do
-  	if [ ! -d "$HOME/.config/$config" ] && [ ! -f "$HOME/.config/$config" ]; then
-        echo "Symlink of $config config to ~/.config/$config"
-        ln -s "$DOTFILES/$config" "$HOME/.config"
-    fi
+	if [ ! -d "$HOME/.config/$config" ] && [ ! -f "$HOME/.config/$config" ]; then
+		echo "Symlink of $config config to ~/.config/$config"
+		ln -s "$DOTFILES/$config" "$HOME/.config/"
+	fi
 done
 
+mkdir -p "$HOME/.local/bin"
 for bin in "${BIN_FILES[@]}"; do
     if [ ! -e "$HOME/.local/bin/$bin" ]; then
         echo "Symlink of $bin config to ~/.local/bin/$bin"

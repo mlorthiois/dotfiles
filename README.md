@@ -26,7 +26,7 @@ if ! command -v brew &>/dev/null; then
 fi
 
 # On macOS
-brew bundle --file=~/Brewfile
+brew bundle --file="$HOME/dotfiles/Brewfile"
 
 # Install zsh plugins
 plugins="zsh-users/zsh-autosuggestions zdharma-continuum/fast-syntax-highlighting"
@@ -34,7 +34,7 @@ for plugin in $plugins; do
 	if [ ! -d "$HOME/.local/share/zsh/$plugin/" ]; then
 		echo "Installing $plugin"
 		mkdir -p "$HOME/.local/share/zsh"
-		git clone --depth 1 "https://github.com/$plugin" "$plugin"
+		git clone --depth 1 "https://github.com/$plugin" "$HOME/.local/share/zsh/$plugin"
 	fi
 done
 

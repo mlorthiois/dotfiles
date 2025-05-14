@@ -80,6 +80,10 @@ bindkey "^Z" Resume
 ############
 # CLI utils
 ############
+if [ -e "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 set_fzf_theme() {
 	if [[ "$TERMINAL_THEME" == "dark" ]]; then
 		export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#1d1d1c,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#d1d1d1,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
