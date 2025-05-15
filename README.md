@@ -16,36 +16,16 @@ Clone this repo:
 git clone git@github.com:mlorthiois/dotfiles.git $HOME/dotfiles
 ```
 
+Then run:
+
 ```sh
-bash link.sh
-
-# Install homebrew
-if ! command -v brew &>/dev/null; then
-	echo "Installing Homebrew..."
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-# On macOS
-brew bundle --file="$HOME/dotfiles/Brewfile"
-
-# Install zsh plugins
-plugins="zsh-users/zsh-autosuggestions zdharma-continuum/fast-syntax-highlighting"
-for plugin in $plugins; do
-	if [ ! -d "$HOME/.local/share/zsh/$plugin/" ]; then
-		echo "Installing $plugin"
-		mkdir -p "$HOME/.local/share/zsh"
-		git clone --depth 1 "https://github.com/$plugin" "$HOME/.local/share/zsh/$plugin"
-	fi
-done
-
-# Install Lazy.nvim
-git clone --filter=blob:none --branch=stable "https://github.com/folke/lazy.nvim.git" "$HOME/.local/share/nvim/lazy/lazy.nvim"
+make all
 ```
 
 ## Main tools
 
 - Ghostty as terminal emulator
-- neovim as code editor
+- neovim/Zed as code editor
 - zsh as shell
 - JetBrains Mono Nerd Font
 - Starship as shell prompt env
